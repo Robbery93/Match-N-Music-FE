@@ -1,14 +1,22 @@
-import React from 'react';
+import React, {useContext, useState} from 'react';
 import './Home.css'
+import {AuthContext} from "../../context/AuthContext";
 
 const Home = () => {
+
+    // useContext
+    const { login } = useContext(AuthContext);
+
+    // useState
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
 
     return (
         <div className="page-container">
             <div className="page">
                 <div className="left">
                     <div className="title">
-                        <h1>Match &apos;n Music</h1>
+                        <h1>Onze missie</h1>
                     </div>
 
                     <main className="intro_text">
@@ -19,24 +27,37 @@ const Home = () => {
                     <div className="login-register-window">
                         <form>
                             <input type="text"
+                                   value={username}
+                                   onChange={(e) => setUsername(e.target.value)}
                                    placeholder="Gebruikersnaam"
                             />
                             <input
                                 type="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                                 placeholder="Wachtwoord"
                             />
                             <button
                                 type="button"
+                                onClick={login}
                                 className="login-btn"
+
                             >Login</button>
                         </form>
 
                         <div className="line"></div>
 
+                        <div>
                         <button
                             type="button"
                             className="register-btn"
-                        >Registreren</button>
+                        >Student</button>
+
+                        <button
+                            type="button"
+                            className="register-btn"
+                        >Docent</button>
+                        </div>
                     </div>
                 </div>
             </div>

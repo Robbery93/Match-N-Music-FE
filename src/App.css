@@ -1,4 +1,9 @@
 body {
   font-family: Roboto, sans-serif;
-  background-color: #FCEADE;
+  font-size: 16px;
+
+  background-image: url("./assets/BackgroundMnM.png");
+  background-size: 100%;
+  background-attachment: fixed;
+  background-position: center bottom;
 }
