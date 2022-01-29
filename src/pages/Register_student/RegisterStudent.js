@@ -1,11 +1,13 @@
 import React from 'react';
 import './RegisterStudent.css'
-import ContactInformation from "../../components/ContactInformation/ContactInformation";
+import ContactInformationField from "../../components/ContactInformationField/ContactInformationField";
+import RequestField from "../../components/RequestField/RequestField";
 
 const RegisterStudent = () => {
     return (
-        <div>
-            <ContactInformation />
+        <div className="register_student_page">
+            <ContactInformationField />
+            <RequestField />
         </div>
     );
 };

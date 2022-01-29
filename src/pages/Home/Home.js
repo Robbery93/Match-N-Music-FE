@@ -1,15 +1,16 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import './Home.css'
-import {AuthContext} from "../../context/AuthContext";
+import {useNavigate} from "react-router";
 
 const Home = () => {
 
-    // useContext
-    const { login } = useContext(AuthContext);
+
 
     // useState
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+
+    const navigate = useNavigate();
 
     return (
         <div className="page-container">
@@ -39,7 +40,6 @@ const Home = () => {
                             />
                             <button
                                 type="button"
-                                onClick={login}
                                 className="login-btn"
 
                             >Login</button>
@@ -51,6 +51,7 @@ const Home = () => {
                         <button
                             type="button"
                             className="register-btn"
+                            onClick={() => navigate("/registerstudent")}
                         >Student</button>
 
                         <button

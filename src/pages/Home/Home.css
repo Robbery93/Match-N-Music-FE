@@ -15,6 +15,7 @@
 
 .left,
 .right {
+    margin: 25px;
     width: 320px;
     display: flex;
     flex-direction: column;
@@ -89,7 +90,7 @@ input:focus {
 }
 
 .login-btn {
-    font-size: 1.5rem;
+    font-size: 24px;
     margin-top: 30px;
     padding: 10px;
     color: #FFFFFF;
@@ -111,13 +112,13 @@ input:focus {
 }
 
 .login-register-window button {
-    font-size: 12px;
+    font-size: 24px;
 }
 
 button {
     display: block;
+    padding: 10px;
 }
-
 
 
 ::placeholder {
