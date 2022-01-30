@@ -42,42 +42,44 @@ const RequestField = () => {
                         <div className="checkbox_container">
                             <label htmlFor="live"><input type="checkbox" id="live" name="preference" value="Live les" />Live les</label>
                         </div>
+                        <div className="checkbox_container">
                         <label htmlFor="online">
                             <input type="checkbox" id="online" name="preference" value="Online les" />
                             Online les
                         </label>
+                        </div>
                     </div>
 
                     <div className="availability">
                         <h3>Op welke dagen ben je beschikbaar?</h3>
                         <ul>
                             <li>
-                        <input className="day" type="checkbox" id="ma" name="availability" value="Ma" />
-                        <label htmlFor="ma">Ma</label>
+                                <input className="day" type="checkbox" id="ma" name="availability" value="Ma" />
+                                <label htmlFor="ma">Ma</label>
                             </li>
                             <li>
-                        <input className="day" type="checkbox" id="di" name="availability" value="Di" />
-                        <label htmlFor="di">Di</label>
-                        </li>
-                        <li>
-                        <input className="day" type="checkbox" id="wo" name="availability" value="Wo" />
-                        <label htmlFor="wo">Wo</label>
-                        </li>
-                            <li>
-                        <input className="day" type="checkbox" id="do" name="availability" value="Do" />
-                        <label htmlFor="do">Do</label>
+                                <input className="day" type="checkbox" id="di" name="availability" value="Di" />
+                                <label htmlFor="di">Di</label>
                             </li>
                             <li>
-                        <input className="day" type="checkbox" id="vr" name="availability" value="Vr" />
-                        <label htmlFor="vr">Vr</label>
+                                <input className="day" type="checkbox" id="wo" name="availability" value="Wo" />
+                                <label htmlFor="wo">Wo</label>
                             </li>
                             <li>
-                        <input className="day" type="checkbox" id="za" name="availability" value="Za" />
-                        <label htmlFor="za">Za</label>
+                                <input className="day" type="checkbox" id="do" name="availability" value="Do" />
+                                <label htmlFor="do">Do</label>
                             </li>
                             <li>
-                        <input className="day" type="checkbox" id="zo" name="availability" value="Zo" />
-                        <label htmlFor="zo">Zo</label>
+                                <input className="day" type="checkbox" id="vr" name="availability" value="Vr" />
+                                <label htmlFor="vr">Vr</label>
+                            </li>
+                            <li>
+                                <input className="day" type="checkbox" id="za" name="availability" value="Za" />
+                                <label htmlFor="za">Za</label>
+                            </li>
+                            <li>
+                                <input className="day" type="checkbox" id="zo" name="availability" value="Zo" />
+                                <label htmlFor="zo">Zo</label>
                             </li>
                         </ul>
                     </div>

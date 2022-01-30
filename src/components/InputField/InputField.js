@@ -1,6 +1,6 @@
 import React from 'react';
 
-const InputField = ({ className, type, value, onChange, placeholder }) => {
+const InputField = ({ className, type, value, onChange, placeholder, children }) => {
     return (
         <div>
             <input
@@ -10,6 +10,7 @@ const InputField = ({ className, type, value, onChange, placeholder }) => {
                 onChange={onChange}
                 placeholder={placeholder}
             />
+            {children}
         </div>
     );
 };

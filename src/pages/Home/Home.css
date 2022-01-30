@@ -108,7 +108,7 @@ input:focus {
     background-color: #FFD1BE;
     border: #FF8858 solid 3px;
     border-radius: 15px;
-    width: 100px;
+    width: auto;
 }
 
 .login-register-window button {

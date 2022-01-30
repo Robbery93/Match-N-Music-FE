@@ -41,7 +41,6 @@ const Home = () => {
                             <button
                                 type="button"
                                 className="login-btn"
-
                             >Login</button>
                         </form>
 
@@ -57,6 +56,7 @@ const Home = () => {
                         <button
                             type="button"
                             className="register-btn"
+                            onClick={() => navigate("/registerteacher")}
                         >Docent</button>
                         </div>
                     </div>

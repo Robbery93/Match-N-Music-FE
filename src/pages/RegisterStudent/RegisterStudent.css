@@ -1,0 +1,37 @@
+.register_student_page {
+    margin-bottom: 30px;
+}
+
+.user_background {
+    position: absolute;
+    top: 1083px;
+    padding: 25px;
+    margin: 0 0 35px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 820px;
+    border: #018A8C solid 2px;
+    border-radius: 5px;
+    background-color: #EEFCFC;
+    box-shadow: rgba(0, 0, 0, 0.15) 4px 4px 3px;
+    color: #018A8C;
+}
+
+.user_background h3,
+.user_background small {
+    margin: 0 0 0 25px;
+}
+
+.user_background small {
+    color: #000000;
+    font-size: 0.65rem;
+}
+
+.user_background input {
+    width: 310px;
+    height: 30px;
+    padding: 5px 0 5px 20px;
+}
+

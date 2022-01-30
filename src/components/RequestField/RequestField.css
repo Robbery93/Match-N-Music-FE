@@ -1,6 +1,6 @@
 .request_background {
     position: absolute;
-    top: 600px;
+    top: 550px;
     width: 820px;
     padding: 25px;
     border: #018A8C solid 2px;
@@ -32,7 +32,7 @@
 }
 
 .request_background h3 {
-    margin: 0 0 15px 0;
+    margin: 0 0 15px 25px;
 }
 .request_background .select_h3 {
     display: inline;
@@ -63,11 +63,14 @@
     padding: 10px;
     width: 420px;
     height: 280px;
-    margin: 0;
-    border: #018A8C solid 2px;
+    margin: 0 0 0 10px;
+    border: #018A8C solid 1px;
     border-radius: 5px;
-    box-shadow: rgba(0, 0, 0, 0.15) 4px 4px 3px;
 }
+.request_background textarea:focus {
+    outline: none;
+}
+
 
 ::placeholder {
     color: #AEAEAE;
@@ -75,11 +78,14 @@
 
 .request_background .availability {
     margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .request_background ul {
     padding: 0;
-    margin: 0;
+    margin: 0 0 0 20px;
     clear: both;
 }
 
@@ -88,6 +94,7 @@
     list-style-position: outside;
     float: left;
 }
+
 
 .day[type="checkbox"]:not(:checked),
 .day[type="checkbox"]:checked {
@@ -115,5 +122,9 @@
     color: #97EBED;
     background-color: #018A8C;
     border-radius: 50%;
+}
+
+.checkbox_container {
+    margin: 0 0 5px 20px;
 }
 
