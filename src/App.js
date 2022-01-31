@@ -4,8 +4,8 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Home from "./pages/Home/Home";
 import RegisterStudent from "./pages/RegisterStudent/RegisterStudent";
 import NavBar from "./components/NavBar/NavBar";
-import RegisterTeacher from "./pages/RegisterTeacher/RegisterTeacher";
 import StudentProfile from "./pages/StudentProfile/StudentProfile";
+import RegisterTeacher from "./pages/RegisterTeacher/RegisterTeacher";
 
 function App() {
 

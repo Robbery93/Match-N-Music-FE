@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import InputField from "../../components/InputField/InputField";
 import skeleton from "../../assets/skeleton.jpg";
+import "./RegisterTeacher.css"
+import BlueButton from "../../components/BlueButton/BlueButton";
 
 const RegisterTeacher = () => {
 
@@ -13,8 +15,8 @@ const RegisterTeacher = () => {
     const [description, setDescription] = useState("");
     const [experience, setExperience] = useState("");
     const [price, setPrice] = useState("");
-    const [instrument, setInstrument] = useState("");
-    const [instruments, setInstruments] = useState("");
+    // const [instrument, setInstrument] = useState("");
+    // const [instruments, setInstruments] = useState("");
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -30,35 +32,35 @@ const RegisterTeacher = () => {
                             className="input"
                             type="text"
                             value={name}
-                            onChange={setName}
+                            onChange={(e) => setName(e.target.value)}
                             placeholder="Naam"
                         />
                         <InputField
                             className="input"
                             type="email"
                             value={email}
-                            onChange={setEmail}
+                            onChange={(e) => setEmail(e.target.value)}
                             placeholder="Email"
                         />
                         <InputField
                             className="input"
                             type="text"
                             value={age}
-                            onChange={setAge}
+                            onChange={(e) => setAge(e.target.value)}
                             placeholder="Leeftijd"
                         />
                         <InputField
                             className="input"
                             type="text"
                             value={phoneNumber}
-                            onChange={setPhoneNumber}
+                            onChange={(e) => setPhoneNumber(e.target.value)}
                             placeholder="Telefoonnummer +31"
                         />
                         <InputField
                             className="input"
                             type="text"
                             value={residence}
-                            onChange={setResidence}
+                            onChange={(e) => setResidence(e.target.value)}
                             placeholder="Woonplaats"
                         />
                     </div>
@@ -66,12 +68,9 @@ const RegisterTeacher = () => {
                     <div className="avatar">
                         <div className="upload_text">
                             <h3>Foto uploaden:</h3>
-                            <button
-                                className='upload_btn'
-                                type="button"
-                            >
-                                Kies een bestand
-                            </button>
+                            <BlueButton
+                                text="Kies een bestand"
+                            />
                         </div>
 
                         <div className="picture">
@@ -80,67 +79,95 @@ const RegisterTeacher = () => {
                     </div>
                 </div>
             </div>
+
             <div className="field description_field">
                 <div className="background description_background">
-                    <h2>Over jezelf:</h2>
-                    <div className="description">
-                        <h3>Stel jezelf voor</h3>
-                        <textarea
-                            value={description}
-                            onChange={(e) => setDescription(e.target.value)}
-                            placeholder="Beschrijf jezelf in het kort!"
-                        >
+                    <div className="second_left">
+                        <h2>Over jezelf:</h2>
+
+                        <div className="description">
+                            <h3>Stel jezelf voor</h3>
+                            <textarea
+                                value={description}
+                                onChange={(e) => setDescription(e.target.value)}
+                                placeholder="Beschrijf jezelf in het kort!"
+                            >
                         </textarea>
-                    </div>
-                    <div className="experience">
-                        <h3>Werkervaring</h3>
-                        <textarea
-                            value={experience}
-                            onChange={(e) => setExperience(e.target.value)}
-                        >
+                        </div>
+
+                        <div className="experience">
+                            <h3>Werkervaring</h3>
+                            <textarea
+                                value={experience}
+                                onChange={(e) => setExperience(e.target.value)}
+                            >
                         </textarea>
+                        </div>
                     </div>
-                    <div className="price">
-                        <h3>Vraagprijs per 30 minuten:</h3>
-                        <InputField
-                            type="text"
-                            value={price}
-                            onChange={(e) => setPrice(e.target.value)}
-                            placeholder="Prijs in EUR"
-                        />
-                    </div>
-                    <div className="instruments">
-                        <h3>Welke instrumenten bespeel je?</h3>
-                        <div className="add_instruments">
+
+                    <div className="second_right">
+                        <div className="price">
+                            <h3>Vraagprijs per 30 minuten:</h3>
                             <InputField
                                 type="text"
-                                value={instrument}
-                                onChange={(e) => setInstrument(e.target.value)}
-                            >
-                                <button
-                                    type="button"
-                                    onClick={setInstruments(... + instrument)}
-                                >Toevoegen</button>
-                            </InputField>
-                                <p>Instrumenten: ${instruments}</p>
+                                value={price}
+                                onChange={(e) => setPrice(e.target.value)}
+                                placeholder="Prijs in EUR"
+                            />
                         </div>
-                    </div>
-                    <div className="preference">
-                        <h3>Hoe wil je les krijgen?</h3>
-                        <div className="checkbox_container">
-                            <label htmlFor="live"><input type="checkbox" id="live" name="preference" value="Live les" />Live les</label>
+
+                        <div className="preference">
+                            <h3>Hoe wil je les krijgen?</h3>
+                            <div className="checkbox_container">
+                                <label htmlFor="live"><input type="checkbox" id="live" name="preference" value="Live les" />Live les</label>
+                            </div>
+                            <div className="checkbox_container">
+                                <label htmlFor="online">
+                                    <input type="checkbox" id="online" name="preference" value="Online les" />
+                                    Online les
+                                </label>
+                            </div>
                         </div>
-                        <div className="checkbox_container">
-                            <label htmlFor="online">
-                                <input type="checkbox" id="online" name="preference" value="Online les" />
-                                Online les
-                            </label>
+
+                        <div className="availability">
+                            <h3>Op welke dagen ben je beschikbaar?</h3>
+                            <ul>
+                                <li>
+                                    <input className="day" type="checkbox" id="ma" name="availability" value="Ma" />
+                                    <label htmlFor="ma">Ma</label>
+                                </li>
+                                <li>
+                                    <input className="day" type="checkbox" id="di" name="availability" value="Di" />
+                                    <label htmlFor="di">Di</label>
+                                </li>
+                                <li>
+                                    <input className="day" type="checkbox" id="wo" name="availability" value="Wo" />
+                                    <label htmlFor="wo">Wo</label>
+                                </li>
+                                <li>
+                                    <input className="day" type="checkbox" id="do" name="availability" value="Do" />
+                                    <label htmlFor="do">Do</label>
+                                </li>
+                                <li>
+                                    <input className="day" type="checkbox" id="vr" name="availability" value="Vr" />
+                                    <label htmlFor="vr">Vr</label>
+                                </li>
+                                <li>
+                                    <input className="day" type="checkbox" id="za" name="availability" value="Za" />
+                                    <label htmlFor="za">Za</label>
+                                </li>
+                                <li>
+                                    <input className="day" type="checkbox" id="zo" name="availability" value="Zo" />
+                                    <label htmlFor="zo">Zo</label>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
+
             <div className="field user_field">
-                <div className="background user_background">
+                <div className="background userTeacher_background">
                     <div className="user_inputs">
                         <div className="username">
                             <h3>Gebruikersnaam:</h3>

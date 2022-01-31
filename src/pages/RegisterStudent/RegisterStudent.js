@@ -20,7 +20,7 @@ const RegisterStudent = () => {
 
     return (
         <div className="register_student_page">
-            <div className="field">
+            <div className="field contact_field">
                 <div className="background contact_background">
                     <div className="inputs">
                         <h2>Gegevens:</h2>
@@ -76,7 +76,7 @@ const RegisterStudent = () => {
                 </div>
             </div>
 
-            <div className="field">
+            <div className="field request_field">
                 <div className="background request_background">
 
                     <div className="request_left">
@@ -156,7 +156,7 @@ const RegisterStudent = () => {
                 </div>
             </div>
 
-            <div className="field">
+            <div className="field user_field">
                 <div className="background user_background">
                         <div className="user_inputs">
                         <div className="username">
@@ -171,7 +171,7 @@ const RegisterStudent = () => {
                         </div>
                         <div className="password">
                             <h3>Wachtwoord:</h3>
-                            <small>Minimaal 8 karakters, waaronder één hoofdlettter, één kleine letter, een cijfer en een symbool. </small>
+                            <small>Minimaal 8 karakters, waaronder één hoofdletter, één kleine letter, een cijfer en een symbool. </small>
                             <InputField
                                 className="username"
                                 type="password"

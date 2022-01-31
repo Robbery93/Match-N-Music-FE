@@ -26,7 +26,7 @@ const Home = () => {
                 </div>
                 <div className="right">
                     <div className="login-register-window">
-                        <form>
+                        <form className="user_cred_input">
                             <input type="text"
                                    value={username}
                                    onChange={(e) => setUsername(e.target.value)}

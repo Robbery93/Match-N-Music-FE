@@ -27,6 +27,8 @@
     color: #018A8C;
 }
 
+/*  Contact  */
+
 .contact_background {
     position: absolute;
     top: 110px;
@@ -43,6 +45,8 @@
 .upload_text h3 {
     margin: 0 0 5px 0;
 }
+
+/*   Request   */
 
 .request_background {
     position: absolute;
@@ -123,7 +127,7 @@
     outline: none;
 }
 
-.request_background textarea {
+textarea {
     font-family: Roboto, sans-serif;
     resize: none;
     padding: 10px;
@@ -133,7 +137,7 @@
     border: #018A8C solid 1px;
     border-radius: 5px;
 }
-.request_background textarea:focus {
+textarea:focus {
     outline: none;
 }
 
@@ -154,6 +158,8 @@ input {
     flex-direction: row;
     align-items: center;
 }
+
+/*   User   */
 
 .user_background {
     position: absolute;
