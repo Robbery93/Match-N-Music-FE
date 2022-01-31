@@ -64,7 +64,7 @@
 }
 .upload_btn:hover {
     background-color: #018A8C;
-    border-radius: 5px;
+    cursor: pointer;
 }
 
 .picture {

@@ -1,17 +1,3 @@
-.request_background {
-    position: absolute;
-    top: 550px;
-    width: 820px;
-    padding: 25px;
-    border: #018A8C solid 2px;
-    border-radius: 5px;
-    background-color: #EEFCFC;
-    box-shadow: rgba(0, 0, 0, 0.15) 4px 4px 3px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
 .request_background .instrument {
     margin-bottom: 30px;
 }
@@ -43,8 +29,9 @@
 }
 
 .request_background input[type="checkbox"] {
-    width: 13px;
-    margin: 5px;
+    width: 16px;
+    height: 16px;
+    margin: 0 5px 0 0;
 }
 
 .request_background select {
@@ -104,16 +91,16 @@
 
 .day[type="checkbox"] + label {
     display: inline-block;
-    padding: 10px;
     cursor: pointer;
+    padding-top: 8px;
     border: 1px solid #018A8C;
     text-align: center;
     color: #000000;
     background-color: #97EBED;
     margin-bottom: 10px;
     border-radius: 50%;
-    width: 20px;
-    height: 20px;
+    width: 35px;
+    height: 35px;
 }
 
 .day[type="checkbox"]:checked + label {
@@ -127,4 +114,6 @@
 .checkbox_container {
     margin: 0 0 5px 20px;
 }
+
+
 

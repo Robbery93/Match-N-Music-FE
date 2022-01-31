@@ -13,3 +13,10 @@
     box-shadow: rgba(0, 0, 0, 0.15) 4px 4px 3px;
     z-index: 100;
 }
+
+.logo {
+    height: 80px;
+    width: auto;
+    margin: 0;
+    border: #000000 solid 1px;
+}

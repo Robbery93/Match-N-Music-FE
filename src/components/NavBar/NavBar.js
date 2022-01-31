@@ -7,7 +7,10 @@ const NavBar = () => {
     return (
         <>
             <div className="navBar">
-            <img src={mNMLogo} alt = "Logo van Match 'n Match" />
+            <img
+                className="logo"
+                src={mNMLogo}
+                alt = "Logo van Match 'n Match" />
             </div>
         </>
     );

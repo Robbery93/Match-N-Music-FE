@@ -2,6 +2,7 @@ import React from 'react';
 import './ContactInformationField.css'
 import InputField from "../InputField/InputField";
 import skeleton from '../../assets/skeleton.jpg'
+import BlueButton from "../BlueButton/BlueButton";
 
 const ContactInformationField = ({ name, setName, email, setEmail, age, setAge, phoneNumber, setPhoneNumber, residence, setResidence }) => {
     return (
@@ -50,12 +51,13 @@ const ContactInformationField = ({ name, setName, email, setEmail, age, setAge, 
                 <div className="avatar">
                    <div className="upload_text">
                     <h3>Foto uploaden:</h3>
-                        <button
-                            className='upload_btn'
-                            type="button"
-                        >
-                            Kies een bestand
-                        </button>
+                       <BlueButton
+                           backgroundColor="#52DEE0"
+                           borderColor="#018A8C"
+                           textColor="#E0FFFF"
+                           type="button"
+                           text="Kies een bestand"
+                           />
                    </div>
 
                     <div className="picture">

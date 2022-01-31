@@ -4,7 +4,7 @@ import './RequestField.css'
 const RequestField = () => {
 
     // states
-    const [request, setRequest] = useState("");
+
 
     return (
         <div className="field">

@@ -22,7 +22,7 @@ const RegisterTeacher = () => {
     return (
         <div>
             <div className="field contact_field">
-                <div className="contact_background">
+                <div className="background contact_background">
                     <div className="inputs">
                         <h2>Gegevens:</h2>
 
@@ -81,7 +81,7 @@ const RegisterTeacher = () => {
                 </div>
             </div>
             <div className="field description_field">
-                <div className="description_background">
+                <div className="background description_background">
                     <h2>Over jezelf:</h2>
                     <div className="description">
                         <h3>Stel jezelf voor</h3>
@@ -140,7 +140,7 @@ const RegisterTeacher = () => {
                 </div>
             </div>
             <div className="field user_field">
-                <div className="user_background">
+                <div className="background user_background">
                     <div className="user_inputs">
                         <div className="username">
                             <h3>Gebruikersnaam:</h3>
@@ -154,7 +154,7 @@ const RegisterTeacher = () => {
                         </div>
                         <div className="password">
                             <h3>Wachtwoord:</h3>
-                            <small>Minimaal 8 karakters, waaronder één hoofdlettter, één kleine letter, een cijfer en een symbool. </small>
+                            <small>Minimaal 8 karakters, waaronder één hoofdletter, één kleine letter, een cijfer en een symbool. </small>
                             <InputField
                                 className="username"
                                 type="password"
