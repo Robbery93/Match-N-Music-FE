@@ -1,0 +1,11 @@
+.avatar {
+    border: #018A8C solid 2px;
+    border-radius: 50%;
+    width: 150px;
+    margin: 0;
+}
+
+.avatar h2 {
+    text-decoration: none;
+    margin: 0;
+}

@@ -1,8 +1,7 @@
 import React from 'react';
-import './BlueButton.module.css';
-import styles from "./BlueButton.module.css"
+import styles from "../BlueButton/BlueButton.module.css";
 
-const BlueButton = ({ onClick, text }) => {
+const GreenButton = ({ onClick, text }) => {
     return (
         <button
             className={styles.button}
@@ -14,4 +13,4 @@ const BlueButton = ({ onClick, text }) => {
     );
 };
 
-export default BlueButton;
+export default GreenButton;

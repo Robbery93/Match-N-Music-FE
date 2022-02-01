@@ -1,0 +1,21 @@
+.details-field {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.details-field h2 {
+    text-decoration: none;
+}
+
+.location {
+    display: flex;
+    flex-direction: row;
+    margin-left: 25px;
+}
+
+.location p {
+    margin: 0;
+}
+

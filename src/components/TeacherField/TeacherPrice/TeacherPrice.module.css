@@ -1,0 +1,23 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.price-container {
+    width: 50px;
+    height: 30px;
+    background-color: #FFFFFF;
+    border: #018A8C solid 1px;
+    border-radius: 5px;
+    color: #000000;
+    margin-left: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.price-container p {
+    margin: 0;
+    color: #000000
+}

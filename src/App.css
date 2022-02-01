@@ -13,13 +13,19 @@ body {
   background-attachment: fixed;
   background-position: center bottom;
 }
-
-h2, h3 {
+h2,
+h3,
+h4,
+p {
   color: #018A8C;
-  margin: 0 0 5px 25px;
+}
+
+h2,
+h3 {
+  margin: 0 0 10px 25px;
 }
 
 h2 {
   text-decoration: underline;
-  margin: 0 0 10px 25px;
 }
+

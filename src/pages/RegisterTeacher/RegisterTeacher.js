@@ -15,11 +15,17 @@ const RegisterTeacher = () => {
     const [description, setDescription] = useState("");
     const [experience, setExperience] = useState("");
     const [price, setPrice] = useState("");
-    // const [instrument, setInstrument] = useState("");
-    // const [instruments, setInstruments] = useState("");
+    const [instrument, setInstrument] = useState("");
+    const [instruments, setInstruments] = useState("Instrumenten: ")
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+
+const addInstrument = () => {
+    setInstruments({instruments}, {instrument})
+}
+
+
 
     return (
         <div>
@@ -106,6 +112,24 @@ const RegisterTeacher = () => {
                     </div>
 
                     <div className="second_right">
+                        <div className="instruments">
+                            <h3>Welke instrumenten bespeel je?</h3>
+                            <div className="instruments-field">
+                                <InputField
+                                    type="text"
+                                    value={instrument}
+                                    onChange={(e) => setInstrument(e.target.value)}
+                                    placeholder="Voeg een instrument toe"
+                                >
+                                    <BlueButton
+                                        text="Toevoegen"
+                                        onClick={addInstrument}
+                                    />
+                                </InputField>
+                            </div>
+                            <p>{instruments}</p>
+                        </div>
+
                         <div className="price">
                             <h3>Vraagprijs per 30 minuten:</h3>
                             <InputField
