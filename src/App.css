@@ -8,11 +8,29 @@ body {
   font-family: Roboto, sans-serif;
   font-size: 16px;
 
+  background-color: #FCF1EF;
   background-image: url("./assets/BackgroundMnM.png");
   background-size: 100%;
   background-attachment: fixed;
   background-position: center bottom;
+  background-repeat: no-repeat;
 }
+
+body::-webkit-scrollbar {
+  width: 12px;               /* width of the entire scrollbar */
+}
+
+body::-webkit-scrollbar-track {
+  background: #97EBED;        /* color of the tracking area */
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #018A8C;    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 3px solid #97EBED;  /* creates padding around scroll thumb */
+}
+
+
 h2,
 h3,
 h4,

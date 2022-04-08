@@ -2,9 +2,12 @@ import React, {useState} from 'react';
 import InputField from "../../components/InputField/InputField";
 import skeleton from "../../assets/skeleton.jpg";
 import "./RegisterTeacher.css"
-import BlueButton from "../../components/BlueButton/BlueButton";
+import BlueButton from "../../components/Description/BlueButton/BlueButton";
+import {useNavigate} from "react-router";
 
 const RegisterTeacher = () => {
+
+    const navigate = useNavigate();
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -16,15 +19,9 @@ const RegisterTeacher = () => {
     const [experience, setExperience] = useState("");
     const [price, setPrice] = useState("");
     const [instrument, setInstrument] = useState("");
-    const [instruments, setInstruments] = useState("Instrumenten: ")
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-
-const addInstrument = () => {
-    setInstruments({instruments}, {instrument})
-}
-
 
 
     return (
@@ -112,22 +109,15 @@ const addInstrument = () => {
                     </div>
 
                     <div className="second_right">
-                        <div className="instruments">
-                            <h3>Welke instrumenten bespeel je?</h3>
+                        <div className="instrument">
+                            <h3>Welke instrument bespeel je?</h3>
                             <div className="instruments-field">
                                 <InputField
                                     type="text"
                                     value={instrument}
                                     onChange={(e) => setInstrument(e.target.value)}
-                                    placeholder="Voeg een instrument toe"
-                                >
-                                    <BlueButton
-                                        text="Toevoegen"
-                                        onClick={addInstrument}
-                                    />
-                                </InputField>
+                                />
                             </div>
-                            <p>{instruments}</p>
                         </div>
 
                         <div className="price">
@@ -218,6 +208,7 @@ const addInstrument = () => {
                     <button
                         type="button"
                         className="register-btn"
+                        onClick={() => navigate("/studentapplications")}
                     >Registreren</button>
 
                 </div>

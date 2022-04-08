@@ -1,25 +1,25 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './RegisterStudent.css';
 import InputField from "../../components/InputField/InputField";
 import skeleton from "../../assets/skeleton.jpg";
-import BlueButton from "../../components/BlueButton/BlueButton";
+import BlueButton from "../../components/Description/BlueButton/BlueButton";
+import {useNavigate} from "react-router";
+import {useForm} from "react-hook-form";
+import Label from "../../components/Label/Label";
 
 const RegisterStudent = () => {
 
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [age, setAge] = useState("");
-    const [phoneNumber, setPhoneNumber] = useState("");
-    const [residence, setResidence] = useState("");
+    const navigate = useNavigate()
 
-    const [request, setRequest] = useState("");
+    const { register, handleSubmit } = useForm()
 
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-
+    const onFormSubmit = (data) => {
+        console.log(data)
+    }
 
     return (
         <div className="register_student_page">
+            <form onSubmit={handleSubmit(onFormSubmit)}>
             <div className="field contact_field">
                 <div className="background contact_background">
                     <div className="inputs">
@@ -27,36 +27,43 @@ const RegisterStudent = () => {
                         <InputField
                             className="input"
                             type="text"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
+                            {...register("name",{
+                                required: true,
+                                minLength: 2
+                            })}
                             placeholder="Naam"
                         />
                         <InputField
                             className="input"
                             type="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            {...register("email", {
+                                required: true,
+                                validate: value => value.includes("@"),
+                            })}
                             placeholder="Email"
                         />
                         <InputField
                             className="input"
-                            type="text"
-                            value={age}
-                            onChange={(e) => setAge(e.target.value)}
+                            type="number"
+                            {...register("age", {
+                                required: true,
+                                valueAsNumber: true
+                            })}
                             placeholder="Leeftijd"
                         />
                         <InputField
                             className="input"
-                            type="text"
-                            value={phoneNumber}
-                            onChange={(e) => setPhoneNumber(e.target.value)}
+                            type="tel"
+                            {...register("phoneNumber", {
+                                required: true,
+                                valueAsNumber: true
+                            })}
                             placeholder="Telefoonnummer +31"
                         />
                         <InputField
                             className="input"
                             type="text"
-                            value={residence}
-                            onChange={(e) => setResidence(e.target.value)}
+                            {...register("residence")}
                             placeholder="Woonplaats"
                         />
                     </div>
@@ -82,23 +89,29 @@ const RegisterStudent = () => {
                     <div className="request_left">
                         <h2>Je verzoek:</h2>
                         <div className="instrument">
-                            <label htmlFor="instrument"><h3 className="select_h3">Instrument:</h3></label>
-                            <select name="instrument" id="instrument" placeholder="Kies een instrument">
-                                <option value="gitaar">Gitaar</option>
-                                <option value="basgitaar">Basgitaar</option>
+                            <Label id="instrument">
+                                <h3 className="select_h3">Instrument:</h3>
+                            </Label>
+                            <select name="instrument"
+                                    id="instrument"
+                                    placeholder="Kies een instrument"
+                                    {...register("intrument")}>
+                                <option value="guitar">Gitaar</option>
+                                <option value="bassguitar">Basgitaar</option>
                                 <option value="piano">Piano</option>
                                 <option value="keyboard">Keyboard</option>
-                                <option value="zang">Zang</option>
-                                <option value="drum">Drum</option>
-                                <option value="anders">Anders</option>
+                                <option value="singing">Zang</option>
+                                <option value="drums">Drum</option>
+                                <option value="other">Anders</option>
                             </select>
                         </div>
 
                         <div className="request">
-                            <label htmlFor="request"><h3>Wat wil je leren?</h3></label>
+                                <Label id="request"
+                                        text="Wat wil je leren?">
+                                </Label>
                             <textarea
-                                value={request}
-                                onChange={(e) => setRequest(e.target.value)}
+                                {...register("request")}
                                 placeholder="Wees zo duidelijk mogelijk!"
                             >
                         </textarea>
@@ -109,11 +122,22 @@ const RegisterStudent = () => {
                         <div className="preference">
                             <h3>Hoe wil je les krijgen?</h3>
                             <div className="checkbox_container">
-                                <label htmlFor="live"><input type="checkbox" id="live" name="preference" value="Live les" />Live les</label>
+                                <label htmlFor="live">
+                                    <input
+                                        type="checkbox"
+                                        id="live"
+                                        name="preference"
+                                        value="Live les" />
+                                    Live les
+                                </label>
                             </div>
                             <div className="checkbox_container">
                                 <label htmlFor="online">
-                                    <input type="checkbox" id="online" name="preference" value="Online les" />
+                                    <input
+                                        type="checkbox"
+                                        id="online"
+                                        name="preference"
+                                        value="Online les" />
                                     Online les
                                 </label>
                             </div>
@@ -123,31 +147,66 @@ const RegisterStudent = () => {
                             <h3>Op welke dagen ben je beschikbaar?</h3>
                             <ul>
                                 <li>
-                                    <input className="day" type="checkbox" id="ma" name="availability" value="Ma" />
+                                    <input
+                                        className="day"
+                                        type="checkbox"
+                                        id="ma"
+                                        name="availability"
+                                        value="Ma" />
                                     <label htmlFor="ma">Ma</label>
                                 </li>
                                 <li>
-                                    <input className="day" type="checkbox" id="di" name="availability" value="Di" />
+                                    <input
+                                        className="day"
+                                        type="checkbox"
+                                        id="di"
+                                        name="availability"
+                                        value="Di" />
                                     <label htmlFor="di">Di</label>
                                 </li>
                                 <li>
-                                    <input className="day" type="checkbox" id="wo" name="availability" value="Wo" />
+                                    <input
+                                        className="day"
+                                        type="checkbox"
+                                        id="wo"
+                                        name="availability"
+                                        value="Wo" />
                                     <label htmlFor="wo">Wo</label>
                                 </li>
                                 <li>
-                                    <input className="day" type="checkbox" id="do" name="availability" value="Do" />
+                                    <input
+                                        className="day"
+                                        type="checkbox"
+                                        id="do"
+                                        name="availability"
+                                        value="Do" />
                                     <label htmlFor="do">Do</label>
                                 </li>
                                 <li>
-                                    <input className="day" type="checkbox" id="vr" name="availability" value="Vr" />
+                                    <input
+                                        className="day"
+                                        type="checkbox"
+                                        id="vr"
+                                        name="availability"
+                                        value="Vr" />
                                     <label htmlFor="vr">Vr</label>
                                 </li>
                                 <li>
-                                    <input className="day" type="checkbox" id="za" name="availability" value="Za" />
+                                    <input
+                                        className="day"
+                                        type="checkbox"
+                                        id="za"
+                                        name="availability"
+                                        value="Za" />
                                     <label htmlFor="za">Za</label>
                                 </li>
                                 <li>
-                                    <input className="day" type="checkbox" id="zo" name="availability" value="Zo" />
+                                    <input
+                                        className="day"
+                                        type="checkbox"
+                                        id="zo"
+                                        name="availability"
+                                        value="Zo" />
                                     <label htmlFor="zo">Zo</label>
                                 </li>
                             </ul>
@@ -164,8 +223,7 @@ const RegisterStudent = () => {
                             <InputField
                                 className="username"
                                 type="text"
-                                value={username}
-                                onChange={(e) => setUsername(e.target.value)}
+                                {...register("username")}
                                 placeholder="Gebruikersnaam"
                             />
                         </div>
@@ -175,8 +233,7 @@ const RegisterStudent = () => {
                             <InputField
                                 className="username"
                                 type="password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
+                                {...register("password")}
                                 placeholder="Wachtwoord"
                             />
                         </div>
@@ -184,10 +241,16 @@ const RegisterStudent = () => {
                         <button
                             type="button"
                             className="register-btn"
+                            onClick={() => navigate("/availableteachers")}
                         >Registreren</button>
-
+                    <button
+                        type="submit">
+                        Submit
+                    </button>
                 </div>
             </div>
+
+        </form>
         </div>
     );
 };

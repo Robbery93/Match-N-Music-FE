@@ -9,6 +9,13 @@
     text-decoration: none;
 }
 
+.details-field span {
+    display: inline;
+    color: #018A8C;
+    font-size: 1rem;
+    margin-left: 10px;
+}
+
 .location {
     display: flex;
     flex-direction: row;
@@ -18,4 +25,3 @@
 .location p {
     margin: 0;
 }
-

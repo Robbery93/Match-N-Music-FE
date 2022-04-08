@@ -1,15 +1,15 @@
 import React from 'react';
-import styles from "./TeacherPreference.module.css"
+import styles from "./Preference.css"
 
-const TeacherPreference = () => {
+const Preference = ({ preference }) => {
     return (
         <div className={styles.container}>
             <h4>Lesvorm:</h4>
             <div className={styles['preference-container']}>
-                <p>Live les en Online les</p>
+                <p>{preference}</p>
             </div>
         </div>
     );
 };
 
-export default TeacherPreference;
+export default Preference;

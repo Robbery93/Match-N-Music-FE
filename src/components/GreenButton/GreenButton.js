@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from "../BlueButton/BlueButton.module.css";
+import styles from "./GreenButton.module.css";
 
 const GreenButton = ({ onClick, text }) => {
     return (

@@ -1,15 +1,15 @@
 import React from 'react';
-import styles from "./TeacherPrice.module.css"
+import styles from "./Price.css"
 
-const TeacherPrice = () => {
+const Price = ( {price} ) => {
     return (
         <div className={styles.container}>
             <h4>Prijs per 30 minuten:</h4>
             <div className={styles['price-container']}>
-                <p>€30,-</p>
+                <p>€{price},-</p>
             </div>
         </div>
     );
 };
 
-export default TeacherPrice;
+export default Price;

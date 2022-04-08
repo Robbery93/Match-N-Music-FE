@@ -1,17 +1,16 @@
 import React from 'react';
 
-const InputField = ({ className, type, value, onChange, placeholder, children }) => {
+const InputField = ({ className, type, placeholder, register, children }) => {
     return (
-        <div>
+        <>
             <input
                 className={className}
                 type={type}
-                value={value}
-                onChange={onChange}
+                ref={register}
                 placeholder={placeholder}
             />
             {children}
-        </div>
+        </>
     );
 };
 

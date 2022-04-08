@@ -1,0 +1,27 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.avatars {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.field {
+    position: absolute;
+    top: 175px;
+    width: 820px;
+    height: auto;
+    padding: 25px;
+    background-color: #EEFCFC;
+    border: #018A8C solid 2px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+}

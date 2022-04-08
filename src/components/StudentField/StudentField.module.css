@@ -1,0 +1,25 @@
+.field {
+    width: 820px;
+    padding: 25px;
+    background-color: #EEFCFC;
+    border: #018A8C solid 2px;
+    border-radius: 5px;
+}
+
+.request {
+    display: flex;
+    flex-direction: row;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.button {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-top: 10px;
+}

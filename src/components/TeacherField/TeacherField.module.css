@@ -47,7 +47,7 @@
 }
 
 .description {
-    align-self: center;
+    align-self: flex-start;
     width: 475px;
 }
 

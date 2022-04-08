@@ -69,7 +69,7 @@ const AuthContextProvider = ({ children }) => {
         localStorage.setItem('token', JWT);
         const decoded = jwtDecode(JWT);
 
-        fetchUserData(decoded.sub, JWT, '/profile');
+        fetchUserData(decoded.sub, JWT);
 
         // link de gebruiker door naar de profielpagina
         // history.push('/profile');
@@ -82,8 +82,6 @@ const AuthContextProvider = ({ children }) => {
             user: null,
             status: 'done',
         });
-
-        console.log('Gebruiker is uitgelogd!');
         history.push('/');
     }
 
