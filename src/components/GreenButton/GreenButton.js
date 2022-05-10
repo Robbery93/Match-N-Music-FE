@@ -5,6 +5,7 @@ const GreenButton = ({ onClick, text }) => {
     return (
         <button
             className={styles.button}
+
             type="button"
             onClick={onClick}
         >

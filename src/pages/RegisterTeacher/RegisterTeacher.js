@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import InputField from "../../components/InputField/InputField";
 import skeleton from "../../assets/skeleton.jpg";
 import "./RegisterTeacher.css"
-import BlueButton from "../../components/Description/BlueButton/BlueButton";
+import BlueButton from "../../components/BlueButton/BlueButton";
 import {useNavigate} from "react-router";
 
 const RegisterTeacher = () => {

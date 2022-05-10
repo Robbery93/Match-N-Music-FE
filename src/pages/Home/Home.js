@@ -1,16 +1,13 @@
 import React, {useState} from 'react';
 import './Home.css'
-import {useNavigate} from "react-router";
+// import {useNavigate} from "react-router";
+import {Link} from "react-router-dom";
 
 const Home = () => {
-
-
 
     // useState
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-
-    const navigate = useNavigate();
 
     return (
         <div className="page-container">
@@ -47,17 +44,8 @@ const Home = () => {
                         <div className="line"></div>
 
                         <div>
-                        <button
-                            type="button"
-                            className="register-btn"
-                            onClick={() => navigate("/registerstudent")}
-                        >Student</button>
-
-                        <button
-                            type="button"
-                            className="register-btn"
-                            onClick={() => navigate("/registerteacher")}
-                        >Docent</button>
+                            <Link to="register/student">Student</Link>
+                            <Link to="register/teacher">Docent</Link>
                         </div>
                     </div>
                 </div>

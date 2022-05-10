@@ -1,12 +1,14 @@
 import React from 'react';
 
-const InputField = ({ className, type, placeholder, register, children }) => {
+const InputField = ({ className, labelId, type, inputName, register, validationRules, placeholder, children }) => {
     return (
         <>
             <input
                 className={className}
+                id={labelId}
                 type={type}
-                ref={register}
+                name={inputName}
+                {...register(inputName, validationRules)}
                 placeholder={placeholder}
             />
             {children}

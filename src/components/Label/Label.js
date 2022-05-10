@@ -1,10 +1,10 @@
 import React from "react";
 
-const Label = ({ id, text }) => {
+const Label = ({ id, text, children }) => {
     return(
-        <label
-        htmlFor={id}>
+        <label htmlFor={id}>
             <h3>{text}</h3>
+            {children}
         </label>
     )
 }
