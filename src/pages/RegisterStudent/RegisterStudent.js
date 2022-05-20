@@ -13,7 +13,7 @@ import Form from "../../components/Form/Form";
 
 const RegisterStudent = () => {
 
-    const { register, handleSubmit, formState: {errors} } = useForm({ mode: "onBlur" });
+    const { register, handleSubmit, formState: {errors} } = useForm({ mode: "onChange" });
 
     const onFormSubmit = (data) => {
         console.log(data)
@@ -72,15 +72,15 @@ const RegisterStudent = () => {
                         />
 
                         <InputField
-                            type="tel"
+                            type="number"
                             inputName="phoneNumber"
                             register={register}
                             validationRules={{
                                 required: "Je telefoonnummer is verplicht",
-                                min: { value: 10, message: "Vul een geldig telefoonnummer in" },
-                                max: { value: 12, message: "Vul een geldig telefoonnummer in" }
+                                minLength: { value: 10, message: "Vul een geldig telefoonnummer in" },
+                                maxLength: { value: 13, message: "Vul een geldig telefoonnummer in" }
                             }}
-                            placeholder="Telefoonnummer 0612345678 of +31612345678"
+                            placeholder="Telefoonnummer bv: 06-12345678"
                         />
                         <ErrorMessage errors={errors}
                                       name="phoneNumber"

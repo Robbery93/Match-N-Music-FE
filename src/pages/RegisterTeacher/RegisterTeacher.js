@@ -7,25 +7,25 @@ import {useForm} from "react-hook-form";
 
 const RegisterTeacher = () => {
 
-    const { register, handleSubmit, formState: {errors} } = useForm({ mode: "onBlur" })
+    const { register, handleSubmit, formState: {errors} } = useForm({ mode: "onChange" })
 
     const onFormSubmit = (data) => {
         console.log(data)
     }
 
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [age, setAge] = useState("");
-    const [phoneNumber, setPhoneNumber] = useState("");
-    const [residence, setResidence] = useState("");
-
-    const [description, setDescription] = useState("");
-    const [experience, setExperience] = useState("");
-    const [price, setPrice] = useState("");
-    const [instrument, setInstrument] = useState("");
-
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+    // const [name, setName] = useState("");
+    // const [email, setEmail] = useState("");
+    // const [age, setAge] = useState("");
+    // const [phoneNumber, setPhoneNumber] = useState("");
+    // const [residence, setResidence] = useState("");
+    //
+    // const [description, setDescription] = useState("");
+    // const [experience, setExperience] = useState("");
+    // const [price, setPrice] = useState("");
+    // const [instrument, setInstrument] = useState("");
+    //
+    // const [username, setUsername] = useState("");
+    // const [password, setPassword] = useState("");
 
 
     return (
