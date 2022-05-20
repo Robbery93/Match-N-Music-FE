@@ -44,8 +44,8 @@ const Home = () => {
                         <div className="line"></div>
 
                         <div>
-                            <Link to="register/student">Student</Link>
-                            <Link to="register/teacher">Docent</Link>
+                            <Link to="/registerstudent">Student</Link>
+                            <Link to="/registerteacher">Docent</Link>
                         </div>
                     </div>
                 </div>

@@ -1,0 +1,14 @@
+.input-textarea {
+    font-family: Roboto, sans-serif;
+    resize: none;
+    padding: 10px;
+    width: 420px;
+    height: 280px;
+    margin: 0 0 0 10px;
+    border: var(--dark-blue) solid 1px;
+    border-radius: 5px;
+}
+.input-textarea:focus {
+    outline: none;
+    border: var(--dark-blue) solid 2px;
+}

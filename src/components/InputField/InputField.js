@@ -1,19 +1,19 @@
 import React from 'react';
+import './InputField.css';
 
-const InputField = ({ className, labelId, type, inputName, register, validationRules, placeholder, children }) => {
+
+const InputField = ({ labelId, type, inputName, placeholder, register, validationRules }) => {
+
+
     return (
-        <>
             <input
-                className={className}
-                id={labelId}
-                type={type}
-                name={inputName}
-                {...register(inputName, validationRules)}
-                placeholder={placeholder}
-            />
-            {children}
-        </>
+            className="inputfield"
+            id={labelId}
+            type={type}
+            placeholder={placeholder}
+            {...register(inputName, validationRules)}
+        />
     );
-};
+}
 
 export default InputField;

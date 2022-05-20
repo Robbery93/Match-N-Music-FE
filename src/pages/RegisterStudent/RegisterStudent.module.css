@@ -1,39 +1,17 @@
 .register_student_page {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     align-items: center;
     gap: 3px;
-    margin-bottom: 100px;
 }
 
-.field {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    position: relative;
-}
-
-.background {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 820px;
-    border: #018A8C solid 2px;
-    border-radius: 5px;
-    background-color: #EEFCFC;
-    box-shadow: rgba(0, 0, 0, 0.15) 4px 4px 3px;
-    color: #018A8C;
-}
+/*.form_wrapper {*/
+/*    position: absolute;*/
+/*    top: 120px;*/
+/*    margin-bottom: 25px;*/
+/*}*/
 
 /*  Contact  */
-
-.contact_background {
-    position: absolute;
-    top: 110px;
-    padding: 25px;
-}
 
 .avatar {
     margin-right: 100px;
@@ -42,73 +20,18 @@
     align-items: center;
 }
 
+img {
+    border: var(--dark-blue) solid 2px;
+    border-radius: 50%;
+    width: 150px;
+    margin-top: 10px;
+}
+
 .upload_text h3 {
     margin: 0 0 5px 0;
 }
 
 /*   Request   */
-
-.request_background {
-    position: absolute;
-    top: 460px;
-    padding: 25px;
-}
-
-.request_background .availability {
-    margin-top: 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.request_background ul {
-    padding: 0;
-    margin: 0 0 0 20px;
-    clear: both;
-}
-
-.request_background li{
-    list-style-type: none;
-    list-style-position: outside;
-    float: left;
-}
-
-
-/*.day[type="checkbox"]:not(:checked),*/
-/*.day[type="checkbox"]:checked {*/
-/*    position: absolute;*/
-/*    left: -9999%;*/
-/*}*/
-
-/*.day[type="checkbox"] + label {*/
-/*    display: inline-block;*/
-/*    cursor: pointer;*/
-/*    padding-top: 8px;*/
-/*    border: 1px solid #018A8C;*/
-/*    text-align: center;*/
-/*    color: #000000;*/
-/*    background-color: #97EBED;*/
-/*    margin-bottom: 10px;*/
-/*    border-radius: 50%;*/
-/*    width: 35px;*/
-/*    height: 35px;*/
-/*}*/
-
-.day[type="checkbox"]:checked + label {
-    text-align: center;
-    border: 1px solid #018A8C;
-    color: #97EBED;
-    background-color: #018A8C;
-    border-radius: 50%;
-}
-
-.checkbox_container {
-    margin: 0 0 5px 20px;
-}
-
-.request_background label {
-    margin-right: 5px;
-}
 
 .request_background input[type="checkbox"] {
     width: 16px;
@@ -116,16 +39,6 @@
     margin: 0 5px 0 0;
 }
 
-.request_background select {
-    border: #018A8C solid 1px;
-    border-radius: 3px;
-    margin: 0 0 15px 10px;
-    padding: 5px;
-    width: 200px;
-}
-.request_background select:focus {
-    outline: none;
-}
 
 textarea {
     font-family: Roboto, sans-serif;
@@ -134,23 +47,11 @@ textarea {
     width: 420px;
     height: 280px;
     margin: 0 0 0 10px;
-    border: #018A8C solid 1px;
+    border: var(--dark-blue) solid 1px;
     border-radius: 5px;
 }
 textarea:focus {
     outline: none;
-}
-
-img {
-    border: #018A8C solid 2px;
-    border-radius: 50%;
-    width: 150px;
-    margin-top: 10px;
-}
-input {
-    width: 310px;
-    height: 30px;
-    padding: 7px 0 7px 20px;
 }
 
 .checkbox_container {
@@ -161,12 +62,10 @@ input {
 
 /*   User   */
 
-.user_background {
-    position: absolute;
-    top: 942px;
-    padding: 25px;
-    margin: 0 0 35px 0;
-}
+/*.user_background {*/
+/*    position: absolute;*/
+/*    top: 953px;*/
+/*}*/
 
 .user_background h3,
 .user_background small {
@@ -178,13 +77,9 @@ small {
     font-size: 0.7rem;
 }
 
-.register_btn {
-    display: inline-block;
-    font-size: 1.5rem;
-    padding: 10px;
-    margin: 25px;
-    background-color: #FFD1BE;
-    border: #FF8858 solid 3px;
-    border-radius: 15px;
-    width: auto;
+.error {
+    font-size: 0.75rem;
+    color: var(--error);
+    margin-left: 10px;
+    padding: 0;
 }

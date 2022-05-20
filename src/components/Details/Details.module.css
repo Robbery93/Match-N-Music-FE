@@ -1,15 +1,15 @@
-.details-field {
+.details_field {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
 }
 
-.details-field h2 {
+.details_field h2 {
     text-decoration: none;
 }
 
-.details-field span {
+.details_field span {
     display: inline;
     color: #018A8C;
     font-size: 1rem;

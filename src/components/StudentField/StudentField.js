@@ -3,8 +3,8 @@ import styles from "./StudentField.module.css"
 import Avatar from "../Avatar/Avatar";
 import Details from "../Details/Details";
 import Description from "../Description/Description";
-import GreenButton from "../GreenButton/GreenButton";
 import floortje from "../../assets/Floortje.jpg"
+import Button from "../Button/Button";
 
 const StudentField = () => {
     return (
@@ -23,7 +23,7 @@ const StudentField = () => {
                 </div>
             </div>
             <div className={styles.button}>
-                <GreenButton text="Aanvraag accepteren" />
+                <Button text="Aanvraag accepteren" color="green" />
             </div>
         </div>
     );
