@@ -1,10 +1,10 @@
 import React from 'react';
 import './InstrumentSelector.css'
 
-const InstrumentSelector = ( {labelId, register, inputName, validationRules} ) => {
+const InstrumentSelector = ({ register, inputName, validationRules }) => {
     return (
         <select className="selector"
-                id={labelId}
+                id={inputName}
                 {...register(inputName, validationRules)}
         >
             <option value="guitar">Gitaar</option>

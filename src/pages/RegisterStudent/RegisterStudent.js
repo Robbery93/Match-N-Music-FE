@@ -10,6 +10,7 @@ import Background from "../../components/Background/Background";
 import InputTextarea from "../../components/InputTextarea/InputTextarea";
 import InstrumentSelector from "../../components/InstrumentSelector/InstrumentSelector";
 import Form from "../../components/Form/Form";
+import Avatar from "../../components/Avatar/Avatar";
 
 const RegisterStudent = () => {
 
@@ -21,9 +22,10 @@ const RegisterStudent = () => {
 
     return (
         <main className={styles.register_student_page}>
-            <Form onSubmit={handleSubmit(onFormSubmit)} className={styles.form_wrapper}>
+            <Form onSubmit={handleSubmit(onFormSubmit)}>
+
                 <Background>
-                    <span className={styles.inputs}>
+                    <section>
                         <h2>Gegevens</h2>
 
                         <InputField
@@ -59,12 +61,12 @@ const RegisterStudent = () => {
                         <InputField
                             type="number"
                             inputName="age"
+                            placeholder="Leeftijd"
                             register={register}
                             validationRules={{
                                 required: "Je leeftijd invullen is verplicht",
                                 min: { value: 16, message: "Je moet minimaal 16 jaar oud zijn om je in te schrijven" }
                             }}
-                            placeholder="Leeftijd"
                         />
                         <ErrorMessage errors={errors}
                                       name="age"
@@ -100,7 +102,7 @@ const RegisterStudent = () => {
                                       name="residence"
                                       render={({ message }) => <p className={styles.error}>{message}</p>}
                         />
-                    </span>
+                    </section>
 
 
                     <aside className={styles.avatar}>
@@ -108,20 +110,18 @@ const RegisterStudent = () => {
                             <Label text="Foto uploaden" />
                             <Button
                                 color="blue"
-                                type="button"
                                 text="Kies een bestand"
                             />
                         </span>
 
-                        <div className={styles.pictures}>
-                            <img src={skeleton} alt="Afbeelding"/>
-                        </div>
+                        <Avatar photo={skeleton} alt="Afbeelding" />
+
                     </aside>
 
                 </Background>
 
                 <Background specificBackground={styles.request_background}>
-                    <section className={styles.request_left}>
+                    <section>
                         <h2>Je verzoek</h2>
 
                         <span className={styles.instrument}>
@@ -130,7 +130,6 @@ const RegisterStudent = () => {
                                     text="Instrument"
                                 />
                                 <InstrumentSelector
-                                    labelId="instrument"
                                     inputName="instrument"
                                     register={register}
                                     validationRules={{
@@ -145,7 +144,6 @@ const RegisterStudent = () => {
                                     text="Wat wil je leren?"
                                 />
                                 <InputTextarea
-                                    labelId="request"
                                     placeholder="Wees zo duidelijk mogelijk!"
                                     inputName="request"
                                     register={register}
@@ -163,36 +161,31 @@ const RegisterStudent = () => {
                             </span>
                     </section>
 
-                    <section className={styles.request_right}>
-                            <span className={styles.preference}>
-                                <h3>Hoe wil je les krijgen?</h3>
-                                <div className={styles.checkbox_container}>
-                                    <label>
-                                        <input
-                                            type="checkbox"
-                                            {...register("preferenceForLessonType")}
-                                            value="Live lessen"
-                                        />
-                                        Live les
-                                    </label>
-                                </div>
-                                <div className={styles.checkbox_container}>
-                                    <label>
-                                        <input
-                                            type="checkbox"
-                                            {...register("preferenceForLessonType")}
-                                            value="Online lessen"
-                                        />
-                                        Online les
-                                    </label>
-                                </div>
-                            </span>
+
+                    <section className={styles.preference}>
+                        <h3>Hoe wil je les krijgen?</h3>
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    {...register("preferenceForLessonType")}
+                                    value="Live lessen"
+                                />
+                                Live les
+                            </label>
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    {...register("preferenceForLessonType")}
+                                    value="Online lessen"
+                                />
+                                Online les
+                            </label>
                     </section>
+
                 </Background>
 
                 <Background specificBackground={styles.user_background}>
-                    <div className={styles.user_inputs}>
-                        <div className={styles.username}>
+                    <span>
                             <Label
                                 id="username"
                                 text="Gebruikersnaam"
@@ -212,8 +205,7 @@ const RegisterStudent = () => {
                                           name="username"
                                           render={({ message }) => <p className={styles.error}>{message}</p>}
                             />
-                        </div>
-                        <div className={styles.password}>
+
                             <Label
                                 id="password"
                                 text="Wachtwoord"
@@ -233,8 +225,8 @@ const RegisterStudent = () => {
                                           name="password"
                                           render={({ message }) => <p className={styles.error}>{message}</p>}
                             />
-                        </div>
-                    </div>
+                    </span>
+
                     <Button
                         color="orange"
                         type="submit"

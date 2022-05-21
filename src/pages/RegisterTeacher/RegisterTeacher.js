@@ -1,225 +1,257 @@
-import React, {useState} from 'react';
+import React from 'react';
 import InputField from "../../components/InputField/InputField";
 import skeleton from "../../assets/skeleton.jpg";
-import "./RegisterTeacher.css"
+import styles from "./RegisterTeacher.module.css"
 import Button from "../../components/Button/Button";
 import {useForm} from "react-hook-form";
+import {ErrorMessage} from "@hookform/error-message";
+import Background from "../../components/Background/Background";
+import Form from "../../components/Form/Form";
+import Avatar from "../../components/Avatar/Avatar";
+import Label from "../../components/Label/Label";
+import InputTextarea from "../../components/InputTextarea/InputTextarea";
+import InstrumentSelector from "../../components/InstrumentSelector/InstrumentSelector";
 
 const RegisterTeacher = () => {
 
-    const { register, handleSubmit, formState: {errors} } = useForm({ mode: "onChange" })
+    const { register, handleSubmit, formState: {errors} } = useForm({ mode: "onBlur" })
 
     const onFormSubmit = (data) => {
         console.log(data)
     }
 
-    // const [name, setName] = useState("");
-    // const [email, setEmail] = useState("");
-    // const [age, setAge] = useState("");
-    // const [phoneNumber, setPhoneNumber] = useState("");
-    // const [residence, setResidence] = useState("");
-    //
-    // const [description, setDescription] = useState("");
-    // const [experience, setExperience] = useState("");
-    // const [price, setPrice] = useState("");
     // const [instrument, setInstrument] = useState("");
-    //
     // const [username, setUsername] = useState("");
     // const [password, setPassword] = useState("");
 
 
     return (
-        <>
-            {/*<div className="field contact_field">*/}
-            {/*    <div className="background contact_background">*/}
-            {/*        <div className="inputs">*/}
-            {/*            <h2>Gegevens:</h2>*/}
+        <main className={styles.register_teacher_page}>
+            <Form onSubmit={handleSubmit(onFormSubmit)}>
 
-            {/*            <InputField*/}
-            {/*                type="text"*/}
-            {/*                inputName="name"*/}
-            {/*                register={register}*/}
-            {/*                placeholder="Naam"*/}
-            {/*            />*/}
-            {/*            <InputField*/}
-            {/*                className="input"*/}
-            {/*                type="email"*/}
-            {/*                value={email}*/}
-            {/*                onChange={(e) => setEmail(e.target.value)}*/}
-            {/*                placeholder="Email"*/}
-            {/*            />*/}
-            {/*            <InputField*/}
-            {/*                className="input"*/}
-            {/*                type="text"*/}
-            {/*                value={age}*/}
-            {/*                onChange={(e) => setAge(e.target.value)}*/}
-            {/*                placeholder="Leeftijd"*/}
-            {/*            />*/}
-            {/*            <InputField*/}
-            {/*                className="input"*/}
-            {/*                type="text"*/}
-            {/*                value={phoneNumber}*/}
-            {/*                onChange={(e) => setPhoneNumber(e.target.value)}*/}
-            {/*                placeholder="Telefoonnummer +31"*/}
-            {/*            />*/}
-            {/*            <InputField*/}
-            {/*                className="input"*/}
-            {/*                type="text"*/}
-            {/*                value={residence}*/}
-            {/*                onChange={(e) => setResidence(e.target.value)}*/}
-            {/*                placeholder="Woonplaats"*/}
-            {/*            />*/}
-            {/*        </div>*/}
+                <Background>
+                    <section className="inputs">
+                        <h2>Gegevens</h2>
 
-            {/*        <div className="avatar">*/}
-            {/*            <div className="upload_text">*/}
-            {/*                <h3>Foto uploaden:</h3>*/}
-            {/*                <Button*/}
-            {/*                    text="Kies een bestand"*/}
-            {/*                />*/}
-            {/*            </div>*/}
+                        <InputField
+                            type="text"
+                            inputName="name"
+                            placeholder="Naam"
+                            register={register}
+                            validationRules={{
+                                required: "Een naam invullen is verplicht",
+                                minLength: { value: 2, message: "Je naam moet uit minimaal 2 letters bestaan" }
+                            }}
+                        />
+                        <ErrorMessage errors={errors}
+                                      name="name"
+                                      render={({ message }) => <p className={styles.error}>{message}</p>}
+                        />
 
-            {/*            <div className="picture">*/}
-            {/*                <img src={skeleton} />*/}
-            {/*            </div>*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
+                        <InputField
+                            type="email"
+                            inputName="email"
+                            placeholder="Email"
+                            register={register}
+                            validationRules={{
+                                required: "Email adres mag niet leeg zijn",
+                                minLength: { value: 6, message: "Emailadres is te kort. Gebruik een \"@\"" }
+                            }}
+                        />
+                        <ErrorMessage errors={errors}
+                                      name="email"
+                                      render={({ message }) => <p className={styles.error}>{message}</p>}
+                        />
 
-            {/*<div className="field description_field">*/}
-            {/*    <div className="background description_background">*/}
-            {/*        <div className="second_left">*/}
-            {/*            <h2>Over jezelf:</h2>*/}
+                        <InputField
+                            type="text"
+                            inputName="age"
+                            placeholder="Leeftijd"
+                            register={register}
+                            validationRules={{
+                                required: "Je leeftijd invullen is verplicht",
+                                min: { value: 16, message: "Je moet minimaal 16 jaar oud zijn om je in te schrijven" }
+                            }}
+                        />
+                        <ErrorMessage errors={errors}
+                                      name="age"
+                                      render={({ message }) => <p className={styles.error}>{message}</p>}
+                        />
 
-            {/*            <div className="description">*/}
-            {/*                <h3>Stel jezelf voor</h3>*/}
-            {/*                <textarea*/}
-            {/*                    value={description}*/}
-            {/*                    onChange={(e) => setDescription(e.target.value)}*/}
-            {/*                    placeholder="Beschrijf jezelf in het kort!"*/}
-            {/*                >*/}
-            {/*            </textarea>*/}
-            {/*            </div>*/}
+                        <InputField
+                            type="number"
+                            inputName="phoneNumber"
+                            placeholder="Telefoonnummer bv: 06-12345678"
+                            register={register}
+                            validationRules={{
+                                required: "Je telefoonnummer is verplicht",
+                                minLength: { value: 10, message: "Vul een geldig telefoonnummer in" },
+                                maxLength: { value: 13, message: "Vul een geldig telefoonnummer in" }
+                            }}
+                        />
+                        <ErrorMessage errors={errors}
+                                      name="phoneNumber"
+                                      render={({ message }) => <p className={styles.error}>{message}</p>}
+                        />
 
-            {/*            <div className="experience">*/}
-            {/*                <h3>Werkervaring</h3>*/}
-            {/*                <textarea*/}
-            {/*                    value={experience}*/}
-            {/*                    onChange={(e) => setExperience(e.target.value)}*/}
-            {/*                >*/}
-            {/*            </textarea>*/}
-            {/*            </div>*/}
-            {/*        </div>*/}
+                        <InputField
+                            type="text"
+                            inputName="residence"
+                            placeholder="Woonplaats"
+                            register={register}
+                            validationRules={{
+                                required: "Een woonplaats invullen is verplicht."
+                            }}
+                        />
+                        <ErrorMessage errors={errors}
+                                      name="residence"
+                                      render={({ message }) => <p className={styles.error}>{message}</p>}
+                        />
+                    </section>
 
-            {/*        <div className="second_right">*/}
-            {/*            <div className="instrument">*/}
-            {/*                <h3>Welke instrument bespeel je?</h3>*/}
-            {/*                <div className="instruments-field">*/}
-            {/*                    <InputField*/}
-            {/*                        type="text"*/}
-            {/*                        value={instrument}*/}
-            {/*                        onChange={(e) => setInstrument(e.target.value)}*/}
-            {/*                    />*/}
-            {/*                </div>*/}
-            {/*            </div>*/}
+                    <aside className={styles.avatar}>
+                        <span className={styles.upload_text}>
+                            <h3>Foto uploaden:</h3>
+                            <Button
+                                text="Kies een bestand"
+                                color="blue"
+                            />
+                        </span>
 
-            {/*            <div className="price">*/}
-            {/*                <h3>Vraagprijs per 30 minuten:</h3>*/}
-            {/*                <InputField*/}
-            {/*                    type="text"*/}
-            {/*                    value={price}*/}
-            {/*                    onChange={(e) => setPrice(e.target.value)}*/}
-            {/*                    placeholder="Prijs in EUR"*/}
-            {/*                />*/}
-            {/*            </div>*/}
+                        <Avatar photo={skeleton} alt="Afbeelding" />
+                    </aside>
+                </Background>
 
-            {/*            <div className="preference">*/}
-            {/*                <h3>Hoe wil je les krijgen?</h3>*/}
-            {/*                <div className="checkbox_container">*/}
-            {/*                    <label htmlFor="live"><input type="checkbox" id="live" name="preference" value="Live les" />Live les</label>*/}
-            {/*                </div>*/}
-            {/*                <div className="checkbox_container">*/}
-            {/*                    <label htmlFor="online">*/}
-            {/*                        <input type="checkbox" id="online" name="preference" value="Online les" />*/}
-            {/*                        Online les*/}
-            {/*                    </label>*/}
-            {/*                </div>*/}
-            {/*            </div>*/}
+                <Background>
+                    <section>
+                    <h2>Over jezelf:</h2>
 
-            {/*            <div className="availability">*/}
-            {/*                <h3>Op welke dagen ben je beschikbaar?</h3>*/}
-            {/*                <ul>*/}
-            {/*                    <li>*/}
-            {/*                        <input className="day" type="checkbox" id="ma" name="availability" value="Ma" />*/}
-            {/*                        <label htmlFor="ma">Ma</label>*/}
-            {/*                    </li>*/}
-            {/*                    <li>*/}
-            {/*                        <input className="day" type="checkbox" id="di" name="availability" value="Di" />*/}
-            {/*                        <label htmlFor="di">Di</label>*/}
-            {/*                    </li>*/}
-            {/*                    <li>*/}
-            {/*                        <input className="day" type="checkbox" id="wo" name="availability" value="Wo" />*/}
-            {/*                        <label htmlFor="wo">Wo</label>*/}
-            {/*                    </li>*/}
-            {/*                    <li>*/}
-            {/*                        <input className="day" type="checkbox" id="do" name="availability" value="Do" />*/}
-            {/*                        <label htmlFor="do">Do</label>*/}
-            {/*                    </li>*/}
-            {/*                    <li>*/}
-            {/*                        <input className="day" type="checkbox" id="vr" name="availability" value="Vr" />*/}
-            {/*                        <label htmlFor="vr">Vr</label>*/}
-            {/*                    </li>*/}
-            {/*                    <li>*/}
-            {/*                        <input className="day" type="checkbox" id="za" name="availability" value="Za" />*/}
-            {/*                        <label htmlFor="za">Za</label>*/}
-            {/*                    </li>*/}
-            {/*                    <li>*/}
-            {/*                        <input className="day" type="checkbox" id="zo" name="availability" value="Zo" />*/}
-            {/*                        <label htmlFor="zo">Zo</label>*/}
-            {/*                    </li>*/}
-            {/*                </ul>*/}
-            {/*            </div>*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
 
-            {/*<div className="field user_field">*/}
-            {/*    <div className="background userTeacher_background">*/}
-            {/*        <div className="user_inputs">*/}
-            {/*            <div className="username">*/}
-            {/*                <h3>Gebruikersnaam:</h3>*/}
-            {/*                <InputField*/}
-            {/*                    className="username"*/}
-            {/*                    type="text"*/}
-            {/*                    value={username}*/}
-            {/*                    onChange={(e) => setUsername(e.target.value)}*/}
-            {/*                    placeholder="Gebruikersnaam"*/}
-            {/*                />*/}
-            {/*            </div>*/}
-            {/*            <div className="password">*/}
-            {/*                <h3>Wachtwoord:</h3>*/}
-            {/*                <small>Minimaal 8 karakters, waaronder één hoofdletter, één kleine letter, een cijfer en een symbool. </small>*/}
-            {/*                <InputField*/}
-            {/*                    className="username"*/}
-            {/*                    type="password"*/}
-            {/*                    value={password}*/}
-            {/*                    onChange={(e) => setPassword(e.target.value)}*/}
-            {/*                    placeholder="Wachtwoord"*/}
-            {/*                />*/}
-            {/*            </div>*/}
-            {/*        </div>*/}
-            {/*        <button*/}
-            {/*            type="button"*/}
-            {/*            className="register-btn"*/}
-            {/*            onClick={() => navigate("/studentapplications")}*/}
-            {/*        >Registreren</button>*/}
+                        <span>
+                            <Label
+                                id="description"
+                                text="Stel jezelf eens voor"
+                            />
+                            <InputTextarea
+                                inputName="description"
+                                placeholder="Beschrijf jezelf in het kort!"
+                                register={register}
+                                validationRules={{
+                                    required: "Een beschrijving over jezelf is verplicht",
+                                    minLength: { value: 20, message: "Dat is wel heel erg kort. Probeer iets meer over jezelf te vertellen (minimaal 20 karakters)" },
+                                    maxLength: { value: 2000, message: "Dit is wel iets langer dan \"kort\"... (maximaal 2000 karakters)" }
+                                }}
+                            />
+                            <ErrorMessage
+                                errors={errors}
+                                name="description"
+                                render={({ message }) => <p className={styles.error}>{message}</p>}
+                            />
 
-            {/*    </div>*/}
-            {/*</div>*/}
+                        </span>
 
-            <p>Hoi!</p>
-        </>
+                        <span>
+                            <Label
+                                id="experience"
+                                text="Werkervaring"
+                                />
+                            <InputTextarea
+                                inputName="experience"
+                                placeholder="Beschrijf hier je werkervaring. Bijvoorbeeld hoe lang je waar werkzaam bent, relevante opleidingen, enzovoorts..."
+                                register={register}
+                                validationRules={{
+                                    required: "Een beschrijving over je werkervaring is verplicht",
+                                    minLength: { value: 20, message: "Dat is wel heel erg kort. Probeer iets meer over je werkervaring te vertellen (minimaal 20 karakters)" },
+                                    maxLength: { value: 4000, message: "Dat is wel erg veel ervaring! Kijk of je het iets compacter kan opschrijven (maximaal 4000 karakters)" }
+                                }}
+                            />
+                            <ErrorMessage
+                                errors={errors}
+                                name="experience"
+                                render={({ message }) => <p className={styles.error}>{message}</p>}
+                            />
+                        </span>
+                    </section>
+
+                    <aside>
+                    <section className={styles.instrument}>
+                        <Label
+                            id="instrument"
+                            text="In welk instrument wil je les geven?"
+                        />
+                        <InstrumentSelector
+                            inputName="instrument"
+                            register={register}
+                            validationRules={{
+                                required: true
+                            }}
+                        />
+                    </section>
+
+                    <section className={styles.preference}>
+                        <h3>Hoe wil je les krijgen?</h3>
+                        <label>
+                            <input
+                                type="checkbox"
+                                {...register("preferenceForLessonType")}
+                                value="Live lessen"
+                            />
+                            Live les
+                        </label>
+                        <label>
+                            <input
+                                type="checkbox"
+                                {...register("preferenceForLessonType")}
+                                value="Online lessen"
+                            />
+                            Online les
+                        </label>
+                    </section>
+                    </aside>
+
+                </Background>
+
+                <Background>
+
+                </Background>
+            </Form>
+        </main>
     );
 };
 
 export default RegisterTeacher;
+
+
+{/*<div className="field user_field">*/}
+{/*    <div className="background userTeacher_background">*/}
+{/*        <div className="user_inputs">*/}
+{/*            <div className="username">*/}
+{/*                <h3>Gebruikersnaam:</h3>*/}
+{/*                <InputField*/}
+{/*                    className="username"*/}
+{/*                    type="text"*/}
+{/*                    value={username}*/}
+{/*                    onChange={(e) => setUsername(e.target.value)}*/}
+{/*                    placeholder="Gebruikersnaam"*/}
+{/*                />*/}
+{/*            </div>*/}
+{/*            <div className="password">*/}
+{/*                <h3>Wachtwoord:</h3>*/}
+{/*                <small>Minimaal 8 karakters, waaronder één hoofdletter, één kleine letter, een cijfer en een symbool. </small>*/}
+{/*                <InputField*/}
+{/*                    className="username"*/}
+{/*                    type="password"*/}
+{/*                    value={password}*/}
+{/*                    onChange={(e) => setPassword(e.target.value)}*/}
+{/*                    placeholder="Wachtwoord"*/}
+{/*                />*/}
+{/*            </div>*/}
+{/*        </div>*/}
+{/*        <button*/}
+{/*            type="button"*/}
+{/*            className="register-btn"*/}
+{/*            onClick={() => navigate("/studentapplications")}*/}
+{/*        >Registreren</button>*/}
+
+{/*    </div>*/}
+{/*</div>*/}

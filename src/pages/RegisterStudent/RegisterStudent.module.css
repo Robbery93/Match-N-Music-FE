@@ -5,12 +5,6 @@
     gap: 3px;
 }
 
-/*.form_wrapper {*/
-/*    position: absolute;*/
-/*    top: 120px;*/
-/*    margin-bottom: 25px;*/
-/*}*/
-
 /*  Contact  */
 
 .avatar {
@@ -28,44 +22,29 @@ img {
 }
 
 .upload_text h3 {
-    margin: 0 0 5px 0;
+    margin: 0 0 7px 0;
 }
 
 /*   Request   */
 
-.request_background input[type="checkbox"] {
+input[type="checkbox"] {
     width: 16px;
     height: 16px;
     margin: 0 5px 0 0;
 }
 
-
-textarea {
-    font-family: Roboto, sans-serif;
-    resize: none;
-    padding: 10px;
-    width: 420px;
-    height: 280px;
-    margin: 0 0 0 10px;
-    border: var(--dark-blue) solid 1px;
-    border-radius: 5px;
-}
-textarea:focus {
-    outline: none;
-}
-
-.checkbox_container {
+.preference {
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+}
+
+.preference h3 {
+    margin: 0 40px 5px 0;
 }
 
 /*   User   */
-
-/*.user_background {*/
-/*    position: absolute;*/
-/*    top: 953px;*/
-/*}*/
 
 .user_background h3,
 .user_background small {

@@ -1,11 +1,11 @@
 import React from "react";
 import './InputTextArea.css'
 
-const InputTextarea = ({ labelId, inputName, register, validationRules, placeholder }) => {
+const InputTextarea = ({ inputName, register, validationRules, placeholder }) => {
     return (
         <textarea
             className="input-textarea"
-            id={labelId}
+            id={inputName}
             {...register(inputName, validationRules)}
             placeholder={placeholder}
         />

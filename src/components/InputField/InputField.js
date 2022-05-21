@@ -1,18 +1,32 @@
 import React from 'react';
 import './InputField.css';
+// import {ErrorMessage} from "@hookform/error-message";
 
 
-const InputField = ({ labelId, type, inputName, placeholder, register, validationRules }) => {
+const InputField = ({   type,
+                        inputName,
+                        placeholder,
+                        register,
+                        validationRules,
+                        // errors
+                    }) => {
 
 
     return (
+        <>
             <input
-            className="inputfield"
-            id={labelId}
-            type={type}
-            placeholder={placeholder}
-            {...register(inputName, validationRules)}
-        />
+                className="inputfield"
+                id={inputName}
+                type={type}
+                placeholder={placeholder}
+                {...register(inputName, validationRules)}
+            />
+            {/*<ErrorMessage*/}
+            {/*    errors={errors}*/}
+            {/*    name={inputName}*/}
+            {/*    render={({message}) => <p className="error">{message}</p>}*/}
+            {/*/>*/}
+        </>
     );
 }
 
