@@ -20,11 +20,6 @@ const RegisterTeacher = () => {
         console.log(data)
     }
 
-    // const [instrument, setInstrument] = useState("");
-    // const [username, setUsername] = useState("");
-    // const [password, setPassword] = useState("");
-
-
     return (
         <main className={styles.register_teacher_page}>
             <Form onSubmit={handleSubmit(onFormSubmit)}>
@@ -211,8 +206,54 @@ const RegisterTeacher = () => {
 
                 </Background>
 
-                <Background>
+                <Background specificBackground={styles.user_background}>
+                    <span>
+                            <Label
+                                id="username"
+                                text="Gebruikersnaam"
+                            />
+                            <InputField
+                                type="text"
+                                inputName="username"
+                                placeholder="Gebruikersnaam"
+                                register={register}
+                                validationRules={{
+                                    required: "Een gebruikersnaam is verplicht",
+                                    min: { value: 8, message: "Je gebruikersnaam moet minimaal 8 karakters bevatten" }
+                                }}
 
+                            />
+                            <ErrorMessage errors={errors}
+                                          name="username"
+                                          render={({ message }) => <p className={styles.error}>{message}</p>}
+                            />
+
+                            <Label
+                                id="password"
+                                text="Wachtwoord"
+                            />
+                            <small>Minimaal 8 karakters, waaronder één hoofdletter, één kleine letter, een cijfer en een symbool. </small>
+                            <InputField
+                                type="password"
+                                inputName="password"
+                                register={register}
+                                validationRules={{
+                                    required: "Een wachtwoord is verplicht",
+                                    min: { value: 8, message: "Je wachtwoord moet minimaal 8 karakters bevatten" }
+                                }}
+                                placeholder="Wachtwoord"
+                            />
+                            <ErrorMessage errors={errors}
+                                          name="password"
+                                          render={({ message }) => <p className={styles.error}>{message}</p>}
+                            />
+                    </span>
+
+                    <Button
+                        color="orange"
+                        type="submit"
+                        text="Registreren"
+                    />
                 </Background>
             </Form>
         </main>

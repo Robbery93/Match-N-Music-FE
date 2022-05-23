@@ -6,16 +6,14 @@ import {Link} from "react-router-dom";
 const NavBar = () => {
 
     return (
-        <>
-            <span className="navBar">
+        <span className="navBar">
             <Link to="/">
                 <img
                     className="logo"
                     src={mNMLogo}
                     alt = "Logo van Match 'n Match" />
             </Link>
-            </span>
-        </>
+        </span>
     );
 };
 

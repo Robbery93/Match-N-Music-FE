@@ -185,7 +185,7 @@ const RegisterStudent = () => {
                 </Background>
 
                 <Background specificBackground={styles.user_background}>
-                    <span>
+                    <section>
                             <Label
                                 id="username"
                                 text="Gebruikersnaam"
@@ -225,7 +225,7 @@ const RegisterStudent = () => {
                                           name="password"
                                           render={({ message }) => <p className={styles.error}>{message}</p>}
                             />
-                    </span>
+                    </section>
 
                     <Button
                         color="orange"
