@@ -3,9 +3,12 @@ import "./Background.css"
 
 const Background = ({ children, specificBackground }) => {
     return (
-        <span className={`background ${specificBackground}`}>
+        <div
+            className="background"
+            id={specificBackground}
+        >
             {children}
-        </span>
+        </div>
     );
 };
 

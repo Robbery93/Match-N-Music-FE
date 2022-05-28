@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import Header from "../../components/Header/Header";
+import Header from "../../components/StylingComponents/Header/Header";
 import styles from "./AvailableTeachers.module.css"
 import TeacherField from "../../components/TeacherField/TeacherField";
 import axios from "axios";

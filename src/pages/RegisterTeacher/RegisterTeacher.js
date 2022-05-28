@@ -1,16 +1,16 @@
 import React from 'react';
-import InputField from "../../components/InputField/InputField";
+import InputField from "../../components/FormComponents/InputField/InputField";
 import skeleton from "../../assets/skeleton.jpg";
 import styles from "./RegisterTeacher.module.css"
 import Button from "../../components/Button/Button";
 import {useForm} from "react-hook-form";
 import {ErrorMessage} from "@hookform/error-message";
-import Background from "../../components/Background/Background";
-import Form from "../../components/Form/Form";
+import Background from "../../components/StylingComponents/Background/Background";
+import Form from "../../components/FormComponents/Form/Form";
 import Avatar from "../../components/Avatar/Avatar";
-import Label from "../../components/Label/Label";
-import InputTextarea from "../../components/InputTextarea/InputTextarea";
-import InstrumentSelector from "../../components/InstrumentSelector/InstrumentSelector";
+import Label from "../../components/FormComponents/Label/Label";
+import InputTextarea from "../../components/FormComponents/InputTextarea/InputTextarea";
+import InstrumentSelector from "../../components/FormComponents/InstrumentSelector/InstrumentSelector";
 
 const RegisterTeacher = () => {
 

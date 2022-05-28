@@ -1,7 +1,7 @@
 import React, {createContext, useEffect, useState} from 'react';
-import {useNavigate} from "react-router";
 import jwtDecode from "jwt-decode";
 import axios from "axios";
+import {useHistory} from "react-router-dom";
 
 export const AuthContext = createContext({});
 
@@ -13,7 +13,7 @@ const AuthContextProvider = ({ children }) => {
         status: 'pending',
     });
 
-    const navigate = useNavigate();
+    const history = useHistory();
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -28,6 +28,8 @@ const AuthContextProvider = ({ children }) => {
                 status: 'done',
             });
         }
+
+        console.log(isAuth);
     }, [])
 
     async function fetchUserData(username, token, redirectUrl) {
@@ -52,7 +54,7 @@ const AuthContextProvider = ({ children }) => {
             });
 
             if (redirectUrl) {
-                navigate(redirectUrl);
+                history.push(redirectUrl);
             }
 
         } catch (e) {
@@ -69,7 +71,7 @@ const AuthContextProvider = ({ children }) => {
         localStorage.setItem('token', JWT);
         const decoded = jwtDecode(JWT);
 
-        fetchUserData(decoded.sub, JWT);
+        fetchUserData(decoded.sub, JWT, "/matchpage");
 
         // link de gebruiker door naar de profielpagina
         // history.push('/profile');
@@ -85,15 +87,15 @@ const AuthContextProvider = ({ children }) => {
         history.push('/');
     }
 
-    const contextData = {
+    const data = {
         isAuth: isAuth.isAuth,
         user: isAuth.user,
-        login: login,
-        logout: logout,
+        login,
+        logout
     }
 
     return (
-        <AuthContext.Provider value={contextData}>
+        <AuthContext.Provider value={data}>
             {isAuth.status === 'done' ? children : <p>Loading...</p>}
         </AuthContext.Provider>
     );

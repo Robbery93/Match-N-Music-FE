@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from "../../components/Header/Header";
+import Header from "../../components/StylingComponents/Header/Header";
 import styles from "./MatchPage.module.css"
 import robbert from "../../assets/Robbert.jpg"
 import floortje from "../../assets/Floortje.jpg"

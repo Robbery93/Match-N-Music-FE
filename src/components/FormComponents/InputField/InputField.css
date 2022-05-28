@@ -9,6 +9,11 @@
 
 .inputfield:focus {
     border: var(--dark-blue) solid 2px;
+    outline: none;
+}
+
+.inputfield::placeholder {
+    color: var(--grey);
 }
 
 /* To hide the up and down arrows of a input[type="number"] */

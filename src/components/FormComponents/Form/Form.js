@@ -1,10 +1,9 @@
 import React from "react";
-import './Form.css'
 
 const Form = ({ onSubmit, children }) => {
 
     return(
-        <form onSubmit={onSubmit} className="form_wrapper">
+        <form onSubmit={onSubmit}>
             {children}
         </form>
     )

@@ -1,0 +1,38 @@
+.side_by_side {
+    display: flex;
+    column-gap: 50px;
+}
+
+.side_by_side section {
+    width: 385px;
+    height: 360px;
+}
+
+#title {
+    width: 100%;
+    background-color: var(--blue);
+    display: flex;
+    justify-content: center;
+}
+
+#title h1 {
+    font-size: 36px;
+    line-height: 42px;
+    color: #FFFFFF;
+    -webkit-text-stroke: 1px #000000;
+}
+
+#intro_text {
+    width: 100%;
+}
+
+#login {
+    width: 385px;
+    height: 360px;
+    background-color: var(--blue);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    position: relative;
+}

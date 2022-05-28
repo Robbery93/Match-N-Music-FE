@@ -3,9 +3,7 @@ import styles from './Header.module.css'
 
 const Header = ({ text }) => {
     return (
-        <header className={styles['teacher-header']}>
-            <h2>{text}</h2>
-        </header>
+            <h2 className={styles.teacher_header}>{text}</h2>
     );
 };
 

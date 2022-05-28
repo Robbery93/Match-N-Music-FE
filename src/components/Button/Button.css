@@ -1,5 +1,7 @@
 .button {
+    padding: 1rem 2rem;
     border-radius: 5px;
+    font-size: 1.5rem;
     transition: background-color 0.1s, color 0.1s;
     display: flex;
     justify-content: center;
@@ -8,6 +10,8 @@
 }
 
 .blue-button {
+    font-size: 1rem;
+    padding: .5rem 1rem;
     background-color: var(--blue);
     border: 2px solid var(--dark-blue);
     color: #000
@@ -22,6 +26,7 @@
     background-color: var(--green);
     border: var(--dark-green) solid 2px;
     color: #FFF;
+    padding: 1rem 2rem;
 }
 
 .green-button:hover {
@@ -29,7 +34,6 @@
 }
 
 .orange-button {
-    font-size: 1.5rem;
     background-color: var(--light-orange);
     border: 2px solid var(--orange);
     color: #000

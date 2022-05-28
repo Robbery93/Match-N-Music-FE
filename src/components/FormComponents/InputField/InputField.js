@@ -16,6 +16,7 @@ const InputField = ({   type,
         <>
             <input
                 className="inputfield"
+                autoComplete="off"
                 id={inputName}
                 type={type}
                 placeholder={placeholder}

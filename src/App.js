@@ -8,6 +8,7 @@ import StudentApplications from "./pages/StudentApplications/StudentApplications
 import MatchPage from "./pages/MatchPage/MatchPage";
 import RegisterStudent from "./pages/RegisterStudent/RegisterStudent";
 import RegisterTeacher from "./pages/RegisterTeacher/RegisterTeacher";
+import RegisterUser from "./pages/RegisterUser/RegisterUser";
 
 function App() {
 
@@ -18,10 +19,13 @@ function App() {
                 <Route exact path="/">
                     <Home />
                 </Route>
-                <Route path="/registerstudent">
+                <Route path="/register">
+                    <RegisterUser />
+                </Route>
+                <Route path="/newstudent">
                     <RegisterStudent />
                 </Route>
-                <Route path="/registerteacher">
+                <Route path="/newteacher">
                     <RegisterTeacher />
                 </Route>
                 <Route path="/availableteachers">

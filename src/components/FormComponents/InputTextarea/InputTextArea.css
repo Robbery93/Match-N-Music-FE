@@ -8,6 +8,11 @@
     border: var(--dark-blue) solid 1px;
     border-radius: 5px;
 }
+
+.input-textarea::placeholder {
+    color: var(--grey);
+    font-size: .9rem;
+}
 .input-textarea:focus {
     outline: none;
     border: var(--dark-blue) solid 2px;

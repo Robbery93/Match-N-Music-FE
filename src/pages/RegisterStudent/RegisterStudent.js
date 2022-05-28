@@ -1,16 +1,17 @@
 import React from 'react';
 import styles from './RegisterStudent.module.css';
-import InputField from "../../components/InputField/InputField";
+import InputField from "../../components/FormComponents/InputField/InputField";
 import skeleton from "../../assets/skeleton.jpg";
 import Button from "../../components/Button/Button";
 import {useForm} from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
-import Label from "../../components/Label/Label";
-import Background from "../../components/Background/Background";
-import InputTextarea from "../../components/InputTextarea/InputTextarea";
-import InstrumentSelector from "../../components/InstrumentSelector/InstrumentSelector";
-import Form from "../../components/Form/Form";
+import Label from "../../components/FormComponents/Label/Label";
+import Background from "../../components/StylingComponents/Background/Background";
+import InputTextarea from "../../components/FormComponents/InputTextarea/InputTextarea";
+import InstrumentSelector from "../../components/FormComponents/InstrumentSelector/InstrumentSelector";
+import Form from "../../components/FormComponents/Form/Form";
 import Avatar from "../../components/Avatar/Avatar";
+import PageWrapper from "../../components/StylingComponents/PageWrapper/PageWrapper";
 
 const RegisterStudent = () => {
 
@@ -21,9 +22,8 @@ const RegisterStudent = () => {
     }
 
     return (
-        <main className={styles.register_student_page}>
+        <PageWrapper>
             <Form onSubmit={handleSubmit(onFormSubmit)}>
-
                 <Background>
                     <section>
                         <h2>Gegevens</h2>
@@ -120,7 +120,7 @@ const RegisterStudent = () => {
 
                 </Background>
 
-                <Background specificBackground={styles.request_background}>
+                <Background>
                     <section>
                         <h2>Je verzoek</h2>
 
@@ -163,6 +163,7 @@ const RegisterStudent = () => {
 
 
                     <section className={styles.preference}>
+                        <span>
                         <h3>Hoe wil je les krijgen?</h3>
                             <label>
                                 <input
@@ -180,62 +181,19 @@ const RegisterStudent = () => {
                                 />
                                 Online les
                             </label>
+                        </span>
+
+                        <Button
+                            color="orange"
+                            type="submit"
+                            text="Registreren"
+                        />
                     </section>
 
-                </Background>
-
-                <Background specificBackground={styles.user_background}>
-                    <section>
-                            <Label
-                                id="username"
-                                text="Gebruikersnaam"
-                            />
-                            <InputField
-                                type="text"
-                                inputName="username"
-                                placeholder="Gebruikersnaam"
-                                register={register}
-                                validationRules={{
-                                    required: "Een gebruikersnaam is verplicht",
-                                    min: { value: 8, message: "Je gebruikersnaam moet minimaal 8 karakters bevatten" }
-                                }}
-
-                            />
-                            <ErrorMessage errors={errors}
-                                          name="username"
-                                          render={({ message }) => <p className={styles.error}>{message}</p>}
-                            />
-
-                            <Label
-                                id="password"
-                                text="Wachtwoord"
-                            />
-                            <small>Minimaal 8 karakters, waaronder één hoofdletter, één kleine letter, een cijfer en een symbool. </small>
-                            <InputField
-                                type="password"
-                                inputName="password"
-                                register={register}
-                                validationRules={{
-                                    required: "Een wachtwoord is verplicht",
-                                    min: { value: 8, message: "Je wachtwoord moet minimaal 8 karakters bevatten" }
-                                }}
-                                placeholder="Wachtwoord"
-                            />
-                            <ErrorMessage errors={errors}
-                                          name="password"
-                                          render={({ message }) => <p className={styles.error}>{message}</p>}
-                            />
-                    </section>
-
-                    <Button
-                        color="orange"
-                        type="submit"
-                        text="Registreren"
-                    />
                 </Background>
 
             </Form>
-        </main>
+        </PageWrapper>
     );
 };
 

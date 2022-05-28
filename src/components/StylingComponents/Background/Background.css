@@ -13,6 +13,7 @@
     color: var(--dark-blue);
 }
 
-.background:last-child {
-    margin-bottom: 30px;
+.background section {
+    display: flex;
+    flex-flow: column nowrap;
 }
