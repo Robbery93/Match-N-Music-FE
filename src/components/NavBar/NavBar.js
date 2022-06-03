@@ -1,19 +1,30 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import mNMLogo from '../../assets/matchnmusicLogo.png';
 import './NavBar.css'
 import {Link} from "react-router-dom";
+import Button from "../Button/Button";
+import {AuthContext} from "../../context/AuthContext";
 
 const NavBar = () => {
 
+    const { isAuth, logout } = useContext(AuthContext);
+
     return (
-        <span className="navBar">
+        <header className="navBar">
             <Link to="/">
                 <img
                     className="logo"
                     src={mNMLogo}
                     alt = "Logo van Match 'n Match" />
             </Link>
-        </span>
+            {isAuth === true &&
+            <Button color="blue"
+                    text="Uitloggen"
+                    onClick={logout}
+            />
+            }
+
+        </header>
     );
 };
 

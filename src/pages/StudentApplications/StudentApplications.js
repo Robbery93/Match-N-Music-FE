@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from "../../components/StylingComponents/Header/Header";
+import Header from "../../components/StylingElements/Header/Header";
 import styles from "./StudentApplications.module.css"
 import StudentField from "../../components/StudentField/StudentField";
 

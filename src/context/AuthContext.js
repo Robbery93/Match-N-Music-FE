@@ -7,13 +7,13 @@ export const AuthContext = createContext({});
 
 const AuthContextProvider = ({ children }) => {
 
+    const history = useHistory();
+
     const [isAuth, toggleIsAuth] = useState({
         isAuth: false,
         user: null,
         status: 'pending',
     });
-
-    const history = useHistory();
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -28,8 +28,6 @@ const AuthContextProvider = ({ children }) => {
                 status: 'done',
             });
         }
-
-        console.log(isAuth);
     }, [])
 
     async function fetchUserData(username, token, redirectUrl) {
@@ -46,9 +44,8 @@ const AuthContextProvider = ({ children }) => {
                 isAuth: true,
                 user: {
                     username: result.data.username,
-                    email: result.data.email,
-                    id: result.data.id,
                     enabled: result.data.enabled,
+                    authority: result.data.authorities[0].authority
                 },
                 status: 'done',
             });
@@ -64,33 +61,45 @@ const AuthContextProvider = ({ children }) => {
                 user: null,
                 status: 'done',
             });
+            console.log("Je zit nu in het catch blok")
         }
+
+        console.log(isAuth)
     }
 
-    function login(JWT) {
-        localStorage.setItem('token', JWT);
-        const decoded = jwtDecode(JWT);
+    function login(jwt) {
+        localStorage.setItem('token', jwt);
+        const decoded = jwtDecode(jwt);
 
-        fetchUserData(decoded.sub, JWT, "/matchpage");
+        fetchUserData(decoded.sub, jwt, "/matchpage");
+    }
 
-        // link de gebruiker door naar de profielpagina
-        // history.push('/profile');
+    function registerUser(jwt) {
+        localStorage.setItem('token', jwt)
+        const decoded = jwtDecode(jwt);
+
+        fetchUserData(decoded.sub, jwt)
     }
 
     function logout() {
+        if(confirm("Weet je zeker dat je wil uitloggen?\n\nAls je op OK klikt, wordt je teruggestuurd naar de homepagina") === true) {
         localStorage.clear();
         toggleIsAuth({
             isAuth: false,
             user: null,
             status: 'done',
         });
-        history.push('/');
+        console.log("Gebruiker is uitgelogd.");
+        history.push("/");
+        }
+        // (confirm("Weet je zeker dat je wil uitloggen?\n\nAls je op OK klikt, wordt je teruggestuurd naar de homepagina") === true && history.push("/"));
     }
 
     const data = {
         isAuth: isAuth.isAuth,
         user: isAuth.user,
         login,
+        registerUser,
         logout
     }
 

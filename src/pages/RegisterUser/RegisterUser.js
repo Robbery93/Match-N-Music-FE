@@ -1,23 +1,25 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import axios from "axios";
 import styles from "./RegisterUser.module.css"
-import InputField from "../../components/FormComponents/InputField/InputField";
+import InputField from "../../components/FormElements/InputField/InputField";
 import {useForm} from "react-hook-form";
-import Form from "../../components/FormComponents/Form/Form";
-import Background from "../../components/StylingComponents/Background/Background";
-import Label from "../../components/FormComponents/Label/Label";
+import Form from "../../components/FormElements/Form/Form";
+import Background from "../../components/StylingElements/Background/Background";
+import Label from "../../components/FormElements/Label/Label";
 import {ErrorMessage} from "@hookform/error-message";
-import PageWrapper from "../../components/StylingComponents/PageWrapper/PageWrapper";
-import Header from "../../components/StylingComponents/Header/Header";
+import Header from "../../components/StylingElements/Header/Header";
 import Button from "../../components/Button/Button";
 import {useHistory} from "react-router-dom";
+import ErrorText from "../../components/ErrorMessage/ErrorText";
+import {AuthContext} from "../../context/AuthContext";
 
 const RegisterUser = () => {
 
     const {register, handleSubmit, formState: { errors }} = useForm({mode: "onChange"});
+
     const history = useHistory();
 
-
+    const { registerUser } = useContext(AuthContext);
 
     const [registerTeacher, toggleRegisterTeacher] = useState(false);
     const [registerStudent, toggleRegisterStudent] = useState(false);
@@ -36,17 +38,20 @@ const RegisterUser = () => {
     }
 
     async function createStudent(data) {
-        console.log(data)
-
         try {
-            await axios.post(`http://localhost:8080/users/student`,
-                {
-                    username: data.usrname,
+            await axios.post(`http://localhost:8080/users/student`, {
+                    username: data.username,
                     password: data.password
                 })
 
-            toggleRegistrationSuccessful(true);
+            const result = await axios.post('http://localhost:8080/authenticate', {
+                username: data.username,
+                password: data.password
+            })
 
+            registerUser(result.data.jwt);
+
+            toggleRegistrationSuccessful(true);
             setTimeout(() => history.push("/newstudent"), 5000);
         }
         catch (e) {
@@ -55,16 +60,32 @@ const RegisterUser = () => {
         }
     }
 
+
     async function createTeacher(data) {
-        await axios.post(`http://localhost:8080/users/teacher`,
-            {
+        try{
+            await axios.post(`http://localhost:8080/users/teacher`,
+                {
+                    username: data.username,
+                    password: data.password
+                })
+
+            const result = await axios.post('http://localhost:8080/authenticate', {
                 username: data.username,
                 password: data.password
             })
+
+            registerUser(result.data.jwt);
+
+            toggleRegistrationSuccessful(true);
+            setTimeout(() => history.push("/newteacher"), 3000);
+
+        } catch (e) {
+            setErrorMessage(`Het registreren is niet gelukt. Probeer het opnieuw (${e.message})`);
+        }
     }
 
     return (
-        <PageWrapper>
+        <>
             <Header text="Registratie pagina" />
 
             <Background specificBackground={styles.register_background}>
@@ -101,12 +122,12 @@ const RegisterUser = () => {
                             register={register}
                             validationRules={{
                                 required: "Je moet een gebruikersnaam invullen",
-                                minLength: { value: 4, message: "Deze gebruikersnaam is te kort, gebruik minimaal 4 karakters." }
+                                minLength: { value: 3, message: "Deze gebruikersnaam is te kort, gebruik minimaal 3 karakters." }
                             }}
                         />
                         <ErrorMessage errors={errors}
                                       name="username"
-                                      render={({ message }) => <p className={styles.error}>{message}</p>}
+                                      render={({ message }) => <ErrorText errorMessage={message} />}
                         />
 
                         <Label id="password" text="Wachtwoord" />
@@ -129,7 +150,7 @@ const RegisterUser = () => {
                         />
                         <ErrorMessage errors={errors}
                                       name="password"
-                                      render={({ message }) => <p className={styles.error}>{message}</p>}
+                                      render={({ message }) => <ErrorText errorMessage={message} />}
                         />
                     </section>
 
@@ -155,12 +176,12 @@ const RegisterUser = () => {
                             register={register}
                             validationRules={{
                                 required: "Je moet een gebruikersnaam invullen",
-                                minLength: { value: 4, message: "Deze gebruikersnaam is te kort, gebruik minimaal 4 karakters." }
+                                minLength: { value: 3, message: "Deze gebruikersnaam is te kort, gebruik minimaal 3 karakters." }
                             }}
                         />
                         <ErrorMessage errors={errors}
                                       name="username"
-                                      render={({ message }) => <p className={styles.error}>{message}</p>}
+                                      render={({ message }) => <ErrorText errorMessage={message} />}
                         />
 
                         <Label id="password" text="Wachtwoord" />
@@ -183,7 +204,7 @@ const RegisterUser = () => {
                         />
                         <ErrorMessage errors={errors}
                                       name="password"
-                                      render={({ message }) => <p className={styles.error}>{message}</p>}
+                                      render={({ message }) => <ErrorText errorMessage={message} />}
                         />
                     </section>
 
@@ -200,10 +221,10 @@ const RegisterUser = () => {
             }
             {errorMessage &&
             <Background>
-                <p className={styles.error}>{errorMessage}</p>
+                <ErrorText errorMessage={errorMessage} />
             </Background>}
 
-        </PageWrapper>
+        </>
     )
 }
 

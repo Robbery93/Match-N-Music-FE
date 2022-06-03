@@ -20,13 +20,7 @@
 small {
     color: #000;
     font-size: 0.7rem;
-}
-
-.error {
-    font-size: 0.75rem;
-    color: var(--error);
-    margin-left: 10px;
-    padding: 0;
+    margin-left: 25px;
 }
 
 .succes h2 {

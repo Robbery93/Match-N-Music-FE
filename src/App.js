@@ -9,39 +9,43 @@ import MatchPage from "./pages/MatchPage/MatchPage";
 import RegisterStudent from "./pages/RegisterStudent/RegisterStudent";
 import RegisterTeacher from "./pages/RegisterTeacher/RegisterTeacher";
 import RegisterUser from "./pages/RegisterUser/RegisterUser";
+import NotFound from "./pages/NotFound/NotFound";
+import PageWrapper from "./components/StylingElements/PageWrapper/PageWrapper";
 
 function App() {
 
   return (
-    <>
-        <NavBar />
-            <Switch>
-                <Route exact path="/">
-                    <Home />
-                </Route>
-                <Route path="/register">
-                    <RegisterUser />
-                </Route>
-                <Route path="/newstudent">
-                    <RegisterStudent />
-                </Route>
-                <Route path="/newteacher">
-                    <RegisterTeacher />
-                </Route>
-                <Route path="/availableteachers">
-                    <AvailableTeachers />
-                </Route>
-                <Route path="/studentapplications">
-                    <StudentApplications />
-                </Route>
-                <Route path="/matchpage">
-                    <MatchPage />
-                </Route>
-                <Route path="*">
-                    {/* NotFound component toevoegen */}
-                </Route>
-            </Switch>
-    </>
+      <>
+          <NavBar />
+          <PageWrapper>
+          <Switch>
+              <Route exact path="/">
+                  <Home />
+              </Route>
+              <Route path="/register">
+                  <RegisterUser />
+              </Route>
+              <Route path="/newstudent">
+                  <RegisterStudent />
+              </Route>
+              <Route path="/availableteachers">
+                  <AvailableTeachers />
+              </Route>
+              <Route path="/newteacher">
+                  <RegisterTeacher />
+              </Route>
+              <Route path="/studentapplications">
+                  <StudentApplications />
+              </Route>
+              <Route path="/matchpage">
+                  <MatchPage />
+              </Route>
+              <Route path="*">
+                  <NotFound />
+              </Route>
+          </Switch>
+          </PageWrapper>
+      </>
   );
 }
 

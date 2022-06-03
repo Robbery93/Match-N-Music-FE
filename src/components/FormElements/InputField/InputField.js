@@ -1,6 +1,6 @@
 import React from 'react';
 import './InputField.css';
-// import {ErrorMessage} from "@hookform/error-message";
+// import {ErrorText} from "@hookform/error-message";
 
 
 const InputField = ({   type,
@@ -22,7 +22,7 @@ const InputField = ({   type,
                 placeholder={placeholder}
                 {...register(inputName, validationRules)}
             />
-            {/*<ErrorMessage*/}
+            {/*<ErrorText*/}
             {/*    errors={errors}*/}
             {/*    name={inputName}*/}
             {/*    render={({message}) => <p className="error">{message}</p>}*/}

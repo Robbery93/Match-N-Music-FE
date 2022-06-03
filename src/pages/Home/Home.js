@@ -1,22 +1,43 @@
-import React from 'react';
+import React, {useContext, useState} from 'react';
 import styles from './Home.module.css';
 import {Link} from "react-router-dom";
 import Button from "../../components/Button/Button";
-import InputField from "../../components/FormComponents/InputField/InputField";
+import InputField from "../../components/FormElements/InputField/InputField";
 import {useForm} from "react-hook-form";
-import Form from "../../components/FormComponents/Form/Form";
-import Background from "../../components/StylingComponents/Background/Background";
-import PageWrapper from "../../components/StylingComponents/PageWrapper/PageWrapper";
-import Line from "../../components/StylingComponents/Line/Line";
+import Form from "../../components/FormElements/Form/Form";
+import Background from "../../components/StylingElements/Background/Background";
+import PageWrapper from "../../components/StylingElements/PageWrapper/PageWrapper";
+import Line from "../../components/StylingElements/Line/Line";
+import {AuthContext} from "../../context/AuthContext";
+import axios from "axios";
+import ErrorText from "../../components/ErrorMessage/ErrorText";
 
 const Home = () => {
 
-    const { register, handleSubmit } = useForm()
+    const { register, handleSubmit } = useForm();
+    const { login } = useContext(AuthContext);
 
-    const onSubmit = (data) => console.log(data);
+    const [error, toggleError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("")
+
+    async function onSubmit(data) {
+        try {
+            const result = await axios.post("http://localhost:8080/authenticate", {
+                username: data.username,
+                password: data.password
+            })
+            console.log("Je bent ingelogd");
+            login(result.data.jwt);
+
+        } catch (error) {
+            console.error(error.message)
+            toggleError(true);
+            setErrorMessage("Combinatie van gebruikersnaam/wachtwoord niet correct.");
+        }
+    }
 
     return (
-        <PageWrapper>
+        <>
             <div className={styles.side_by_side}>
             <section>
                 <Background specificBackground={styles.title}>
@@ -30,41 +51,28 @@ const Home = () => {
 
             <section>
                 <Form onSubmit={handleSubmit(onSubmit)}>
-                <Background specificBackground={styles.login}>
-
+                    <Background specificBackground={styles.login}>
 
                         <InputField
                             type="text"
                             inputName="username"
                             placeholder="Gebruikersnaam"
                             register={register}
-                            validationRules={{
-                                required: "Je moet een gebruikersnaam invullen",
-                                minLength: { value: 4, message: "Deze gebruikersnaam is te kort, gebruik minimaal 4 karakters." }
-                            }}
                         />
                         <InputField
                             type="password"
                             inputName="password"
                             placeholder="Wachtwoord"
                             register={register}
-                            validationRules={{
-                                required: {
-                                    value: true,
-                                    message: "Je moet een wachtwoord invullen."
-                                },
-                                minLength: {
-                                    value: 8,
-                                    message: "Gebruik minimaal 8 karakters, waaronder één hoofdletter, één kleine letter, een cijfer en een symbool."
-                                }
-                            }}
                         />
+
+                        {error && <ErrorText errorMessage={errorMessage} />}
 
                         <Button
                             color="green"
                             type="submit"
-                            text="Login" />
-
+                            text="Inloggen"
+                        />
 
                         <Line />
 
@@ -74,11 +82,11 @@ const Home = () => {
                             </Link>
                         </div>
 
-                </Background>
+                    </Background>
                 </Form>
             </section>
             </div>
-        </PageWrapper>
+        </>
     );
 };
 

@@ -1,0 +1,13 @@
+.preference_selector {
+    display: flex;
+    flex-direction: column;
+    margin-top: 35px;
+}
+
+.preference_selector h3 {
+    margin: 10px 0;
+}
+
+.preference_selector label {
+    margin-bottom: 5px;
+}
