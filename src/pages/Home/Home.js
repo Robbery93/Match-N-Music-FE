@@ -1,12 +1,11 @@
 import React, {useContext, useState} from 'react';
 import styles from './Home.module.css';
 import {Link} from "react-router-dom";
-import Button from "../../components/Button/Button";
+import Button from "../../components/StylingElements/Button/Button";
 import InputField from "../../components/FormElements/InputField/InputField";
 import {useForm} from "react-hook-form";
 import Form from "../../components/FormElements/Form/Form";
 import Background from "../../components/StylingElements/Background/Background";
-import PageWrapper from "../../components/StylingElements/PageWrapper/PageWrapper";
 import Line from "../../components/StylingElements/Line/Line";
 import {AuthContext} from "../../context/AuthContext";
 import axios from "axios";

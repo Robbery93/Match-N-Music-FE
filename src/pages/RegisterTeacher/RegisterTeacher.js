@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import InputField from "../../components/FormElements/InputField/InputField";
 import skeleton from "../../assets/skeleton.jpg";
 import styles from "./RegisterTeacher.module.css"
-import Button from "../../components/Button/Button";
+import Button from "../../components/StylingElements/Button/Button";
 import {useForm} from "react-hook-form";
 import {ErrorMessage} from "@hookform/error-message";
 import Background from "../../components/StylingElements/Background/Background";
@@ -14,15 +14,36 @@ import InstrumentSelector from "../../components/FormElements/InstrumentSelector
 import {AuthContext} from "../../context/AuthContext";
 import NotRegistered from "../../components/NotRegistered/NotRegistered";
 import PreferenceSelector from "../../components/FormElements/PreferenceSelector/PreferenceSelector";
+import axios from "axios";
 
 const RegisterTeacher = () => {
 
     const { user } = useContext(AuthContext);
 
-    const { register, handleSubmit, formState: {errors} } = useForm({ mode: "onBlur" })
+    const { register, handleSubmit, formState: {errors} } = useForm({ mode: "onChange" })
 
-    const onFormSubmit = (data) => {
-        console.log(data)
+    async function onFormSubmit(data) {
+        console.log(data);
+        const axiosConfig = { headers: {
+                'Content-Type' : 'application/json',
+                'Authorization' : `Bearer ${localStorage.getItem("token")}`
+            }};
+        try {
+            const result = await axios.post("http://localhost:8080/teachers", {
+                name: data.name,
+                email: data.email,
+                age: data.age,
+                phoneNumber : data.phoneNumber,
+                residence: data.residence,
+                description: data.description,
+                experience: data.experience,
+                instruments : data.instrument,
+                preferenceForLessonType: data.preferenceForLessonType
+            }, axiosConfig)
+            console.log(result);
+        } catch (e) {
+            console.error(e);
+        }
     }
 
     return (
@@ -119,13 +140,13 @@ const RegisterTeacher = () => {
                                 </section>
 
                                 <aside className={styles.avatar}>
-                        <span className={styles.upload_text}>
-                            <h3>Foto uploaden:</h3>
-                            <Button
-                                text="Kies een bestand"
-                                color="blue"
-                            />
-                        </span>
+                                    <span className={styles.upload_text}>
+                                        <h3>Foto uploaden:</h3>
+                                        <Button
+                                            text="Kies een bestand"
+                                            color="blue"
+                                        />
+                                    </span>
 
                                     <Avatar photo={skeleton} alt="Afbeelding"/>
                                 </aside>

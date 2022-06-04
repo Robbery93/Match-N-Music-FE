@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import mNMLogo from '../../assets/matchnmusicLogo.png';
 import './NavBar.css'
 import {Link} from "react-router-dom";
-import Button from "../Button/Button";
+import Button from "../StylingElements/Button/Button";
 import {AuthContext} from "../../context/AuthContext";
 
 const NavBar = () => {

@@ -1,10 +1,10 @@
 import React from 'react';
 import "./Background.css"
 
-const Background = ({ children, specificBackground }) => {
+const Background = ({ children, color, specificBackground }) => {
     return (
         <div
-            className="background"
+            className={color ? `background ${color}-background`: "background blue-background"}
             id={specificBackground}
         >
             {children}

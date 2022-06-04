@@ -36,7 +36,8 @@
 .orange-button {
     background-color: var(--light-orange);
     border: 2px solid var(--orange);
-    color: #000
+    color: #000;
+    max-width: 200px;
 }
 
 .orange-button:hover {

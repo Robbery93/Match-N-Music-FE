@@ -4,7 +4,7 @@ import Avatar from "../Avatar/Avatar";
 import Details from "../Details/Details";
 import Description from "../Description/Description";
 import floortje from "../../assets/Floortje.jpg"
-import Button from "../Button/Button";
+import Button from "../StylingElements/Button/Button";
 
 const StudentField = () => {
     return (

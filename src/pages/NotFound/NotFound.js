@@ -1,7 +1,7 @@
 import React from 'react';
 import PageWrapper from "../../components/StylingElements/PageWrapper/PageWrapper";
 import Background from "../../components/StylingElements/Background/Background";
-import Button from "../../components/Button/Button";
+import Button from "../../components/StylingElements/Button/Button";
 import {useHistory} from "react-router-dom";
 
 const NotFound = () => {

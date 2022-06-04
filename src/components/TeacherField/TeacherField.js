@@ -5,7 +5,7 @@ import Preference from "./Preference/Preference";
 import Description from "../Description/Description";
 import Details from "../Details/Details";
 import robbert from "../../assets/Robbert.jpg";
-import Button from "../Button/Button";
+import Button from "../StylingElements/Button/Button";
 
 const TeacherField = ({ name, age, residence, instrument, preference, description }) => {
 

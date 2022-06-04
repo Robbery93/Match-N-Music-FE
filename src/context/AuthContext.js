@@ -82,7 +82,7 @@ const AuthContextProvider = ({ children }) => {
     }
 
     function logout() {
-        if(confirm("Weet je zeker dat je wil uitloggen?\n\nAls je op OK klikt, wordt je teruggestuurd naar de homepagina") === true) {
+        if(confirm("Weet je zeker dat je wil uitloggen?\n\nAls je op OK klikt, wordt je teruggestuurd naar de homepagina")) {
         localStorage.clear();
         toggleIsAuth({
             isAuth: false,
@@ -92,7 +92,6 @@ const AuthContextProvider = ({ children }) => {
         console.log("Gebruiker is uitgelogd.");
         history.push("/");
         }
-        // (confirm("Weet je zeker dat je wil uitloggen?\n\nAls je op OK klikt, wordt je teruggestuurd naar de homepagina") === true && history.push("/"));
     }
 
     const data = {

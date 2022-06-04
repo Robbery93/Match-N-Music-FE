@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import styles from './RegisterStudent.module.css';
 import InputField from "../../components/FormElements/InputField/InputField";
 import skeleton from "../../assets/skeleton.jpg";
-import Button from "../../components/Button/Button";
+import Button from "../../components/StylingElements/Button/Button";
 import {useForm} from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import Label from "../../components/FormElements/Label/Label";

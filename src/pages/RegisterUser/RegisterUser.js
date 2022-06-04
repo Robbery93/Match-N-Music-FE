@@ -8,7 +8,7 @@ import Background from "../../components/StylingElements/Background/Background";
 import Label from "../../components/FormElements/Label/Label";
 import {ErrorMessage} from "@hookform/error-message";
 import Header from "../../components/StylingElements/Header/Header";
-import Button from "../../components/Button/Button";
+import Button from "../../components/StylingElements/Button/Button";
 import {useHistory} from "react-router-dom";
 import ErrorText from "../../components/ErrorMessage/ErrorText";
 import {AuthContext} from "../../context/AuthContext";

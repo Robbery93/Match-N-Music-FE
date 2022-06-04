@@ -6,14 +6,44 @@
     width: 820px;
     padding: 25px;
     margin-bottom: 15px;
-    border: var(--dark-blue) solid 2px;
     border-radius: 5px;
-    background-color: var(--light-blue);
+    border: var(--dark-blue) solid 2px;
     box-shadow: rgba(0, 0, 0, 0.15) 4px 4px 3px;
-    color: var(--dark-blue);
 }
 
 .background section {
     display: flex;
     flex-flow: column nowrap;
+}
+
+.blue-background {
+    background-color: var(--light-blue);
+    color: var(--dark-blue);
+}
+
+.white-background {
+    background: #FFFFFF;
+    width: inherit;
+    padding: 10px 25px;
+    overflow: auto;
+}
+
+.white-background > p {
+    color: #000000;
+    max-height: 300px;
+    overflow: auto;
+}
+
+.white-background > p::-webkit-scrollbar {
+    width: 12px;               /* width of the entire scrollbar */
+}
+
+.white-background > p::-webkit-scrollbar-track {
+    background: #FFFFFF;        /* color of the tracking area */
+}
+
+.white-background > p::-webkit-scrollbar-thumb {
+    background-color: var(--blue);    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: 3px solid #FFF;  /* creates padding around scroll thumb */
 }
