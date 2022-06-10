@@ -28,7 +28,7 @@ const PreferenceSelector = ({ register }) => {
                         type="radio"
                         id="both"
                         {...register("preferenceForLessonType")}
-                        value="Beide"
+                        value="Geen voorkeur"
                     />
                     Geen voorkeur
                 </label>

@@ -15,11 +15,12 @@ const NavBar = () => {
                 <img
                     className="logo"
                     src={mNMLogo}
-                    alt = "Logo van Match 'n Match" />
+                    alt = "Logo van Match 'n Music" />
             </Link>
             {isAuth === true &&
             <Button color="blue"
                     text="Uitloggen"
+                    small="yes"
                     onClick={logout}
             />
             }

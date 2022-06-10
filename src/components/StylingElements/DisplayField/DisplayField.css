@@ -1,0 +1,23 @@
+.display_field {
+    width: 350px;
+    display:flex;
+    align-items: center;
+    column-gap: 5px;
+    margin-bottom: 3px;
+}
+
+.display_field > h4 {
+    margin: 5px 0 5px 10px;
+}
+
+.display-field_text {
+    flex-grow: 1;
+    background-color: #FFFFFF;
+    border: var(--dark-blue) solid 1px;
+    border-radius: 5px;
+    padding: 7px 0 7px 20px;
+}
+
+.display-field_text p {
+    color: #000000;
+}

@@ -10,8 +10,6 @@
 }
 
 .blue-button {
-    font-size: 1rem;
-    padding: .5rem 1rem;
     background-color: var(--blue);
     border: 2px solid var(--dark-blue);
     color: #000
@@ -26,7 +24,6 @@
     background-color: var(--green);
     border: var(--dark-green) solid 2px;
     color: #FFF;
-    padding: 1rem 2rem;
 }
 
 .green-button:hover {
@@ -44,3 +41,13 @@
     background-color: var(--orange);
     color: #FFF
 }
+
+.small-button {
+    padding: .5rem 1rem;
+    font-size: 1rem;
+}
+
+a button {
+    width: 100%;
+}
+

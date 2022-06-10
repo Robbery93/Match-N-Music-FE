@@ -11,6 +11,7 @@ import RegisterTeacher from "./pages/RegisterTeacher/RegisterTeacher";
 import RegisterUser from "./pages/RegisterUser/RegisterUser";
 import NotFound from "./pages/NotFound/NotFound";
 import PageWrapper from "./components/StylingElements/PageWrapper/PageWrapper";
+import StudentProfile from "./pages/StudentProfile/StudentProfile";
 
 function App() {
 
@@ -28,11 +29,14 @@ function App() {
               <Route path="/newstudent">
                   <RegisterStudent />
               </Route>
-              <Route path="/availableteachers">
-                  <AvailableTeachers />
-              </Route>
               <Route path="/newteacher">
                   <RegisterTeacher />
+              </Route>
+              <Route path="/profile">
+                  <StudentProfile />
+              </Route>
+              <Route path="/availableteachers">
+                  <AvailableTeachers />
               </Route>
               <Route path="/studentapplications">
                   <StudentApplications />

@@ -8,8 +8,8 @@ body {
   font-family: Roboto, sans-serif;
   font-size: 16px;
 
-  background-color: #FCF1EF;
-  background-image: url("./assets/Background MnM.jpg");
+  background-color: #fcf8f8;
+  background-image: url("assets/Background MnM.png");
   background-size: 100%;
   background-attachment: fixed;
   background-position: center bottom;

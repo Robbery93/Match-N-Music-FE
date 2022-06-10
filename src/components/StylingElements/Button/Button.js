@@ -1,15 +1,35 @@
 import React from 'react';
 import './Button.css';
+import {Link} from "react-router-dom";
 
-const Button = ({ color, type, onClick, text }) => {
+const Button = ({ link, color,small , addStyle, type, onClick, text }) => {
     return (
-        <button
-            className={`button ${color}-button`}
-            type={type ? type : "button"}
-            onClick={onClick}
-        >
-            {text}
-        </button>
+        <>
+            {link ?
+                <Link
+                    to={link}
+                    id={addStyle ? addStyle : ""}
+                    style={{ textDecoration: 'none' }} >
+                    <button
+                        className={small === "yes" ? `button ${color}-button small-button`: `button ${color}-button`}
+                        id={addStyle ? addStyle : ""}
+                        type={type ? type : "button"}
+                        onClick={onClick}
+                    >
+                        {text}
+                    </button>
+                </Link>
+                :
+                <button
+                    className={small === "yes" ? `button ${color}-button small-button`: `button ${color}-button`}
+                    id={addStyle ? addStyle : ""}
+                    type={type ? type : "button"}
+                    onClick={onClick}
+                >
+                    {text}
+                </button>
+            }
+        </>
     );
 };
 

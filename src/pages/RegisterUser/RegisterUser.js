@@ -52,7 +52,7 @@ const RegisterUser = () => {
             registerUser(result.data.jwt);
 
             toggleRegistrationSuccessful(true);
-            setTimeout(() => history.push("/newstudent"), 5000);
+            setTimeout(() => history.push("/newstudent"), 3000);
         }
         catch (e) {
             console.error(e);

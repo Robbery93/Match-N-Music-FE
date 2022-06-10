@@ -25,7 +25,7 @@ const Home = () => {
                 username: data.username,
                 password: data.password
             })
-            console.log("Je bent ingelogd");
+            console.log(`${data.username} is ingelogd`);
             login(result.data.jwt);
 
         } catch (error) {

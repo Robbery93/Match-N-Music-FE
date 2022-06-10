@@ -32,23 +32,54 @@ const AuthContextProvider = ({ children }) => {
 
     async function fetchUserData(username, token, redirectUrl) {
         try {
-            const result = await axios.get(`http://localhost:8080/users/${username}`, {
+            const {data} = await axios.get(`http://localhost:8080/users/${username}`, {
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`,
                 },
             });
 
-            toggleIsAuth({
-                ...isAuth,
-                isAuth: true,
-                user: {
-                    username: result.data.username,
-                    enabled: result.data.enabled,
-                    authority: result.data.authorities[0].authority
-                },
-                status: 'done',
-            });
+            if (data.student) {
+                toggleIsAuth({
+                    ...isAuth,
+                    isAuth: true,
+                    user: {
+                        username: data.username,
+                        enabled: data.enabled,
+                        authority: data.authorities[0].authority,
+                        id: data.student.id,
+                        instrument: data.student.instrument,
+                        preference: data.student.preferenceForLessonType
+                    },
+                    status: 'done',
+                });
+            } else if(data.teacher) {
+                toggleIsAuth({
+                    ...isAuth,
+                    isAuth: true,
+                    user: {
+                        username: data.username,
+                        enabled: data.enabled,
+                        authority: data.authorities[0].authority,
+                        id: data.teacher.id,
+                        instrument: data.teacher.instrument,
+                        preference: data.teacher.preferenceForLessonType
+                    },
+                    status: 'done',
+                });
+            } else {
+                toggleIsAuth({
+                    ...isAuth,
+                    isAuth: true,
+                    user: {
+                        username: data.username,
+                        enabled: data.enabled,
+                        authority: data.authorities[0].authority,
+                    },
+                    status: 'done',
+                });
+            }
+
 
             if (redirectUrl) {
                 history.push(redirectUrl);
@@ -63,15 +94,13 @@ const AuthContextProvider = ({ children }) => {
             });
             console.log("Je zit nu in het catch blok")
         }
-
-        console.log(isAuth)
     }
 
     function login(jwt) {
         localStorage.setItem('token', jwt);
         const decoded = jwtDecode(jwt);
 
-        fetchUserData(decoded.sub, jwt, "/matchpage");
+        fetchUserData(decoded.sub, jwt, "/profile");
     }
 
     function registerUser(jwt) {
@@ -89,7 +118,7 @@ const AuthContextProvider = ({ children }) => {
             user: null,
             status: 'done',
         });
-        console.log("Gebruiker is uitgelogd.");
+        console.log(`${isAuth.user.username} is uitgelogd.`);
         history.push("/");
         }
     }

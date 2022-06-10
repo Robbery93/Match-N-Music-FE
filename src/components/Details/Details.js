@@ -5,12 +5,12 @@ import {ReactComponent as LocationPin} from "../../assets/location-pin.svg";
 const Details = ({ name, age, residence, instrument }) => {
     return (
         <div className={styles.details_field}>
-            <h2>{name}<span>{age} jaar</span></h2>
-            <div className={styles.location}>
+            <h2>{name}<p>{age} jaar</p></h2>
+            <span className={styles.location}>
                 <LocationPin />
                 <p>{residence}</p>
                 <p>{instrument}</p>
-            </div>
+            </span>
         </div>
     );
 };
