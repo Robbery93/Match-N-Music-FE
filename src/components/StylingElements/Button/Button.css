@@ -9,35 +9,35 @@
     cursor: pointer;
 }
 
-.blue-button {
+.blue {
     background-color: var(--blue);
     border: 2px solid var(--dark-blue);
     color: #000
 }
 
-.blue-button:hover {
+.blue:hover {
     background-color: var(--dark-blue);
     color: #FFF;
 }
 
-.green-button {
+.green {
     background-color: var(--green);
     border: var(--dark-green) solid 2px;
     color: #FFF;
 }
 
-.green-button:hover {
+.green:hover {
     background-color: var(--dark-green);
 }
 
-.orange-button {
+.orange {
     background-color: var(--light-orange);
     border: 2px solid var(--orange);
     color: #000;
     max-width: 200px;
 }
 
-.orange-button:hover {
+.orange:hover {
     background-color: var(--orange);
     color: #FFF
 }

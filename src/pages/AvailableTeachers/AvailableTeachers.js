@@ -4,6 +4,8 @@ import TeacherField from "../../components/TeacherField/TeacherField";
 import axios from "axios";
 import {AuthContext} from "../../context/AuthContext";
 import Background from "../../components/StylingElements/Background/Background";
+import NotRegistered from "../../components/NotRegistered/NotRegistered";
+import Button from "../../components/StylingElements/Button/Button";
 
 const AvailableTeachers = () => {
 
@@ -36,21 +38,40 @@ const AvailableTeachers = () => {
 
     return (
         <>
-            <Header text="Beschikbare docenten" />
-                {teachers.length > 0 && teachers.map((teacher) => {
-                    return <TeacherField
-                        key={teacher.id}
-                        name={teacher.name}
-                        age={teacher.age}
-                        residence={teacher.residence}
-                        instrument={teacher.instruments}
-                        preference={teacher.preferenceForLessonType}
-                        description={teacher.description}
-                    />
-                })}
+            {user ?
+                <>
+                    {user.authority === "ROLE_STUDENT" ?
+                        <>
+                            <Header text="Beschikbare docenten" />
+                            {teachers.length > 0 && teachers.map((teacher) => {
+                                return <TeacherField
+                                    key={teacher.id}
+                                    name={teacher.name}
+                                    age={teacher.age}
+                                    residence={teacher.residence}
+                                    instrument={teacher.instrument}
+                                    preference={teacher.preferenceForLessonType}
+                                    description={teacher.description}
+                                    userId={user.id}
+                                    teacherId={teacher.id}
+                                />
+                            })}
 
-                {loading && <Background><p>Beschikbare docenten worden opgehaald</p></Background>}
-                {error && <Background><p>Whoops! Er ging iets fout met het ophalen van data...</p></Background>}
+                            {teachers.length === 0 && <Background><p><strong>Sorry...</strong> Op dit moment zijn er geen docenten voor de door jou opgegeven voorkeuren</p></Background>}
+                            {loading && <Background><p>Beschikbare docenten worden opgehaald</p></Background>}
+                            {error && <Background><p>Whoops! Er ging iets fout met het ophalen van data...</p></Background>}
+                        </>
+                        :
+                        <Background>
+                            <h3>Je hebt niet de juiste rechten om deze pagina te bekijken.</h3>
+                            <Button color="orange" text="Terug" onClick={() => history.goBack()} />
+                        </Background>
+                    }
+
+                </>
+                :
+                <NotRegistered />
+            }
         </>
     );
 };

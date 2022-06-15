@@ -8,11 +8,10 @@ const Button = ({ link, color,small , addStyle, type, onClick, text }) => {
             {link ?
                 <Link
                     to={link}
-                    id={addStyle ? addStyle : ""}
                     style={{ textDecoration: 'none' }} >
                     <button
-                        className={small === "yes" ? `button ${color}-button small-button`: `button ${color}-button`}
-                        id={addStyle ? addStyle : ""}
+                        className={small === "yes" ? `${color} button small-button`: `${color} button`}
+                        id={addStyle && addStyle}
                         type={type ? type : "button"}
                         onClick={onClick}
                     >
@@ -21,8 +20,8 @@ const Button = ({ link, color,small , addStyle, type, onClick, text }) => {
                 </Link>
                 :
                 <button
-                    className={small === "yes" ? `button ${color}-button small-button`: `button ${color}-button`}
-                    id={addStyle ? addStyle : ""}
+                    className={small === "yes" ? `${color} button small-button`: `${color} button`}
+                    id={addStyle && addStyle}
                     type={type ? type : "button"}
                     onClick={onClick}
                 >

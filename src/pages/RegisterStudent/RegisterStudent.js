@@ -172,16 +172,16 @@ const RegisterStudent = () => {
                                     </section>
 
                                     <aside className={styles.avatar}>
-                        <span className={styles.upload_text}>
-                            <Label text="Foto uploaden"/>
-                            <Button
-                                color="blue"
-                                text="Kies een bestand"
-                            />
-                        </span>
+                                        <span className={styles.upload_text}>
+                                            <Label text="Foto uploaden"/>
+                                            <Button
+                                                color="blue"
+                                                text="Kies een bestand"
+                                                small="yes"
+                                            />
+                                        </span>
 
                                         <Avatar photo={skeleton} alt="Afbeelding"/>
-
                                     </aside>
 
                                 </Background>

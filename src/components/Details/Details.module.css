@@ -1,19 +1,25 @@
-.details_field {
+.details {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+    margin: 0 0 10px 0.25rem;
 }
 
-.details_field h2 {
+.details_header {
+    display: flex;
+    align-items: flex-end;
+}
+
+.details_header h2 {
     text-decoration: none;
+    margin: 0 0 3px 25px;
 }
 
-.details_field p {
+.details_header p {
     display: inline;
-    color: #018A8C;
+    color: var(--dark-blue);
     font-size: 1rem;
-    margin-left: .25rem;
 }
 
 .location {
@@ -23,5 +29,5 @@
 }
 
 .location p {
-    margin: 0;
+    margin-left: 0;
 }

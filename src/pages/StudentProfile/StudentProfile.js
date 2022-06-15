@@ -24,7 +24,6 @@ const StudentProfile = () => {
         async function fetchData(){
             try {
                 const {data} = await axios.get(`http://localhost:8080/students/${user.id}`, axiosConfig)
-                console.log(data);
                 setStudent(data);
             } catch (e) {
                 console.error("Is niet gelukt joh")
@@ -72,8 +71,8 @@ const StudentProfile = () => {
                     </section>
 
                     <section className={styles.navigation}>
-                        <Button link="/availableteachers" text="Zoek naar docenten" color="blue" addStyle={styles.navigation_btn} />
-                        <Button link="/matchpage" text="Huiswerk" color="blue" addStyle={styles.navigation_btn} />
+                        <Button link="/availableteachers" text="Zoek naar docenten" color="blue" small="yes" addStyle={styles.navigation_btn} />
+                        <Button link="/matchpage" text="Huiswerk" color="blue" small="yes" addStyle={styles.navigation_btn} />
                     </section>
                 </Background>
             </>

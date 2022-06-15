@@ -7,8 +7,22 @@ import Details from "../Details/Details";
 import robbert from "../../assets/Robbert.jpg";
 import Button from "../StylingElements/Button/Button";
 import Background from "../StylingElements/Background/Background";
+import axios from "axios";
 
-const TeacherField = ({ name, age, residence, instrument, preference, description }) => {
+const TeacherField = ({ name, age, residence, instrument, preference, description, userId, teacherId }) => {
+
+    const axiosConfig = { headers: {
+            'Content-Type' : 'application/json',
+            'Authorization' : `Bearer ${localStorage.getItem("token")}`
+        }};
+
+    async function applyForTeacher() {
+        try {
+            await axios.post(`http://localhost:8080/students/${userId}/apply?teacher_id=${teacherId}`, axiosConfig)
+        } catch (e) {
+            console.error(e);
+        }
+    }
 
     return (
         <Background>
@@ -16,25 +30,25 @@ const TeacherField = ({ name, age, residence, instrument, preference, descriptio
                 photo={robbert}
                 alt="Foto van docent"/>
 
-            <span className={styles.info}>
-                <Details
-                    name={name}
-                    age={age}
-                    residence={residence}
-                    instrument={instrument}
+            <section className={styles.info}>
+                <span className={styles.info_top}>
+                    <Details
+                        name={name}
+                        age={age}
+                        residence={residence}
+                        instrument={instrument}
+                    />
+                    <Preference
+                        preference={preference}
+                    />
+                </span>
+
+                <Description
+                    description={description}
                 />
-                {/*<Preference*/}
-                {/*    preference={preference}*/}
-                {/*/>*/}
-            </span>
 
-
-            {/*<Description*/}
-            {/*    description={description}*/}
-            {/*/>*/}
-
-
-            {/*<Button text="Les aanvragen" color="green" small="yes"/>*/}
+            </section>
+            <Button text="Les aanvragen" color="green" small="yes" addStyle={styles.apply_btn} onClick={applyForTeacher}/>
         </Background>
     );
 };
