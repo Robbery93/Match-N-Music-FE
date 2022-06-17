@@ -71,7 +71,7 @@ const RegisterStudent = () => {
         }
 
         registerUser(localStorage.getItem("token"), user.username);
-        setTimeout(() => history.push("/profile"), 3000);
+        setTimeout(() => history.push("/studentprofile"), 3000);
     }
 
     return (

@@ -71,8 +71,9 @@ const StudentProfile = () => {
                     </section>
 
                     <section className={styles.navigation}>
-                        <Button link="/availableteachers" text="Zoek naar docenten" color="blue" small="yes" addStyle={styles.navigation_btn} />
                         <Button link="/matchpage" text="Huiswerk" color="blue" small="yes" addStyle={styles.navigation_btn} />
+                        <Button link="/availableteachers" text="Zoek naar docenten" color="blue" small="yes" addStyle={styles.navigation_btn} />
+                        <Button link="/activeapplications" text="Openstaande aanvragen" color="blue" small="yes" addStyle={styles.navigation_btn} />
                     </section>
                 </Background>
             </>

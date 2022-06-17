@@ -9,16 +9,17 @@ import Button from "../StylingElements/Button/Button";
 import Background from "../StylingElements/Background/Background";
 import axios from "axios";
 
-const TeacherField = ({ name, age, residence, instrument, preference, description, userId, teacherId }) => {
-
-    const axiosConfig = { headers: {
-            'Content-Type' : 'application/json',
-            'Authorization' : `Bearer ${localStorage.getItem("token")}`
-        }};
+const TeacherField = ({ name, age, residence, instrument, preference, description, isApplication, userId, teacherId }) => {
 
     async function applyForTeacher() {
         try {
-            await axios.post(`http://localhost:8080/students/${userId}/apply?teacher_id=${teacherId}`, axiosConfig)
+            await axios({
+                method: `POST`,
+                url : `http://localhost:8080/students/${userId}/apply?teacher_id=${teacherId}`,
+                headers: {
+                    'Content-Type' : 'application/json',
+                    'Authorization' : `Bearer ${localStorage.getItem("token")}`
+                }});
         } catch (e) {
             console.error(e);
         }
@@ -48,7 +49,8 @@ const TeacherField = ({ name, age, residence, instrument, preference, descriptio
                 />
 
             </section>
-            <Button text="Les aanvragen" color="green" small="yes" addStyle={styles.apply_btn} onClick={applyForTeacher}/>
+
+            {!isApplication && <Button text="Les aanvragen" color="green" small="yes" addStyle={styles.apply_btn} onClick={applyForTeacher}/>}
         </Background>
     );
 };

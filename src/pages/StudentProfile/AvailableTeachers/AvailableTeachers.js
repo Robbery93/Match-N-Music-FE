@@ -1,11 +1,11 @@
 import React, {useContext, useEffect, useState} from 'react';
-import Header from "../../components/StylingElements/Header/Header";
-import TeacherField from "../../components/TeacherField/TeacherField";
+import Header from "../../../components/StylingElements/Header/Header";
+import TeacherField from "../../../components/TeacherField/TeacherField";
 import axios from "axios";
-import {AuthContext} from "../../context/AuthContext";
-import Background from "../../components/StylingElements/Background/Background";
-import NotRegistered from "../../components/NotRegistered/NotRegistered";
-import Button from "../../components/StylingElements/Button/Button";
+import {AuthContext} from "../../../context/AuthContext";
+import Background from "../../../components/StylingElements/Background/Background";
+import NotRegistered from "../../../components/NotRegistered/NotRegistered";
+import Button from "../../../components/StylingElements/Button/Button";
 
 const AvailableTeachers = () => {
 
@@ -52,6 +52,7 @@ const AvailableTeachers = () => {
                                     instrument={teacher.instrument}
                                     preference={teacher.preferenceForLessonType}
                                     description={teacher.description}
+                                    isApplication={false}
                                     userId={user.id}
                                     teacherId={teacher.id}
                                 />
@@ -64,7 +65,7 @@ const AvailableTeachers = () => {
                         :
                         <Background>
                             <h3>Je hebt niet de juiste rechten om deze pagina te bekijken.</h3>
-                            <Button color="orange" text="Terug" onClick={() => history.goBack()} />
+                            <Button color="orange" text="Terug" small="yes" onClick={() => history.goBack()} />
                         </Background>
                     }
 

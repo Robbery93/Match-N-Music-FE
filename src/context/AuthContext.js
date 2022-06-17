@@ -82,7 +82,7 @@ const AuthContextProvider = ({ children }) => {
 
 
             if (redirectUrl) {
-                history.push(redirectUrl);
+                history.push(`/student${redirectUrl}`);
             }
 
         } catch (e) {
@@ -100,7 +100,7 @@ const AuthContextProvider = ({ children }) => {
         localStorage.setItem('token', jwt);
         const decoded = jwtDecode(jwt);
 
-        fetchUserData(decoded.sub, jwt, "/profile");
+        fetchUserData(decoded.sub, jwt, "profile");
     }
 
     function registerUser(jwt) {
