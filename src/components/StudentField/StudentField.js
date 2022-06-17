@@ -1,31 +1,70 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import styles from "./StudentField.module.css"
 import Avatar from "../Avatar/Avatar";
 import Details from "../Details/Details";
-import Description from "../Description/Description";
 import floortje from "../../assets/Floortje.jpg"
 import Button from "../StylingElements/Button/Button";
+import Preference from "../Preference/Preference";
+import Background from "../StylingElements/Background/Background";
+import BigDisplayField from "../StylingElements/BigDisplayField/BigDisplayField";
+import axios from "axios";
+import {AuthContext} from "../../context/AuthContext";
 
-const StudentField = () => {
+const StudentField = ({ name, age, residence, instrument, preference, request, studentId }) => {
+
+    const { user } = useContext(AuthContext);
+
+    const handleClick = () => {
+        if(confirm("Weet je zeker dat je deze leerling les wil gaan geven?")) {
+            acceptApplication();
+        }
+    }
+
+    async function acceptApplication() {
+        try{
+        await axios({
+            method: 'PATCH',
+            url: `http://localhost:8080/teachers/${user.id}/update_homework?student_id=${studentId}`,
+            data: {
+                homework: ""
+            },
+            headers: {
+                'Content-Type' : 'application/json',
+                'Authorization' : `Bearer ${localStorage.getItem("token")}`
+            }});
+            console.log("Het is gelukt")
+            location.reload();
+        } catch (e) {
+            console.error(e.message)
+        }
+    }
+
     return (
-        <div className={styles.field}>
-            <div className={styles.request}>
+        <>
+            <Background specificBackground={styles.student_application}>
             <Avatar
                 photo={floortje}
                 alt="foto van leerling" />
-                <div className={styles.details}>
-                    <Details
-                        name="Floortje"
-                        age="10"
-                        residence="Capelle aan den IJssel"/>
 
-                    <Description description="Hallo, ik ben Floortje en ik ben 10 jaar oud. Ik woon met mijn broertje, mama en papa in Capelle aan den IJssel. Mijn papa speelt al heel lang gitaar en het lijkt mij heel cool om dat ook te kunnen. Mijn lievelingsartiesten zijn: Miley Cyrus en Ilse de Lange. Ik hoop snel op les te kunnen en heel mooi gitaar te leren spelen. " />
-                </div>
-            </div>
+                <section className={styles.info}>
+                    <span className={styles.info_top}>
+                    <Details
+                        name={name}
+                        age={age}
+                        residence={residence}
+                        instrument={instrument}
+                    />
+                    <Preference preference={preference} />
+                </span>
+
+                    <BigDisplayField text={request} />
+                </section>
+
             <div className={styles.button}>
-                <Button text="Aanvraag accepteren" color="green" />
+                <Button text="Aanvraag accepteren" color="green" small="yes" onClick={handleClick}/>
             </div>
-        </div>
+            </Background>
+        </>
     );
 };
 

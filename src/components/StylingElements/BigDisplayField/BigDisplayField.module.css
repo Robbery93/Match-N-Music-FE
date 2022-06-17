@@ -1,0 +1,13 @@
+.container {
+    width: inherit;
+    max-height: 200px;
+    background-color: #FFFFFF;
+    border: var(--dark-blue) solid 1px;
+    border-radius: 5px;
+    padding: 10px 25px;
+    overflow-y: auto;
+}
+
+.container > p {
+    color: #000;
+}

@@ -1,13 +1,13 @@
 import React from 'react';
 import Avatar from "../Avatar/Avatar";
 import styles from "./TeacherField.module.css";
-import Preference from "./Preference/Preference";
-import Description from "../Description/Description";
+import Preference from "../Preference/Preference";
 import Details from "../Details/Details";
 import robbert from "../../assets/Robbert.jpg";
 import Button from "../StylingElements/Button/Button";
 import Background from "../StylingElements/Background/Background";
 import axios from "axios";
+import BigDisplayField from "../StylingElements/BigDisplayField/BigDisplayField";
 
 const TeacherField = ({ name, age, residence, instrument, preference, description, isApplication, userId, teacherId }) => {
 
@@ -20,6 +20,7 @@ const TeacherField = ({ name, age, residence, instrument, preference, descriptio
                     'Content-Type' : 'application/json',
                     'Authorization' : `Bearer ${localStorage.getItem("token")}`
                 }});
+            location.reload();
         } catch (e) {
             console.error(e);
         }
@@ -44,13 +45,14 @@ const TeacherField = ({ name, age, residence, instrument, preference, descriptio
                     />
                 </span>
 
-                <Description
-                    description={description}
-                />
+                <BigDisplayField text={description} />
 
             </section>
 
+            <aside className={styles.buttons}>
+            <Button text="Bekijk profiel" small="yes" color="blue" link={`/teacherprofile/${teacherId}`}/>
             {!isApplication && <Button text="Les aanvragen" color="green" small="yes" addStyle={styles.apply_btn} onClick={applyForTeacher}/>}
+            </aside>
         </Background>
     );
 };

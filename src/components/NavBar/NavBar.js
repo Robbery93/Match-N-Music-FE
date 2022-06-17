@@ -7,7 +7,7 @@ import {AuthContext} from "../../context/AuthContext";
 
 const NavBar = () => {
 
-    const { isAuth, logout } = useContext(AuthContext);
+    const { isAuth, user,  logout } = useContext(AuthContext);
 
     return (
         <header className={styles.navBar}>
@@ -17,8 +17,9 @@ const NavBar = () => {
                     src={mNMLogo}
                     alt = "Logo van Match 'n Music" />
             </NavLink>
-            {isAuth === true &&<>
-                <Button color="blue" text="Profiel" small="yes" link="/studentprofile" addStyle={styles.profile_btn}/>
+            {isAuth === true &&
+                <>
+                <Button color="blue" text="Profiel" small="yes" link={`/studentprofile/${user.id}`} addStyle={styles.profile_btn}/>
                 <Button color="orange"
                         text="Uitloggen"
                         small="yes"

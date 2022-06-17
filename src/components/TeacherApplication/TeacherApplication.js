@@ -33,6 +33,7 @@ const TeacherApplication = ({ id }) => {
             preference={teacher.preferenceForLessonType}
             description={teacher.description}
             isApplication={true}
+            teacherId={teacher.id}
         />
     );
 };

@@ -25,7 +25,7 @@ const Home = () => {
                 username: data.username,
                 password: data.password
             })
-            login(result.data.jwt);
+            login(result.data.jwt, "profile");
 
         } catch (error) {
             console.error(error.message)

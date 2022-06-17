@@ -7,7 +7,3 @@
     display: flex;
     justify-content: space-between;
 }
-
-#student_application {
-    column-gap: 20px;
-}

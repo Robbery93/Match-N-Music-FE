@@ -44,7 +44,7 @@ const ActiveApplicationsForStudent = () => {
                     {user.authority === "ROLE_STUDENT" ?
                         <>
                             <Header text="Jouw aanvragen" />
-                            {applications.length > 0 && applications.map((application) => {
+                            {applications.length > 0 && applications.map(application => {
                             return <TeacherApplication
                                 key={application.id.teacherId}
                                 id={application.id.teacherId} />

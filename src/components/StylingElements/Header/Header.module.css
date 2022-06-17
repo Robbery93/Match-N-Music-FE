@@ -1,4 +1,5 @@
 .teacher_header {
+    position: relative;
     width: 820px;
     height: 60px;
     line-height: 60px;
@@ -11,3 +12,12 @@
     margin: 0 0 15px 0;
 }
 
+.teacher_header h2 {
+    margin: 0;
+}
+
+#back_btn {
+    position: absolute;
+    top: calc(50% - 19px);
+    left: 10px;
+}

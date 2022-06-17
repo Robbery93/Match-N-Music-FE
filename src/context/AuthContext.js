@@ -82,8 +82,16 @@ const AuthContextProvider = ({ children }) => {
 
 
             if (redirectUrl) {
-                history.push(`/student${redirectUrl}`);
+
+                if (data.authorities[0].authority === "ROLE_STUDENT") {
+                    history.push(`/student${redirectUrl}/${data.student.id}`);
+                } else if (data.authorities[0].authority === "ROLE_TEACHER") {
+                    history.push(`/teacher${redirectUrl}/${data.teacher.id}`);
+                } else {
+                    history.push("/")
+                }
             }
+
 
         } catch (e) {
             console.error(e);

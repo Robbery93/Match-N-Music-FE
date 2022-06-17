@@ -1,0 +1,23 @@
+.avatar {
+    margin-right: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.avatar h2 {
+    margin: 0;
+}
+
+.about {
+    width: 450px;
+}
+
+.navigation {
+    justify-content: space-around;
+    row-gap: 20px;
+}
+
+#navigation_btn {
+    flex-grow: 1;
+}
