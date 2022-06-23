@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import StudentField from "../StudentField/StudentField";
 
-const StudentApplication = ({ id }) => {
+const StudentApplication = ({ id, isActive }) => {
 
     const axiosConfig = { headers: {
             'Content-Type' : 'application/json',
@@ -33,6 +33,7 @@ const StudentApplication = ({ id }) => {
             preference={student.preferenceForLessonType}
             request={student.request}
             studentId={student.id}
+            isActive={isActive}
         />
     );
 };

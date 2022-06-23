@@ -19,51 +19,51 @@ import AllActiveLessons from "./pages/TeacherProfile/AllActiveLessons/AllActiveL
 
 function App() {
 
-  return (
-      <>
-          <NavBar />
-          <PageWrapper>
-          <Switch>
-              <Route exact path="/">
-                  <Home />
-              </Route>
-              <Route path="/register">
-                  <RegisterUser />
-              </Route>
-              <Route path="/newstudent">
-                  <RegisterStudent />
-              </Route>
-              <Route path="/newteacher">
-                  <RegisterTeacher />
-              </Route>
-              <Route path="/studentprofile/:id">
-                  <StudentProfile />
-              </Route>
-              <Route path="/availableteachers">
-                  <AvailableTeachers />
-              </Route>
-              <Route path="/activeapplications">
-                  <ActiveApplicationsForStudent />
-              </Route>
-              <Route path="/teacherprofile/:id">
-                  <TeacherProfile />
-              </Route>
-              <Route path="/activelessons">
-                  <AllActiveLessons />
-              </Route>
-              <Route path="/studentapplications">
-                  <StudentApplications />
-              </Route>
-              <Route path="/matchpage">
-                  <MatchPage />
-              </Route>
-              <Route path="*">
-                  <NotFound />
-              </Route>
-          </Switch>
-          </PageWrapper>
-      </>
-  );
+    return (
+        <>
+            <NavBar />
+            <PageWrapper>
+                <Switch>
+                    <Route exact path="/">
+                        <Home />
+                    </Route>
+                    <Route path="/register">
+                        <RegisterUser />
+                    </Route>
+                    <Route path="/newstudent">
+                        <RegisterStudent />
+                    </Route>
+                    <Route path="/newteacher">
+                        <RegisterTeacher />
+                    </Route>
+                    <Route path="/studentprofile/:id">
+                        <StudentProfile />
+                    </Route>
+                    <Route path="/availableteachers">
+                        <AvailableTeachers />
+                    </Route>
+                    <Route path="/activeapplications">
+                        <ActiveApplicationsForStudent />
+                    </Route>
+                    <Route path="/teacherprofile/:id">
+                        <TeacherProfile />
+                    </Route>
+                    <Route path="/activelessons">
+                        <AllActiveLessons />
+                    </Route>
+                    <Route path="/studentapplications">
+                        <StudentApplications />
+                    </Route>
+                    <Route path="/matchpage/teacher=:teacherId&student=:studentId">
+                        <MatchPage />
+                    </Route>
+                    <Route path="*">
+                        <NotFound />
+                    </Route>
+                </Switch>
+            </PageWrapper>
+        </>
+    );
 }
 
 export default App;

@@ -1,5 +1,5 @@
 .avatar {
-    margin-right: 100px;
+    margin-right: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -11,6 +11,12 @@
 
 .request {
     width: 450px;
+    margin-top: 10px;
+}
+
+.request h4 {
+    margin: 5px 0 5px 10px;
+    text-decoration: underline;
 }
 
 .request_container {
@@ -29,6 +35,7 @@
 
 .navigation {
     justify-content: space-around;
+    align-items: stretch;
     row-gap: 20px;
 }
 

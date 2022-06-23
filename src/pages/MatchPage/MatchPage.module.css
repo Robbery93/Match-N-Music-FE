@@ -3,6 +3,12 @@
     align-items: flex-start;
 }
 
+#matchpage button {
+    font-size: 1rem;
+    padding: 1rem;
+    align-self: flex-end;
+}
+
 .avatars {
     display: flex;
     flex-direction: column;
@@ -14,10 +20,4 @@
     height: 340px;
     flex-direction: column;
     justify-content: space-between;
-}
-
-#matchpage button {
-    font-size: 1rem;
-    padding: 1rem;
-    align-self: flex-end;
 }

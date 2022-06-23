@@ -12,22 +12,24 @@ import BigDisplayField from "../StylingElements/BigDisplayField/BigDisplayField"
 const TeacherField = ({ name, age, residence, instrument, preference, description, isApplication, userId, teacherId }) => {
 
     async function applyForTeacher() {
-        try {
-            await axios({
-                method: `POST`,
-                url : `http://localhost:8080/students/${userId}/apply?teacher_id=${teacherId}`,
-                headers: {
-                    'Content-Type' : 'application/json',
-                    'Authorization' : `Bearer ${localStorage.getItem("token")}`
-                }});
-            location.reload();
-        } catch (e) {
-            console.error(e);
+        if(confirm("Weet je zeker dat je de les wil krijg van deze docent?")){
+            try {
+                await axios({
+                    method: `POST`,
+                    url : `http://localhost:8080/students/${userId}/apply?teacher_id=${teacherId}`,
+                    headers: {
+                        'Content-Type' : 'application/json',
+                        'Authorization' : `Bearer ${localStorage.getItem("token")}`
+                    }});
+                location.reload();
+            } catch (e) {
+                console.error(e);
+            }
         }
     }
 
     return (
-        <Background>
+        <Background specificBackground={styles.teacher_field}>
             <Avatar
                 photo={robbert}
                 alt="Foto van docent"/>

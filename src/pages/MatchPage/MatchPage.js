@@ -10,23 +10,37 @@ import {AuthContext} from "../../context/AuthContext";
 import Button from "../../components/StylingElements/Button/Button";
 import NotRegistered from "../../components/NotRegistered/NotRegistered";
 import axios from "axios";
+import {useParams} from "react-router-dom";
 
 const MatchPage = () => {
 
-    const { user } = useContext(AuthContext)
+    const { isAuth, user } = useContext(AuthContext)
+    
+    // const { teacherId } = useParams();
+    const { studentId } = useParams();
 
-    const [student, setStudent] = useState(null);
+    const axiosConfig = { headers: {
+            'Content-Type' : 'application/json',
+            'Authorization' : `Bearer ${localStorage.getItem("token")}`
+        }};
 
+    const [student, setStudent] = useState({});
+    // const [teacher, setTeacher] = useState({});  Toevoegen van foto moet er nog bij!
+    const [dataCollected, toggleDataCollected] = useState(false)
+
+    
     useEffect(() => {
         async function fetchData() {
-            const axiosConfig = { headers: {
-                    'Content-Type' : 'application/json',
-                    'Authorization' : `Bearer ${localStorage.getItem("token")}`
-                }};
             try{
-            const result = await axios.get(`http://localhost:8080/students/${user.id}`, axiosConfig);
-                setStudent(result.data);
-        } catch (e) {
+                const studentData = await axios.get(`http://localhost:8080/students/${studentId}`, axiosConfig);
+                setStudent(studentData.data);
+
+                // const teacherData = await axios.get(`http://localhost:8080/teachers/${teacherId}`, axiosConfig);
+                // setTeacher(teacherData.data);
+                // console.log(teacherData.data);
+
+                toggleDataCollected(true);
+            } catch (e) {
                 console.error("Ophalen van data is niet gelukt")
             }
         }
@@ -36,9 +50,9 @@ const MatchPage = () => {
 
     return (
         <>
-            {user ?
+            {isAuth ?
                 <>
-                    { student !== null ?
+                    {dataCollected &&
                     <>
                         <Header text="Match pagina" />
                         <Background specificBackground={styles.matchpage}>
@@ -54,7 +68,7 @@ const MatchPage = () => {
                             <div className={styles.homework_container}>
                                 <HomeworkField
                                     name={student.name}
-                                    homework={student.lessons[0] ? student.lessons[0].homework : "Er is nog geen huiswerk opgegeven"}
+                                    homework={student.lesson[0].homework}
                                 />
                                 {user.authority === "ROLE_TEACHER" &&
                                 <Button
@@ -65,10 +79,6 @@ const MatchPage = () => {
                             </div>
                         </Background>
                     </>
-                        :
-                        <Background>
-                            <p>Ophalen van data is nog niet gelukt.</p>
-                        </Background>
                     }
                 </>
                 :

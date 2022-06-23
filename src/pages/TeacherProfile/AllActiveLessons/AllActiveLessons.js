@@ -31,9 +31,13 @@ const AllActiveLessons = () => {
     return (
         <>
             <Header text="Alle active lessen" />
-            {lessons.length > 0 &&
-                <StudentApplication id="1" />
-            }
+            {lessons.length > 0 && lessons.map(lesson => {
+                return <StudentApplication
+                    key={lesson.id.studentId}
+                    id={lesson.id.studentId}
+                    isActive={true}
+                />
+            })}
         </>
     );
 };

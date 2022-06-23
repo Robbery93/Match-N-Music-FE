@@ -8,6 +8,15 @@
     justify-content: space-between;
 }
 
-#student_application {
+#student_field {
     column-gap: 20px;
+}
+
+.buttons {
+    margin-left: 10px;
+    height: 164px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-self: flex-end;
 }

@@ -28,23 +28,12 @@ const RegisterStudent = () => {
 
     const [registerSucces, toggleRegisterSucces] = useState(false);
 
+    const axiosConfig = { headers: {
+            'Content-Type' : 'application/json',
+            'Authorization' : `Bearer ${localStorage.getItem("token")}`
+        }};
+
     async function onFormSubmit(data) {
-
-        console.log(`Ingevulde data:
-        Naam: ${data.name}
-        Email: ${data.email}
-        Leeftijd: ${data.age}
-        Woonplaats: ${data.residence}
-        Telefoonnummer: ${data.phoneNumber}
-        Instrument: ${data.instrument}
-        Verzoek: ${data.request}
-        Voorkeur voor lesvorm: ${data.preferenceForLessonType}`);
-
-        const axiosConfig = { headers: {
-                'Content-Type' : 'application/json',
-                'Authorization' : `Bearer ${localStorage.getItem("token")}`
-            }};
-
         try {
             await axios.post("http://localhost:8080/students", {
                 name: data.name,
@@ -56,6 +45,8 @@ const RegisterStudent = () => {
                 request : data.request,
                 preferenceForLessonType: data.preferenceForLessonType
             }, axiosConfig);
+
+            console.log("Post request gelukt")
         } catch (e) {
             console.error(e);
             console.error("In invullen van data is niet gelukt.");
@@ -65,20 +56,24 @@ const RegisterStudent = () => {
             await axios.patch(`http://localhost:8080/students/linkuser/${user.username}?email=${data.email}`,
                 axiosConfig)
             toggleRegisterSucces(true);
+            console.log("patch request gelukt")
         } catch (e) {
             console.log(e);
             console.error("Het linken aan User is niet gelukt");
         }
 
+        console.log(user)
+
         registerUser(localStorage.getItem("token"), user.username);
-        setTimeout(() => history.push("/studentprofile"), 3000);
+
+        console.log(user)
+
+        setTimeout(() => history.push(`/studentprofile/${user.id}`), 3000);
     }
 
     return (
-        <>
-            {user ?
-                <>
-                    {user.authority === "ROLE_STUDENT" ?
+        <> {user ?
+                <> {user.authority === "ROLE_STUDENT" ?
                         <>
                             <Header text="Registratie pagina" />
                             <Form onSubmit={handleSubmit(onFormSubmit)}>
@@ -87,6 +82,7 @@ const RegisterStudent = () => {
                                         <h2>Gegevens</h2>
 
                                         <InputField
+                                            label="Naam"
                                             type="text"
                                             inputName="name"
                                             placeholder="Naam"
@@ -105,6 +101,7 @@ const RegisterStudent = () => {
                                         />
 
                                         <InputField
+                                            label="Email"
                                             type="email"
                                             inputName="email"
                                             placeholder="Email"
@@ -123,6 +120,7 @@ const RegisterStudent = () => {
                                         />
 
                                         <InputField
+                                            label="Leeftijd"
                                             type="number"
                                             inputName="age"
                                             placeholder="Leeftijd"
@@ -141,6 +139,7 @@ const RegisterStudent = () => {
                                         />
 
                                         <InputField
+                                            label="Telefoonnummer"
                                             type="number"
                                             inputName="phoneNumber"
                                             register={register}
@@ -149,7 +148,7 @@ const RegisterStudent = () => {
                                                 minLength: {value: 10, message: "Vul een geldig telefoonnummer in"},
                                                 maxLength: {value: 13, message: "Vul een geldig telefoonnummer in"}
                                             }}
-                                            placeholder="Telefoonnummer bv: 06-12345678"
+                                            placeholder="06******** of +316********"
                                         />
                                         <ErrorMessage errors={errors}
                                                       name="phoneNumber"
@@ -157,6 +156,7 @@ const RegisterStudent = () => {
                                         />
 
                                         <InputField
+                                            label="Woonplaats"
                                             type="text"
                                             inputName="residence"
                                             register={register}
@@ -181,7 +181,7 @@ const RegisterStudent = () => {
                                             />
                                         </span>
 
-                                        <Avatar photo={skeleton} alt="Afbeelding"/>
+                                        <Avatar photo={skeleton} alt="Afbeelding" big="yes"/>
                                     </aside>
 
                                 </Background>

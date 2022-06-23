@@ -1,9 +1,13 @@
 import React from 'react';
-import styles from "./Avatar.module.css"
+import "./Avatar.css"
 
-const Avatar = ({ photo, alt }) => {
+const Avatar = ({ photo, alt, big }) => {
     return (
-        <img className={styles.avatar} src={photo} alt={alt} loading="lazy" />
+        <img
+            className={big === "yes" ? "avatar big_avatar" : "avatar"}
+            src={photo} alt={alt}
+            loading="lazy"
+        />
     );
 };
 

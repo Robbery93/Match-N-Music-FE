@@ -13,7 +13,7 @@
 
 .details_header h2 {
     text-decoration: none;
-    margin: 0 0 3px 25px;
+    margin: 0 0 3px 0;
 }
 
 .details_header p {
@@ -25,7 +25,6 @@
 .location {
     display: flex;
     flex-direction: row;
-    margin-left: 25px;
 }
 
 .location p {

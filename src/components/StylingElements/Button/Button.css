@@ -1,6 +1,7 @@
 .button {
     padding: 1rem 2rem;
     border-radius: 5px;
+    border: 3px solid;
     font-size: 1.5rem;
     transition: background-color 0.1s, color 0.1s;
     display: flex;
@@ -8,12 +9,18 @@
     align-items: center;
     cursor: pointer;
     min-width: 100px;
-    max-width: 150px;
+    max-width: 250px;
+}
+
+.small-button {
+    padding: .5rem 1rem;
+    font-size: 1rem;
+    border: 2px solid;
 }
 
 .blue {
     background-color: var(--blue);
-    border: 2px solid var(--dark-blue);
+    border-color: var(--dark-blue);
     color: #000
 }
 
@@ -24,7 +31,7 @@
 
 .green {
     background-color: var(--green);
-    border: var(--dark-green) solid 2px;
+    border-color: var(--dark-green);
     color: #FFF;
 }
 
@@ -34,7 +41,7 @@
 
 .orange {
     background-color: var(--light-orange);
-    border: 2px solid var(--orange);
+    border-color: var(--orange);
     color: #000;
     max-width: 200px;
 }
@@ -42,11 +49,6 @@
 .orange:hover {
     background-color: var(--orange);
     color: #FFF
-}
-
-.small-button {
-    padding: .5rem 1rem;
-    font-size: 1rem;
 }
 
 a button {

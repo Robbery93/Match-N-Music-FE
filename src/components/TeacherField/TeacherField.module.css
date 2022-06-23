@@ -8,11 +8,15 @@
     justify-content: space-between;
 }
 
+#teacher_field {
+    column-gap: 20px;
+}
+
 .buttons {
     margin-left: 10px;
     height: 164px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
     align-self: flex-end;
 }

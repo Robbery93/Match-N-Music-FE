@@ -18,6 +18,7 @@ const ActiveApplicationsForStudent = () => {
         }};
 
     const [applications, setApplications] = useState({});
+    const [lesson, setLesson] = useState({});
     const [loading, toggleLoading] = useState(true);
     const [error, toggleError] = useState(false);
 
@@ -26,11 +27,16 @@ const ActiveApplicationsForStudent = () => {
             try {
                 const { data } = await axios.get(`http://localhost:8080/students/${user.id}/applications`, axiosConfig);
                 setApplications(data);
+
+                const result = await axios.get(`http://localhost:8080/students/${user.id}/lesson`, axiosConfig);
+                if(result.data.length > 0) {
+                    setLesson(result.data);
+                }
                 toggleLoading(false)
             } catch (e) {
                 console.error(e);
                 toggleError(true);
-                toggleLoading(false)
+                toggleLoading(false);
             }
         }
 
@@ -50,7 +56,19 @@ const ActiveApplicationsForStudent = () => {
                                 id={application.id.teacherId} />
                             })}
 
-                            {applications.length === 0 && <Background><p>Je hebt nog geen aanvragen gedaan. Check <Link to="availableteachers">deze</Link> pagina om naar beschikbare docenten te zoeken!</p></Background>}
+                            {applications.length === 0 &&
+                            <> {lesson.length > 0 ?
+                                <Background>
+                                    <p><strong>Je bent al gematcht met een docent!</strong></p>
+                                    <Button color="orange" text="Naar de matchpagina" small="yes" link={`/matchpage/teacher=${lesson[0].id.teacherId}&student=${user.id}`} />
+                                </Background>
+                                :
+                                <Background><p>Je hebt nog geen aanvragen gedaan. Check <Link to="/availableteachers">deze</Link> pagina om naar beschikbare docenten te zoeken!</p></Background>
+                            }
+                            </>
+                            }
+
+
                             {loading && <Background><p>Beschikbare docenten worden opgehaald</p></Background>}
                             {error && <Background><p>Whoops! Er ging iets fout met het ophalen van data...</p></Background>}
                         </>

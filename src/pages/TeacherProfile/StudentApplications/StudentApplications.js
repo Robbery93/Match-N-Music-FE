@@ -35,7 +35,9 @@ const StudentApplications = () => {
             {applications.length > 0 && applications.map(application => {
                 return <StudentApplication
                     key={application.id.studentId}
-                    id={application.id.studentId}/>
+                    id={application.id.studentId}
+                    isActive={false}
+                />
             })}
         </>
     );

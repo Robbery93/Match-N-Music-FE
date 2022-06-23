@@ -10,11 +10,11 @@ import BigDisplayField from "../StylingElements/BigDisplayField/BigDisplayField"
 import axios from "axios";
 import {AuthContext} from "../../context/AuthContext";
 
-const StudentField = ({ name, age, residence, instrument, preference, request, studentId }) => {
+const StudentField = ({ name, age, residence, instrument, preference, request, isActive, studentId }) => {
 
     const { user } = useContext(AuthContext);
 
-    const handleClick = () => {
+    const handleApplication = () => {
         if(confirm("Weet je zeker dat je deze leerling les wil gaan geven?")) {
             acceptApplication();
         }
@@ -26,13 +26,12 @@ const StudentField = ({ name, age, residence, instrument, preference, request, s
             method: 'PATCH',
             url: `http://localhost:8080/teachers/${user.id}/update_homework?student_id=${studentId}`,
             data: {
-                homework: ""
+                homework: "De docent heeft nog geen huiswerk opgegeven."
             },
             headers: {
                 'Content-Type' : 'application/json',
                 'Authorization' : `Bearer ${localStorage.getItem("token")}`
             }});
-            console.log("Het is gelukt")
             location.reload();
         } catch (e) {
             console.error(e.message)
@@ -41,7 +40,7 @@ const StudentField = ({ name, age, residence, instrument, preference, request, s
 
     return (
         <>
-            <Background specificBackground={styles.student_application}>
+            <Background specificBackground={styles.student_field}>
             <Avatar
                 photo={floortje}
                 alt="foto van leerling" />
@@ -60,8 +59,14 @@ const StudentField = ({ name, age, residence, instrument, preference, request, s
                     <BigDisplayField text={request} />
                 </section>
 
-            <div className={styles.button}>
-                <Button text="Aanvraag accepteren" color="green" small="yes" onClick={handleClick}/>
+            <div className={styles.buttons}>
+                <Button text="Bekijk profiel" small="yes" color="blue" link={`/studentprofile/${studentId}`}/>
+                {isActive ?
+                    <Button text="Naar huiswerk" color="green" small="yes" link={`matchpage/teacher=${user.id}&student=${studentId}`}/>
+                    :
+                    <Button text="Aanvraag accepteren" color="green" small="yes" onClick={handleApplication}/>
+                }
+
             </div>
             </Background>
         </>

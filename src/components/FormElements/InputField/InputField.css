@@ -1,18 +1,32 @@
 .inputfield {
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+    column-gap: 5px;
+    margin-bottom: 5px;
+}
+
+.inputfield > h4 {
+    margin: 5px 0 5px 10px;
+    font-weight: normal;
+}
+
+.inputfield_input {
     border: var(--dark-blue) solid 1px;
     border-radius: 5px;
-    margin: 10px 0 5px 10px;
+    margin: 0 0 5px 10px;
     width: 310px;
     height: 30px;
     padding: 7px 0 7px 20px;
+    box-shadow: rgba(0, 0, 0, 0.15) 4px 4px 3px;
 }
 
-.inputfield:focus {
+.inputfield_input:focus {
     border: var(--dark-blue) solid 2px;
     outline: none;
 }
 
-.inputfield::placeholder {
+.inputfield_input::placeholder {
     color: var(--grey);
 }
 

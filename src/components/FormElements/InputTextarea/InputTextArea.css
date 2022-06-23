@@ -7,6 +7,7 @@
     margin: 0 0 0 10px;
     border: var(--dark-blue) solid 1px;
     border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.15) 4px 4px 3px;
 }
 
 .input-textarea::placeholder {

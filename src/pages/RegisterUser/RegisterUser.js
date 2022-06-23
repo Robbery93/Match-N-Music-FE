@@ -116,6 +116,7 @@ const RegisterUser = () => {
                             text="Gebruikersnaam"
                         />
                         <InputField
+                            label="none"
                             type="text"
                             inputName="username"
                             placeholder="Gebruikersnaam"
@@ -131,8 +132,9 @@ const RegisterUser = () => {
                         />
 
                         <Label id="password" text="Wachtwoord" />
-                        <small>Minimaal 8 karakters, waaronder één hoofdletter, één kleine letter, een cijfer en een symbool. </small>
+                        <small>Minimaal 8 karakters, waaronder één hoofdletter, één kleine letter, een cijfer en een symbool.</small>
                         <InputField
+                            label="none"
                             type="password"
                             inputName="password"
                             placeholder="Wachtwoord"

@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import styles from './Home.module.css';
 import {Link} from "react-router-dom";
 import Button from "../../components/StylingElements/Button/Button";
@@ -14,7 +14,7 @@ import ErrorText from "../../components/ErrorMessage/ErrorText";
 const Home = () => {
 
     const { register, handleSubmit } = useForm();
-    const { login } = useContext(AuthContext);
+    const { login, user } = useContext(AuthContext);
 
     const [error, toggleError] = useState(false);
     const [errorMessage, setErrorMessage] = useState("")
@@ -34,6 +34,22 @@ const Home = () => {
         }
     }
 
+    useEffect(() => {
+        if (user) {
+            const role = user.authority;
+
+            if (role === "ROLE_STUDENT") {
+                console.log("Studentje");
+                window.location.replace(`/studentprofile/${user.id}`);
+            }
+            if (role === "ROLE_TEACHER") {
+                console.log("Docentje");
+                window.location.replace(`/teacherprofile/${user.id}`);
+            }
+        }
+
+    } ,[])
+
     return (
         <>
             <div className={styles.side_by_side}>
@@ -52,12 +68,15 @@ const Home = () => {
                     <Background specificBackground={styles.login}>
 
                         <InputField
+                            label="none"
                             type="text"
                             inputName="username"
                             placeholder="Gebruikersnaam"
                             register={register}
                         />
                         <InputField
+
+                            label="none"
                             type="password"
                             inputName="password"
                             placeholder="Wachtwoord"

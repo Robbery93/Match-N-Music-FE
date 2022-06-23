@@ -126,7 +126,6 @@ const AuthContextProvider = ({ children }) => {
             user: null,
             status: 'done',
         });
-        console.log(`${isAuth.user.username} is uitgelogd.`);
         history.push("/");
         }
     }

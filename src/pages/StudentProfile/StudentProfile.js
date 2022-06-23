@@ -18,7 +18,7 @@ const StudentProfile = () => {
 
     const { id } = useParams();
 
-    const [student, setStudent] = useState({});
+    const [student, setStudent] = useState(null);
     const [loading, toggleLoading] = useState(true);
     const [error, toggleError]  =useState(false)
 
@@ -51,7 +51,7 @@ const StudentProfile = () => {
         <> {isAuth ?
             <> {student &&
             <>
-                <Header text="Je profiel"/>
+                {user.authority === "ROLE_STUDENT" ? <Header text="Mijn Profiel" /> : <Header text={`Profiel van ${student.name}`}/>}
                 <Background>
                     <section>
                         <h2>Gegevens</h2>
@@ -64,7 +64,7 @@ const StudentProfile = () => {
 
                     <section className={styles.avatar}>
                         <h2>Profielfoto</h2>
-                        <Avatar photo={robbert}/>
+                        <Avatar photo={robbert} big="yes"/>
                     </section>
                 </Background>
 
@@ -74,18 +74,18 @@ const StudentProfile = () => {
                         <DisplayField label="Instrument" text={student.instrument}/>
                         <DisplayField label="Voorkeur voor lesvorm" text={student.preferenceForLessonType}/>
                         <div className={styles.request}>
-                            <h3>Wat wil ik leren?</h3>
+                            <h4>Wat wil ik leren?</h4>
                             <BigDisplayField text={student.request}/>
                         </div>
                     </section>
 
                     {user.authority === "ROLE_STUDENT" &&
                     <section className={styles.navigation}>
-                        <Button link="/matchpage" text="Huiswerk" color="blue" small="yes"
+                        <Button link={`/matchpage/teacher=1&student=${user.id}`} text="Huiswerk" color="orange"
                                 addStyle={styles.navigation_btn}/>
-                        <Button link="/availableteachers" text="Zoek naar docenten" color="blue" small="yes"
+                        <Button link="/availableteachers" text="Zoek naar docenten" color="blue"
                                 addStyle={styles.navigation_btn}/>
-                        <Button link="/activeapplications" text="Openstaande aanvragen" color="blue" small="yes"
+                        <Button link="/activeapplications" text="Openstaande aanvragen" color="blue"
                                 addStyle={styles.navigation_btn}/>
                     </section>
                     }
