@@ -1,20 +1,26 @@
-.input-textarea {
+.input_textarea {
     font-family: Roboto, sans-serif;
     resize: none;
     padding: 10px;
     width: 420px;
     min-height: 150px;
-    margin: 0 0 0 10px;
+    /*margin: 0 0 0 10px;*/
     border: var(--dark-blue) solid 1px;
     border-radius: 5px;
     box-shadow: rgba(0, 0, 0, 0.15) 4px 4px 3px;
 }
 
-.input-textarea::placeholder {
+.input_textarea::placeholder {
     color: var(--grey);
     font-size: .9rem;
 }
-.input-textarea:focus {
+.input_textarea:focus {
     outline: none;
     border: var(--dark-blue) solid 2px;
+}
+.error {
+    font-size: 0.75rem;
+    color: var(--error);
+    margin-left: 10px;
+    padding: 0;
 }

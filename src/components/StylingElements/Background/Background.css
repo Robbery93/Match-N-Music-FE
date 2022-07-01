@@ -4,7 +4,7 @@
     justify-content: space-between;
     align-items: center;
     width: 820px;
-    padding: 25px;
+    padding: 25px 35px;
     margin-bottom: 15px;
     border-radius: 5px;
     border: var(--dark-blue) solid 2px;
@@ -31,20 +31,20 @@
 
 .white-background > p {
     color: #000000;
-    max-height: 300px;
-    overflow: auto;
+    /*max-height: 300px;*/
+    /*overflow: auto;*/
 }
 
-.white-background > p::-webkit-scrollbar {
-    width: 12px;               /* width of the entire scrollbar */
-}
+/*.white-background > p::-webkit-scrollbar {*/
+/*    width: 12px;               !* width of the entire scrollbar *!*/
+/*}*/
 
-.white-background > p::-webkit-scrollbar-track {
-    background: #FFFFFF;        /* color of the tracking area */
-}
+/*.white-background > p::-webkit-scrollbar-track {*/
+/*    background: #FFFFFF;        !* color of the tracking area *!*/
+/*}*/
 
-.white-background > p::-webkit-scrollbar-thumb {
-    background-color: var(--blue);    /* color of the scroll thumb */
-    border-radius: 20px;       /* roundness of the scroll thumb */
-    border: 3px solid #FFF;  /* creates padding around scroll thumb */
-}
+/*.white-background > p::-webkit-scrollbar-thumb {*/
+/*    background-color: var(--blue);    !* color of the scroll thumb *!*/
+/*    border-radius: 20px;       !* roundness of the scroll thumb *!*/
+/*    border: 3px solid #FFF;  !* creates padding around scroll thumb *!*/
+/*}*/

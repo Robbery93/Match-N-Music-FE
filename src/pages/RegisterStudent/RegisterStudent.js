@@ -4,7 +4,6 @@ import InputField from "../../components/FormElements/InputField/InputField";
 import skeleton from "../../assets/skeleton.jpg";
 import Button from "../../components/StylingElements/Button/Button";
 import {useForm} from "react-hook-form";
-import { ErrorMessage } from "@hookform/error-message";
 import Label from "../../components/FormElements/Label/Label";
 import Background from "../../components/StylingElements/Background/Background";
 import InputTextarea from "../../components/FormElements/InputTextarea/InputTextarea";
@@ -85,7 +84,6 @@ const RegisterStudent = () => {
                                             label="Naam"
                                             type="text"
                                             inputName="name"
-                                            placeholder="Naam"
                                             register={register}
                                             validationRules={{
                                                 required: "Een naam invullen is verplicht",
@@ -94,17 +92,13 @@ const RegisterStudent = () => {
                                                     message: "Je naam moet uit minimaal 2 letters bestaan"
                                                 }
                                             }}
-                                        />
-                                        <ErrorMessage errors={errors}
-                                                      name="name"
-                                                      render={({message}) => <p className={styles.error}>{message}</p>}
+                                            errors={errors}
                                         />
 
                                         <InputField
                                             label="Email"
                                             type="email"
                                             inputName="email"
-                                            placeholder="Email"
                                             register={register}
                                             validationRules={{
                                                 required: "Email adres mag niet leeg zijn",
@@ -113,11 +107,9 @@ const RegisterStudent = () => {
                                                     message: "Emailadres is te kort. Gebruik een \"@\""
                                                 }
                                             }}
+                                            errors={errors}
                                         />
-                                        <ErrorMessage errors={errors}
-                                                      name="email"
-                                                      render={({message}) => <p className={styles.error}>{message}</p>}
-                                        />
+
 
                                         <InputField
                                             label="Leeftijd"
@@ -132,10 +124,7 @@ const RegisterStudent = () => {
                                                     message: "Je moet minimaal 16 jaar oud zijn om je in te schrijven"
                                                 }
                                             }}
-                                        />
-                                        <ErrorMessage errors={errors}
-                                                      name="age"
-                                                      render={({message}) => <p className={styles.error}>{message}</p>}
+                                            errors={errors}
                                         />
 
                                         <InputField
@@ -149,11 +138,9 @@ const RegisterStudent = () => {
                                                 maxLength: {value: 13, message: "Vul een geldig telefoonnummer in"}
                                             }}
                                             placeholder="06******** of +316********"
+                                            errors={errors}
                                         />
-                                        <ErrorMessage errors={errors}
-                                                      name="phoneNumber"
-                                                      render={({message}) => <p className={styles.error}>{message}</p>}
-                                        />
+
 
                                         <InputField
                                             label="Woonplaats"
@@ -164,10 +151,7 @@ const RegisterStudent = () => {
                                                 required: "Een woonplaats invullen is verplicht."
                                             }}
                                             placeholder="Woonplaats"
-                                        />
-                                        <ErrorMessage errors={errors}
-                                                      name="residence"
-                                                      render={({message}) => <p className={styles.error}>{message}</p>}
+                                            errors={errors}
                                         />
                                     </section>
 
@@ -224,10 +208,7 @@ const RegisterStudent = () => {
                                                         message: "Ik denk dat je wel duidelijk genoeg ben geweest. Probeer het in iets minder woorden"
                                                     }
                                                 }}
-                                            />
-                                            <ErrorMessage errors={errors}
-                                                          name="request"
-                                                          render={({message}) => <p className={styles.error}>{message}</p>}
+                                                errors={errors}
                                             />
                                         </div>
                                     </section>

@@ -6,7 +6,6 @@ import {useForm} from "react-hook-form";
 import Form from "../../components/FormElements/Form/Form";
 import Background from "../../components/StylingElements/Background/Background";
 import Label from "../../components/FormElements/Label/Label";
-import {ErrorMessage} from "@hookform/error-message";
 import Header from "../../components/StylingElements/Header/Header";
 import Button from "../../components/StylingElements/Button/Button";
 import {useHistory} from "react-router-dom";
@@ -15,7 +14,7 @@ import {AuthContext} from "../../context/AuthContext";
 
 const RegisterUser = () => {
 
-    const {register, handleSubmit, formState: { errors }} = useForm({mode: "onChange"});
+    const {register, handleSubmit, formState: { errors }} = useForm({mode: "onBlur"});
 
     const history = useHistory();
 
@@ -125,10 +124,7 @@ const RegisterUser = () => {
                                 required: "Je moet een gebruikersnaam invullen",
                                 minLength: { value: 3, message: "Deze gebruikersnaam is te kort, gebruik minimaal 3 karakters." }
                             }}
-                        />
-                        <ErrorMessage errors={errors}
-                                      name="username"
-                                      render={({ message }) => <ErrorText errorMessage={message} />}
+                            errors={errors}
                         />
 
                         <Label id="password" text="Wachtwoord" />
@@ -149,10 +145,7 @@ const RegisterUser = () => {
                                     message: "Gebruik minimaal 8 karakters, waaronder één hoofdletter, één kleine letter, een cijfer en een symbool."
                                 }
                             }}
-                        />
-                        <ErrorMessage errors={errors}
-                                      name="password"
-                                      render={({ message }) => <ErrorText errorMessage={message} />}
+                            errors={errors}
                         />
                     </section>
 
@@ -172,6 +165,7 @@ const RegisterUser = () => {
                             text="Gebruikersnaam"
                         />
                         <InputField
+                            label="none"
                             type="text"
                             inputName="username"
                             placeholder="Gebruikersnaam"
@@ -180,15 +174,13 @@ const RegisterUser = () => {
                                 required: "Je moet een gebruikersnaam invullen",
                                 minLength: { value: 3, message: "Deze gebruikersnaam is te kort, gebruik minimaal 3 karakters." }
                             }}
-                        />
-                        <ErrorMessage errors={errors}
-                                      name="username"
-                                      render={({ message }) => <ErrorText errorMessage={message} />}
+                            errors={errors}
                         />
 
                         <Label id="password" text="Wachtwoord" />
                         <small>Minimaal 8 karakters, waaronder één hoofdletter, één kleine letter, een cijfer en een symbool. </small>
                         <InputField
+                            label="none"
                             type="password"
                             inputName="password"
                             placeholder="Wachtwoord"
@@ -203,10 +195,7 @@ const RegisterUser = () => {
                                     message: "Gebruik minimaal 8 karakters, waaronder één hoofdletter, één kleine letter, een cijfer en een symbool."
                                 }
                             }}
-                        />
-                        <ErrorMessage errors={errors}
-                                      name="password"
-                                      render={({ message }) => <ErrorText errorMessage={message} />}
+                            errors={errors}
                         />
                     </section>
 

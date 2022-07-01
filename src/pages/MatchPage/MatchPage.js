@@ -33,9 +33,20 @@ const MatchPage = () => {
     const [dataCollected, toggleDataCollected] = useState(false)
     const [edit, toggleEdit] = useState(false);
 
-    const onFormSubmit = (data) => {
-        console.log(data);
-        toggleEdit(!edit);
+    async function onFormSubmit(data) {
+        console.log(data)
+
+        try {
+            await axios.patch(`http://localhost:8080/teachers/${user.id}/update_homework?student_id=${studentId}`, {
+                homework: data.homework
+            }, axiosConfig);
+            toggleEdit(false);
+            location.reload();
+        }
+        catch (e) {
+            console.error("Update van huiswerk is niet gelukt")
+        }
+
     }
 
     
@@ -78,7 +89,7 @@ const MatchPage = () => {
                             <div className={styles.homework_container}>
                                 <h3>Huiswerk van {student.name}</h3>
                                 {edit ?
-                                    <form className={styles.homework_form} onSubmit={handleSubmit(onFormSubmit)}>
+                                    <Form className={styles.homework_form} onSubmit={handleSubmit(onFormSubmit)}>
                                         <textarea
                                             className={styles.homework_input}
                                             placeholder={student.lesson[0].homework}
@@ -88,28 +99,44 @@ const MatchPage = () => {
                                                 minLength: {
                                                     value: 30,
                                                     message: "Vul meer tekst is. Zo is het duidelijker voor de leerling wat hij/zij moet leren voor de volgende keer"
+                                                },
+                                                maxLength: {
+                                                    value: 4000,
+                                                    message: "Dit is een hoop huiswerk! Probeer concreter te zijn..."
                                                 }
                                             })}/>
                                         <ErrorMessage errors={errors}
                                                       name="homework"
-                                                      render={({message}) => <p>{message}</p>} />
-                                        <Button
-                                            addStyle={styles.confirm_btn}
-                                            color="green"
-                                            type="submit"
-                                            text="Bevestigen"
-                                        />
-                                    </form>
+                                                      render={({message}) => <p className={styles.error}>{message}</p>} />
+
+                                        <span className={styles.buttons}>
+                                            <Button
+                                                color="orange"
+                                                text="Annuleren"
+                                                onClick={() => toggleEdit(!edit)}
+                                            />
+
+                                            <Button
+                                                addStyle={styles.confirm_btn}
+                                                color="green"
+                                                type="submit"
+                                                text="Bevestigen"
+                                            />
+                                        </span>
+                                    </Form>
                                     :
                                     <>
                                         <Background color="white" specificBackground={styles.homework_container__txt}>
                                             <p>{student.lesson[0].homework}</p>
                                         </Background>
+
                                         {user.authority === "ROLE_TEACHER" &&
                                         <Button
                                             color="orange"
                                             text="Huiswerk aanpassen"
-                                            onClick={() => toggleEdit(!edit)}/>
+                                            onClick={() => toggleEdit(!edit)}
+                                            addStyle={styles.edit_btn}
+                                        />
                                         }
                                     </>
                                 }

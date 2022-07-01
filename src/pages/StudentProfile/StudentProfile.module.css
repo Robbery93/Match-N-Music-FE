@@ -14,11 +14,6 @@
     margin-top: 10px;
 }
 
-.request h4 {
-    margin: 5px 0 5px 10px;
-    text-decoration: underline;
-}
-
 .request_container {
     width: inherit;
     max-height: 200px;

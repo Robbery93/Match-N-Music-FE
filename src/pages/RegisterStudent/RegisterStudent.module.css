@@ -27,17 +27,6 @@ input[type="radio"] {
     justify-content: space-between;
     align-items: flex-start;
 }
-
-/*.preference h3 {*/
-/*    margin: 0 40px 5px 0;*/
-/*}*/
-
-/*.preference span {*/
-/*    margin-top: 50px;*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*}*/
-
 .preference button {
     align-self: flex-end;
 }

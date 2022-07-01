@@ -1,6 +1,7 @@
 #matchpage {
-    justify-content: stretch;
+    justify-content: space-between;
     align-items: flex-start;
+    column-gap: 25px;
 }
 
 #matchpage button {
@@ -15,21 +16,24 @@
     gap: 20px;
 }
 
+.homework_container {
+    height: 340px;
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: stretch;
+}
+
 .homework_form {
     display: flex;
     flex-direction: column;
 }
 
-#confirm_btn {
-    margin-top: 25px;
-}
-
 .homework_input {
-    width: calc(100% - 25px);
-    height: 200px;
+    width: 100%;
+    height: 232px;
     font-family: Roboto, sans-serif;
     font-size: 16px;
-    margin-left: 25px;
     padding: 10px 25px;
     resize: none;
     border: 2px solid var(--dark-blue);
@@ -38,16 +42,47 @@
     box-shadow: rgba(0, 0, 0, 0.15) 4px 4px 3px;
 }
 
-.homework_container {
-    flex-grow: 1;
+.homework_input::-webkit-scrollbar,
+#homework_container__txt::-webkit-scrollbar {
+    width: 16px;
+}
+
+.homework_input::-webkit-scrollbar-track,
+#homework_container__txt::-webkit-scrollbar-track {
+    background: var(--light-blue);
+    border-radius: 5px;
+}
+
+.homework_input::-webkit-scrollbar-thumb,
+#homework_container__txt::-webkit-scrollbar-thumb {
+    background-color: var(--dark-blue);
+    border-radius: 20px;
+    border: 3px solid var(--light-blue);
+}
+
+.buttons {
+    margin-top: 10px;
     display: flex;
-    height: 340px;
-    flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-end;
+    column-gap: 10px;
 }
 
 #homework_container__txt {
+    width: 571px;
     align-items: flex-start;
-    margin-left: 25px;
-    height: 200px;
+    flex-grow: 1;
+}
+#homework_container__txt > p {
+    overflow-y: paged-y;
+}
+
+#edit_btn {
+    margin-top: 10px;
+}
+
+.error {
+    font-size: 0.75rem;
+    color: var(--error);
+    margin-left: 10px;
+    padding: 0;
 }

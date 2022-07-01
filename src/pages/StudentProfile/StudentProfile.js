@@ -43,10 +43,6 @@ const StudentProfile = () => {
         fetchStudent();
     }, [])
 
-    useEffect(() => {
-        window.scrollTo({ top: 0, behavior: "smooth"})
-    }, [])
-
     return (
         <> {isAuth ?
             <> {student &&
@@ -73,6 +69,7 @@ const StudentProfile = () => {
                         <h2>Verzoek</h2>
                         <DisplayField label="Instrument" text={student.instrument}/>
                         <DisplayField label="Voorkeur voor lesvorm" text={student.preferenceForLessonType}/>
+
                         <div className={styles.request}>
                             <h4>Wat wil ik leren?</h4>
                             <BigDisplayField text={student.request}/>
@@ -81,11 +78,11 @@ const StudentProfile = () => {
 
                     {user.authority === "ROLE_STUDENT" &&
                     <section className={styles.navigation}>
-                        <Button link={`/matchpage/teacher=1&student=${user.id}`} text="Huiswerk" color="orange"
+                        <Button link={`/matchpage/teacher=${student.lesson[0].id.teacherId}&student=${user.id}`} text="Huiswerk" color="orange"
                                 addStyle={styles.navigation_btn}/>
-                        <Button link="/availableteachers" text="Zoek naar docenten" color="blue"
+                        <Button link="/availableteachers" text="Zoek naar docenten" color="blue" small="yes"
                                 addStyle={styles.navigation_btn}/>
-                        <Button link="/activeapplications" text="Openstaande aanvragen" color="blue"
+                        <Button link="/activeapplications" text="Openstaande aanvragen" color="blue" small="yes"
                                 addStyle={styles.navigation_btn}/>
                     </section>
                     }

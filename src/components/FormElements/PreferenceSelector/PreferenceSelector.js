@@ -4,7 +4,7 @@ import "./PreferenceSelector.css";
 const PreferenceSelector = ({ register }) => {
     return (
         <span className="preference_selector">
-                <h3>Hoe wil je les krijgen?</h3>
+            <h4>Voorkeur voor lesvorm?</h4>
                 <label htmlFor="live">
                     <input
                         type="radio"

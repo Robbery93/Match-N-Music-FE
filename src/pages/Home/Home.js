@@ -1,6 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
 import styles from './Home.module.css';
-import {Link} from "react-router-dom";
 import Button from "../../components/StylingElements/Button/Button";
 import InputField from "../../components/FormElements/InputField/InputField";
 import {useForm} from "react-hook-form";
@@ -13,7 +12,7 @@ import ErrorText from "../../components/ErrorMessage/ErrorText";
 
 const Home = () => {
 
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, formState: {errors} } = useForm();
     const { login, user } = useContext(AuthContext);
 
     const [error, toggleError] = useState(false);
@@ -51,8 +50,7 @@ const Home = () => {
     } ,[])
 
     return (
-        <>
-            <div className={styles.side_by_side}>
+        <div className={styles.side_by_side}>
             <section>
                 <Background specificBackground={styles.title}>
                     <h1>Onze missie</h1>
@@ -68,19 +66,18 @@ const Home = () => {
                     <Background specificBackground={styles.login}>
 
                         <InputField
-                            label="none"
                             type="text"
                             inputName="username"
-                            placeholder="Gebruikersnaam"
+                            label="Gebruikersnaam"
                             register={register}
+                            errors={errors}
                         />
                         <InputField
-
-                            label="none"
                             type="password"
                             inputName="password"
-                            placeholder="Wachtwoord"
+                            label="Wachtwoord"
                             register={register}
+                            errors={errors}
                         />
 
                         {error && <ErrorText errorMessage={errorMessage} />}
@@ -93,17 +90,12 @@ const Home = () => {
 
                         <Line />
 
-                        <div className={styles.register}>
-                            <Link to="/register" style={{ textDecoration: 'none' }}>
-                                <Button color="orange" text="Registreren" />
-                            </Link>
-                        </div>
+                        <Button color="orange" text="Registreren" link="/register" />
 
                     </Background>
                 </Form>
             </section>
-            </div>
-        </>
+        </div>
     );
 };
 

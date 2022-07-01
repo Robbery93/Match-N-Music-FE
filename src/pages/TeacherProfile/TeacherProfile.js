@@ -43,10 +43,6 @@ const TeacherProfile = () => {
         fetchTeacher();
     } , [])
 
-    useEffect(() => {
-        window.scrollTo({ top: 0, behavior: "smooth"})
-    }, [])
-
     return (
         <> {isAuth ?
             <> {teacher &&
@@ -74,18 +70,18 @@ const TeacherProfile = () => {
                         <DisplayField label="Instrument" text={teacher.instrument}/>
                         <DisplayField label="Voorkeur voor lesvorm" text={teacher.preferenceForLessonType}/>
                         <div className={styles.about}>
-                            <h3>Iets over mij</h3>
+                            <h4>Iets over mij</h4>
                             <BigDisplayField text={teacher.description} />
-                            <h3>Mijn werkervaring</h3>
+                            <h4>Mijn werkervaring</h4>
                             <BigDisplayField text={teacher.experience} />
                         </div>
                     </section>
 
                     {user.authority === "ROLE_TEACHER" &&
                     <section className={styles.navigation}>
-                        <Button link="/studentapplications" text="Aanvragen van leerlingen" color="blue"
+                        <Button link="/activelessons" text="Mijn leerlingen" color="blue"
                                 addStyle={styles.navigation_btn}/>
-                        <Button link="/activelessons" text="Al je leerlingen" color="blue"
+                        <Button link="/studentapplications" text="Aanvragen" color="blue"
                                 addStyle={styles.navigation_btn}/>
                     </section>
                     }

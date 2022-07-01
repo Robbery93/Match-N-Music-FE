@@ -1,27 +1,24 @@
 import React from 'react';
-import './InputField.css';
+import styles from './InputField.module.css';
+import {ErrorMessage} from "@hookform/error-message";
 
 
-const InputField = ({   label,
-                        type,
-                        inputName,
-                        placeholder,
-                        register,
-                        validationRules,
-                    }) => {
-
+const InputField = ({ label, type, inputName, register, validationRules, errors }) => {
 
     return (
-        <div className="inputfield">
-            {label !== "none" && <h4>{label}:</h4>}
+        <div className={styles.inputfield}>
+            {label !== "none" && <h4>{`${label}:`}</h4> }
             <input
-                className="inputfield_input"
+                className={styles.inputfield_input}
                 autoComplete="off"
                 id={inputName}
                 type={type}
-                placeholder={placeholder}
+                placeholder={label}
                 {...register(inputName, validationRules)}
             />
+            <ErrorMessage errors={errors}
+                          name={inputName}
+                          render={({message}) => <p className={styles.error}>{message}</p>} />
         </div>
     );
 }

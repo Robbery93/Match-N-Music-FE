@@ -4,7 +4,6 @@ import skeleton from "../../assets/skeleton.jpg";
 import styles from "./RegisterTeacher.module.css"
 import Button from "../../components/StylingElements/Button/Button";
 import {useForm} from "react-hook-form";
-import {ErrorMessage} from "@hookform/error-message";
 import Background from "../../components/StylingElements/Background/Background";
 import Form from "../../components/FormElements/Form/Form";
 import Avatar from "../../components/Avatar/Avatar";
@@ -60,7 +59,7 @@ const RegisterTeacher = () => {
                                     <InputField
                                         type="text"
                                         inputName="name"
-                                        placeholder="Naam"
+                                        label="Naam"
                                         register={register}
                                         validationRules={{
                                             required: "Een naam invullen is verplicht",
@@ -69,31 +68,25 @@ const RegisterTeacher = () => {
                                                 message: "Je naam moet uit minimaal 2 letters bestaan"
                                             }
                                         }}
-                                    />
-                                    <ErrorMessage errors={errors}
-                                                  name="name"
-                                                  render={({message}) => <p className={styles.error}>{message}</p>}
+                                        errors={errors}
                                     />
 
                                     <InputField
                                         type="email"
                                         inputName="email"
-                                        placeholder="Email"
+                                        label="Email"
                                         register={register}
                                         validationRules={{
                                             required: "Email adres mag niet leeg zijn",
                                             minLength: {value: 6, message: "Emailadres is te kort. Gebruik een \"@\""}
                                         }}
-                                    />
-                                    <ErrorMessage errors={errors}
-                                                  name="email"
-                                                  render={({message}) => <p className={styles.error}>{message}</p>}
+                                        errors={errors}
                                     />
 
                                     <InputField
                                         type="text"
                                         inputName="age"
-                                        placeholder="Leeftijd"
+                                        label="Leeftijd"
                                         register={register}
                                         validationRules={{
                                             required: "Je leeftijd invullen is verplicht",
@@ -102,40 +95,31 @@ const RegisterTeacher = () => {
                                                 message: "Je moet minimaal 16 jaar oud zijn om je in te schrijven"
                                             }
                                         }}
-                                    />
-                                    <ErrorMessage errors={errors}
-                                                  name="age"
-                                                  render={({message}) => <p className={styles.error}>{message}</p>}
+                                        errors={errors}
                                     />
 
                                     <InputField
                                         type="number"
                                         inputName="phoneNumber"
-                                        placeholder="Telefoonnummer bv: 06-12345678"
+                                        label="Telefoonnummer"
                                         register={register}
                                         validationRules={{
                                             required: "Je telefoonnummer is verplicht",
                                             minLength: {value: 10, message: "Vul een geldig telefoonnummer in"},
                                             maxLength: {value: 13, message: "Vul een geldig telefoonnummer in"}
                                         }}
-                                    />
-                                    <ErrorMessage errors={errors}
-                                                  name="phoneNumber"
-                                                  render={({message}) => <p className={styles.error}>{message}</p>}
+                                        errors={errors}
                                     />
 
                                     <InputField
                                         type="text"
                                         inputName="residence"
-                                        placeholder="Woonplaats"
+                                        label="Woonplaats"
                                         register={register}
                                         validationRules={{
                                             required: "Een woonplaats invullen is verplicht."
                                         }}
-                                    />
-                                    <ErrorMessage errors={errors}
-                                                  name="residence"
-                                                  render={({message}) => <p className={styles.error}>{message}</p>}
+                                        errors={errors}
                                     />
                                 </section>
 
@@ -143,12 +127,13 @@ const RegisterTeacher = () => {
                                     <span className={styles.upload_text}>
                                         <h3>Foto uploaden:</h3>
                                         <Button
+                                            small="yes"
                                             text="Kies een bestand"
                                             color="blue"
                                         />
                                     </span>
 
-                                    <Avatar photo={skeleton} alt="Afbeelding"/>
+                                    <Avatar photo={skeleton} alt="Afbeelding" big="yes"/>
                                 </aside>
                             </Background>
 
@@ -156,6 +141,8 @@ const RegisterTeacher = () => {
                                 <section>
                                     <h2>Over jezelf:</h2>
 
+                                <section className={styles.about}>
+                                    <aside>
                                     <span>
                                         <Label
                                             id="description"
@@ -176,11 +163,7 @@ const RegisterTeacher = () => {
                                                     message: "Dit is wel iets langer dan \"kort\"... (maximaal 2000 karakters)"
                                                 }
                                             }}
-                                        />
-                                        <ErrorMessage
                                             errors={errors}
-                                            name="description"
-                                            render={({message}) => <p className={styles.error}>{message}</p>}
                                         />
 
                                     </span>
@@ -192,7 +175,7 @@ const RegisterTeacher = () => {
                                         />
                                         <InputTextarea
                                             inputName="experience"
-                                            placeholder="Beschrijf hier je werkervaring. Bijvoorbeeld hoe lang je waar werkzaam bent, relevante opleidingen, enzovoorts..."
+                                            placeholder="Bijvoorbeeld hoe lang je waar werkzaam bent, relevante opleidingen, enzovoorts..."
                                             register={register}
                                             validationRules={{
                                                 required: "Een beschrijving over je werkervaring is verplicht",
@@ -205,42 +188,39 @@ const RegisterTeacher = () => {
                                                     message: "Dat is wel erg veel ervaring! Kijk of je het iets compacter kan opschrijven (maximaal 4000 karakters)"
                                                 }
                                             }}
-                                        />
-                                        <ErrorMessage
                                             errors={errors}
-                                            name="experience"
-                                            render={({message}) => <p className={styles.error}>{message}</p>}
                                         />
                                     </span>
+                                    </aside>
+
+                                    <aside className={styles.about_right}>
+                                        <section>
+                                            <Label
+                                                id="instrument"
+                                                text="In welk instrument wil je les geven?"
+                                            />
+                                            <InstrumentSelector
+                                                inputName="instrument"
+                                                register={register}
+                                                validationRules={{
+                                                    required: true
+                                                }}
+                                            />
+                                        </section>
+
+                                        <section>
+                                            <PreferenceSelector register={register} />
+                                        </section>
+
+                                        <Button
+                                            color="orange"
+                                            type="submit"
+                                            text="Registreren"
+                                        />
+                                    </aside>
                                 </section>
-
-                                <aside className={styles.about_right}>
-                                    <section className={styles.instrument}>
-                                        <Label
-                                            id="instrument"
-                                            text="In welk instrument wil je les geven?"
-                                        />
-                                        <InstrumentSelector
-                                            inputName="instrument"
-                                            register={register}
-                                            validationRules={{
-                                                required: true
-                                            }}
-                                        />
-                                    </section>
-
-                                    <section className={styles.preference}>
-                                        <PreferenceSelector register={register} />
-                                    </section>
-
-                                    <Button
-                                        color="orange"
-                                        type="submit"
-                                        text="Registreren"
-                                    />
-                                </aside>
-
-                            </Background>
+                                </section>
+                        </Background>
                         </Form>
                         :
                         <Background>
