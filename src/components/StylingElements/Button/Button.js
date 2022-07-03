@@ -1,12 +1,13 @@
 import React from 'react';
 import './Button.css';
-import {Link} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 
 const Button = ({ link, color,small , addStyle, type, onClick, text }) => {
     return (
         <>
             {link ?
-                <Link
+                <NavLink
+                    className="navlink"
                     to={link}
                     style={{ textDecoration: 'none' }} >
                     <button
@@ -17,7 +18,7 @@ const Button = ({ link, color,small , addStyle, type, onClick, text }) => {
                     >
                         {text}
                     </button>
-                </Link>
+                </NavLink>
                 :
                 <button
                     className={small === "yes" ? `${color} button small-button`: `${color} button`}

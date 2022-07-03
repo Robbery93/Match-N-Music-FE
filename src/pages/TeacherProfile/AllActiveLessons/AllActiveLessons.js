@@ -30,7 +30,7 @@ const AllActiveLessons = () => {
     
     return (
         <>
-            <Header text="Alle active lessen" />
+            <Header text="Mijn leerlingen" />
             {lessons.length > 0 && lessons.map(lesson => {
                 return <StudentApplication
                     key={lesson.id.studentId}

@@ -9,6 +9,17 @@
     margin: 0;
 }
 
+#about {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.about_container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
 .request {
     width: 450px;
     margin-top: 10px;
@@ -29,11 +40,12 @@
 }
 
 .navigation {
-    justify-content: space-around;
-    align-items: stretch;
-    row-gap: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 #navigation_btn {
-    flex-grow: 1;
+    margin-bottom: 20px;
+    width: 100%;
 }

@@ -26,6 +26,7 @@ const RegisterStudent = () => {
     const { register, handleSubmit, formState: {errors} } = useForm({ mode: "onChange" });
 
     const [registerSucces, toggleRegisterSucces] = useState(false);
+    const [error, toggleError] = useState(false)
 
     const axiosConfig = { headers: {
             'Content-Type' : 'application/json',
@@ -38,36 +39,38 @@ const RegisterStudent = () => {
                 name: data.name,
                 email: data.email,
                 age: data.age,
-                residence: data.residence,
                 phoneNumber : data.phoneNumber,
+                residence: data.residence,
                 instrument : data.instrument,
                 request : data.request,
                 preferenceForLessonType: data.preferenceForLessonType
             }, axiosConfig);
-
-            console.log("Post request gelukt")
         } catch (e) {
             console.error(e);
-            console.error("In invullen van data is niet gelukt.");
+            toggleError(true);
         }
 
         try {
             await axios.patch(`http://localhost:8080/students/linkuser/${user.username}?email=${data.email}`,
-                axiosConfig)
-            toggleRegisterSucces(true);
-            console.log("patch request gelukt")
+                axiosConfig);
         } catch (e) {
             console.log(e);
-            console.error("Het linken aan User is niet gelukt");
+            toggleError(true);
         }
 
-        console.log(user)
+        try {
+            const foundStudent = await axios.get(`http://localhost:8080/student/email=${data.email}`, axiosConfig);
+            toggleError(false);
+            toggleRegisterSucces(true);
+            setTimeout(() => history.push(`/studentprofile/${foundStudent.data.id}`), 2000);
+        } catch (e) {
+            console.error(e);
+            toggleError(true);
+        }
 
-        registerUser(localStorage.getItem("token"), user.username);
+       registerUser(localStorage.getItem("token"));
 
-        console.log(user)
-
-        setTimeout(() => history.push(`/studentprofile/${user.id}`), 3000);
+        // setTimeout(() => history.push(`/studentprofile/${user.id}`), 3000);
     }
 
     return (
@@ -170,67 +173,67 @@ const RegisterStudent = () => {
 
                                 </Background>
 
-                                <Background>
-                                    <section>
-                                        <h2>Je verzoek</h2>
+                                <Background specificBackground={styles.request}>
+                                    <h2>Je verzoek</h2>
 
-                                        <div>
-                                            <Label
-                                                id="instrument"
-                                                text="Instrument"
+                                    <span className={styles.request_container}>
+                                        <section>
+                                            <div>
+                                                <Label
+                                                    id="instrument"
+                                                    text="Instrument"
+                                                />
+                                                <InstrumentSelector
+                                                    inputName="instrument"
+                                                    register={register}
+                                                    validationRules={{
+                                                        required: true
+                                                    }}
+                                                />
+                                            </div>
+
+                                            <div>
+                                                <Label
+                                                    id="request"
+                                                    text="Wat wil je leren?"
+                                                />
+                                                <InputTextarea
+                                                    placeholder="Wees zo duidelijk mogelijk!"
+                                                    inputName="request"
+                                                    register={register}
+                                                    validationRules={{
+                                                        required: "Een beschrijving van wat je wil leren is verplicht",
+                                                        minLength: {
+                                                            value: 20,
+                                                            message: "Vul wat meer tekst in. Zo is het duidelijker voor de docent wat je wil leren"
+                                                        },
+                                                        maxLength: {
+                                                            value: 4000,
+                                                            message: "Ik denk dat je wel duidelijk genoeg ben geweest. Probeer het in iets minder woorden"
+                                                        }
+                                                    }}
+                                                    errors={errors}
+                                                />
+                                            </div>
+                                        </section>
+
+                                        <section className={styles.preference}>
+                                            <PreferenceSelector register={register} />
+
+
+                                            <Button
+                                                color="orange"
+                                                type="submit"
+                                                text="Registreren"
                                             />
-                                            <InstrumentSelector
-                                                inputName="instrument"
-                                                register={register}
-                                                validationRules={{
-                                                    required: true
-                                                }}
-                                            />
-                                        </div>
-
-                                        <div>
-                                            <Label
-                                                id="request"
-                                                text="Wat wil je leren?"
-                                            />
-                                            <InputTextarea
-                                                placeholder="Wees zo duidelijk mogelijk!"
-                                                inputName="request"
-                                                register={register}
-                                                validationRules={{
-                                                    required: "Een beschrijving van wat je wil leren is verplicht",
-                                                    minLength: {
-                                                        value: 20,
-                                                        message: "Vul wat meer tekst in. Zo is het duidelijker voor de docent wat je wil leren"
-                                                    },
-                                                    maxLength: {
-                                                        value: 4000,
-                                                        message: "Ik denk dat je wel duidelijk genoeg ben geweest. Probeer het in iets minder woorden"
-                                                    }
-                                                }}
-                                                errors={errors}
-                                            />
-                                        </div>
-                                    </section>
-
-                                    <section className={styles.preference}>
-                                        <PreferenceSelector register={register} />
-
-
-                                        <Button
-                                            color="orange"
-                                            type="submit"
-                                            text="Registreren"
-                                        />
-                                    </section>
+                                        </section>
+                                    </span>
 
                                 </Background>
                             </Form>
-                            {registerSucces &&
-                            <Background>
-                                <h2>Je gegevens zijn opgeslagen!</h2>
-                            </Background>
-                            }
+
+                            {registerSucces && <Background><h2>Je gegevens zijn opgeslagen!</h2></Background>}
+                            {error && <Background><h2>Er ging ergens iets mis...</h2></Background>}
                         </>
                         :
                         <Background>

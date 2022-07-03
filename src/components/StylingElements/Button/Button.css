@@ -1,4 +1,6 @@
 .button {
+    min-width: 100px;
+    max-width: 250px;
     padding: 1rem 2rem;
     border-radius: 5px;
     border: 3px solid;
@@ -8,8 +10,6 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    min-width: 100px;
-    max-width: 250px;
 }
 
 .small-button {
@@ -43,7 +43,6 @@
     background-color: var(--light-orange);
     border-color: var(--orange);
     color: #000;
-    /*max-width: 200px;*/
 }
 
 .orange:hover {
@@ -51,7 +50,4 @@
     color: #FFF
 }
 
-a button {
-    width: 100%;
-}
 

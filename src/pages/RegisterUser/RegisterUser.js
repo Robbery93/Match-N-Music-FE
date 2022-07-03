@@ -23,6 +23,7 @@ const RegisterUser = () => {
     const [registerTeacher, toggleRegisterTeacher] = useState(false);
     const [registerStudent, toggleRegisterStudent] = useState(false);
     const [registrationSuccessful, toggleRegistrationSuccessful] = useState(false);
+    const [error, toggleError] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
 
 
@@ -49,13 +50,14 @@ const RegisterUser = () => {
             })
 
             registerUser(result.data.jwt);
-
+            toggleError(false);
             toggleRegistrationSuccessful(true);
             setTimeout(() => history.push("/newstudent"), 3000);
         }
         catch (e) {
             console.error(e);
             setErrorMessage(`Het registreren is niet gelukt. Probeer het opnieuw (${e.message})`);
+            toggleError(true);
         }
     }
 
@@ -75,11 +77,13 @@ const RegisterUser = () => {
 
             registerUser(result.data.jwt);
 
+            toggleError(false);
             toggleRegistrationSuccessful(true);
             setTimeout(() => history.push("/newteacher"), 3000);
 
         } catch (e) {
             setErrorMessage(`Het registreren is niet gelukt. Probeer het opnieuw (${e.message})`);
+            toggleError(true);
         }
     }
 
@@ -210,7 +214,7 @@ const RegisterUser = () => {
                 <p> Vul op de volgende pagina de rest van je gegevens in. <br/> Je wordt automatisch doorgestuurd.</p>
             </Background>
             }
-            {errorMessage &&
+            {error &&
             <Background>
                 <ErrorText errorMessage={errorMessage} />
             </Background>}

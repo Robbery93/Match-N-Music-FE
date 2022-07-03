@@ -9,15 +9,28 @@
     margin: 0;
 }
 
-.about {
+#about {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.about_container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.bigtxt {
     width: 450px;
 }
 
 .navigation {
-    justify-content: space-around;
-    row-gap: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 #navigation_btn {
-    flex-grow: 1;
+    margin-bottom: 20px;
+    width: 100%;
 }

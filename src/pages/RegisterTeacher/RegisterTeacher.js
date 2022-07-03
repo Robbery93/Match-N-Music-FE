@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import InputField from "../../components/FormElements/InputField/InputField";
 import skeleton from "../../assets/skeleton.jpg";
 import styles from "./RegisterTeacher.module.css"
@@ -14,35 +14,69 @@ import {AuthContext} from "../../context/AuthContext";
 import NotRegistered from "../../components/NotRegistered/NotRegistered";
 import PreferenceSelector from "../../components/FormElements/PreferenceSelector/PreferenceSelector";
 import axios from "axios";
+import {useHistory} from "react-router-dom";
 
 const RegisterTeacher = () => {
 
-    const { user } = useContext(AuthContext);
+    const { registerUser, user } = useContext(AuthContext);
 
     const { register, handleSubmit, formState: {errors} } = useForm({ mode: "onChange" })
 
+    const [registerSucces, toggleRegisterSucces] = useState(false);
+    const [error, toggleError] = useState(false);
+
+    const history = useHistory();
+
+    const axiosConfig = { headers: {
+            'Content-Type' : 'application/json',
+            'Authorization' : `Bearer ${localStorage.getItem("token")}`
+        }};
+
     async function onFormSubmit(data) {
-        console.log(data);
-        const axiosConfig = { headers: {
-                'Content-Type' : 'application/json',
-                'Authorization' : `Bearer ${localStorage.getItem("token")}`
-            }};
         try {
-            const result = await axios.post("http://localhost:8080/teachers", {
-                name: data.name,
-                email: data.email,
-                age: data.age,
-                phoneNumber : data.phoneNumber,
-                residence: data.residence,
-                description: data.description,
-                experience: data.experience,
-                instruments : data.instrument,
-                preferenceForLessonType: data.preferenceForLessonType
-            }, axiosConfig)
-            console.log(result);
+            await axios({
+                method: 'POST',
+                url: "http://localhost:8080/teachers",
+                data: {
+                    name: data.name,
+                    email: data.email,
+                    age: data.age,
+                    phoneNumber : data.phoneNumber,
+                    residence: data.residence,
+                    description: data.description,
+                    experience: data.experience,
+                    instrument : data.instrument,
+                    preferenceForLessonType: data.preferenceForLessonType
+                },
+                headers: {
+                    'Content-Type' : 'application/json',
+                    'Authorization' : `Bearer ${localStorage.getItem("token")}`
+                }
+            });
         } catch (e) {
             console.error(e);
+            toggleError(true);
         }
+
+        try {
+            await axios.patch(`http://localhost:8080/teachers/linkuser/${user.username}?email=${data.email}`, axiosConfig);
+        } catch (e) {
+            console.log(e);
+            toggleError(true);
+        }
+
+        try {
+            const foundTeacher = await axios.get(`http://localhost:8080/teachers/email=${data.email}`, axiosConfig)
+            toggleError(false);
+            toggleRegisterSucces(true);
+            setTimeout(() => history.push(`/teacherprofile/${foundTeacher.data.id}`), 2000);
+        } catch (e) {
+            console.error(e);
+            toggleError(true);
+        }
+
+        registerUser(localStorage.getItem("token"));
+
     }
 
     return (
@@ -137,64 +171,62 @@ const RegisterTeacher = () => {
                                 </aside>
                             </Background>
 
-                            <Background>
-                                <section>
+                            <Background specificBackground={styles.about}>
                                     <h2>Over jezelf:</h2>
 
-                                <section className={styles.about}>
-                                    <aside>
-                                    <span>
-                                        <Label
-                                            id="description"
-                                            text="Stel jezelf eens voor"
-                                        />
-                                        <InputTextarea
-                                            inputName="description"
-                                            placeholder="Beschrijf jezelf in het kort!"
-                                            register={register}
-                                            validationRules={{
-                                                required: "Een beschrijving over jezelf is verplicht",
-                                                minLength: {
-                                                    value: 20,
-                                                    message: "Dat is wel heel erg kort. Probeer iets meer over jezelf te vertellen (minimaal 20 karakters)"
-                                                },
-                                                maxLength: {
-                                                    value: 2000,
-                                                    message: "Dit is wel iets langer dan \"kort\"... (maximaal 2000 karakters)"
-                                                }
-                                            }}
-                                            errors={errors}
-                                        />
+                                <span className={styles.about_container}>
+                                    <section>
+                                        <div>
+                                            <Label
+                                                id="description"
+                                                text="Stel jezelf eens voor"
+                                            />
+                                            <InputTextarea
+                                                inputName="description"
+                                                placeholder="Beschrijf jezelf in het kort!"
+                                                register={register}
+                                                validationRules={{
+                                                    required: "Een beschrijving over jezelf is verplicht",
+                                                    minLength: {
+                                                        value: 20,
+                                                        message: "Dat is wel heel erg kort. Probeer iets meer over jezelf te vertellen (minimaal 20 karakters)"
+                                                    },
+                                                    maxLength: {
+                                                        value: 2000,
+                                                        message: "Dit is wel iets langer dan \"kort\"... (maximaal 2000 karakters)"
+                                                    }
+                                                }}
+                                                errors={errors}
+                                            />
+                                        </div>
 
-                                    </span>
+                                        <div>
+                                            <Label
+                                                id="experience"
+                                                text="Werkervaring"
+                                            />
+                                            <InputTextarea
+                                                inputName="experience"
+                                                placeholder="Bijvoorbeeld hoe lang je waar werkzaam bent, relevante opleidingen, enzovoorts..."
+                                                register={register}
+                                                validationRules={{
+                                                    required: "Een beschrijving over je werkervaring is verplicht",
+                                                    minLength: {
+                                                        value: 20,
+                                                        message: "Dat is wel heel erg kort. Probeer iets meer over je werkervaring te vertellen (minimaal 20 karakters)"
+                                                    },
+                                                    maxLength: {
+                                                        value: 4000,
+                                                        message: "Dat is wel erg veel ervaring! Kijk of je het iets compacter kan opschrijven (maximaal 4000 karakters)"
+                                                    }
+                                                }}
+                                                errors={errors}
+                                            />
+                                        </div>
+                                    </section>
 
-                                    <span>
-                                        <Label
-                                            id="experience"
-                                            text="Werkervaring"
-                                        />
-                                        <InputTextarea
-                                            inputName="experience"
-                                            placeholder="Bijvoorbeeld hoe lang je waar werkzaam bent, relevante opleidingen, enzovoorts..."
-                                            register={register}
-                                            validationRules={{
-                                                required: "Een beschrijving over je werkervaring is verplicht",
-                                                minLength: {
-                                                    value: 20,
-                                                    message: "Dat is wel heel erg kort. Probeer iets meer over je werkervaring te vertellen (minimaal 20 karakters)"
-                                                },
-                                                maxLength: {
-                                                    value: 4000,
-                                                    message: "Dat is wel erg veel ervaring! Kijk of je het iets compacter kan opschrijven (maximaal 4000 karakters)"
-                                                }
-                                            }}
-                                            errors={errors}
-                                        />
-                                    </span>
-                                    </aside>
-
-                                    <aside className={styles.about_right}>
-                                        <section>
+                                    <section className={styles.about_right}>
+                                        <div>
                                             <Label
                                                 id="instrument"
                                                 text="In welk instrument wil je les geven?"
@@ -206,20 +238,19 @@ const RegisterTeacher = () => {
                                                     required: true
                                                 }}
                                             />
-                                        </section>
+                                        </div>
 
-                                        <section>
+                                        <div>
                                             <PreferenceSelector register={register} />
-                                        </section>
+                                        </div>
 
                                         <Button
                                             color="orange"
                                             type="submit"
                                             text="Registreren"
                                         />
-                                    </aside>
-                                </section>
-                                </section>
+                                    </section>
+                                </span>
                         </Background>
                         </Form>
                         :
@@ -228,6 +259,8 @@ const RegisterTeacher = () => {
                             <Button color="orange" text="Terug" onClick={() => history.goBack()}/>
                         </Background>
                     }
+                    {registerSucces && <Background><h2>Je gegevens zijn opgeslagen!</h2></Background>}
+                    {error && <Background><h2>Er ging ergens iets mis...</h2></Background>}
                 </>
                 :
                 <NotRegistered/>

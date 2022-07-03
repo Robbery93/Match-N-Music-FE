@@ -1,15 +1,17 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {AuthContext} from "../../context/AuthContext";
+import {useParams} from "react-router-dom";
 import axios from "axios";
+
+import styles from "./TeacherProfile.module.css";
+import robbert from "../../assets/Robbert.jpg";
+
 import Header from "../../components/StylingElements/Header/Header";
 import Background from "../../components/StylingElements/Background/Background";
 import DisplayField from "../../components/StylingElements/DisplayField/DisplayField";
-import styles from "./TeacherProfile.module.css";
 import Avatar from "../../components/Avatar/Avatar";
-import robbert from "../../assets/Robbert.jpg";
 import Button from "../../components/StylingElements/Button/Button";
 import BigDisplayField from "../../components/StylingElements/BigDisplayField/BigDisplayField";
-import {useParams} from "react-router-dom";
 import NotRegistered from "../../components/NotRegistered/NotRegistered";
 
 const TeacherProfile = () => {
@@ -47,7 +49,7 @@ const TeacherProfile = () => {
         <> {isAuth ?
             <> {teacher &&
             <>
-                {user.authority === "ROLE_TEACHER" ? <Header text="Mijn Profiel" /> : <Header text={`Profiel van ${teacher.name}`} />}
+                {user.authority === "ROLE_TEACHER" ? <Header text="Mijn profiel" /> : <Header text={`Profiel van ${teacher.name}`} />}
                 <Background>
                     <section>
                         <h2>Gegevens</h2>
@@ -64,27 +66,33 @@ const TeacherProfile = () => {
                     </section>
                 </Background>
 
-                <Background>
-                    <section>
+                <Background specificBackground={styles.about}>
                         <h2>Over mij</h2>
-                        <DisplayField label="Instrument" text={teacher.instrument}/>
-                        <DisplayField label="Voorkeur voor lesvorm" text={teacher.preferenceForLessonType}/>
-                        <div className={styles.about}>
-                            <h4>Iets over mij</h4>
-                            <BigDisplayField text={teacher.description} />
-                            <h4>Mijn werkervaring</h4>
-                            <BigDisplayField text={teacher.experience} />
-                        </div>
-                    </section>
+                    <span className={styles.about_container}>
+                        <section>
+                            <DisplayField label="Instrument" text={teacher.instrument}/>
+                            <DisplayField label="Voorkeur voor lesvorm" text={teacher.preferenceForLessonType}/>
+                            <div className={styles.bigtxt}>
+                                <h4>Iets over mij</h4>
+                                <BigDisplayField text={teacher.description} />
+                                <h4>Mijn werkervaring</h4>
+                                <BigDisplayField text={teacher.experience} />
+                            </div>
+                        </section>
 
-                    {user.authority === "ROLE_TEACHER" &&
-                    <section className={styles.navigation}>
-                        <Button link="/activelessons" text="Mijn leerlingen" color="blue"
-                                addStyle={styles.navigation_btn}/>
-                        <Button link="/studentapplications" text="Aanvragen" color="blue"
-                                addStyle={styles.navigation_btn}/>
-                    </section>
-                    }
+                        {user.authority === "ROLE_TEACHER" &&
+                        <section className={styles.navigation}>
+                            <div>
+                                <Button link="/activelessons" text="Mijn leerlingen" color="orange" small="yes"
+                                        addStyle={styles.navigation_btn}/>
+                                <Button link="/studentapplications" text="Nieuwe aanvragen" color="orange" small="yes"
+                                        addStyle={styles.navigation_btn}/>
+                            </div>
+                            <Button text="Gegevens wijzigen" color="blue" small="yes" addStyle={styles.navigation_btn}
+                            />
+                        </section>
+                        }
+                    </span>
                 </Background>
 
                 {loading && <Background><p>De gegevens worden geladen</p></Background>}
