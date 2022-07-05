@@ -37,6 +37,9 @@ h4,
 p {
   color: var(--dark-blue);
 }
+::placeholder {
+  font-size: 16px;
+}
 
 h2,
 h3 {

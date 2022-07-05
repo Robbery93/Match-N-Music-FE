@@ -118,7 +118,6 @@ const RegisterStudent = () => {
                                             label="Leeftijd"
                                             type="number"
                                             inputName="age"
-                                            placeholder="Leeftijd"
                                             register={register}
                                             validationRules={{
                                                 required: "Je leeftijd invullen is verplicht",
@@ -179,10 +178,7 @@ const RegisterStudent = () => {
                                     <span className={styles.request_container}>
                                         <section>
                                             <div>
-                                                <Label
-                                                    id="instrument"
-                                                    text="Instrument"
-                                                />
+                                                <Label id="instrument" text="Instrument"/>
                                                 <InstrumentSelector
                                                     inputName="instrument"
                                                     register={register}

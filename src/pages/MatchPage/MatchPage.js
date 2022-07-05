@@ -30,6 +30,7 @@ const MatchPage = () => {
 
     const [student, setStudent] = useState({});
     // const [teacher, setTeacher] = useState({});  Toevoegen van foto moet er nog bij!
+    const [homework, setHomework] = useState(``);
     const [dataCollected, toggleDataCollected] = useState(false)
     const [edit, toggleEdit] = useState(false);
 
@@ -55,6 +56,8 @@ const MatchPage = () => {
             try{
                 const studentData = await axios.get(`http://localhost:8080/students/${studentId}`, axiosConfig);
                 setStudent(studentData.data);
+                setHomework(studentData.data.lesson[0].homework);
+
 
                 // const teacherData = await axios.get(`http://localhost:8080/teachers/${teacherId}`, axiosConfig);
                 // setTeacher(teacherData.data);
@@ -127,7 +130,7 @@ const MatchPage = () => {
                                     :
                                     <>
                                         <Background color="white" specificBackground={styles.homework_container__txt}>
-                                            <p>{student.lesson[0].homework}</p>
+                                            <p>{homework}</p>
                                         </Background>
 
                                         {user.authority === "ROLE_TEACHER" &&

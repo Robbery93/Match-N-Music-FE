@@ -7,7 +7,7 @@
 }
 
 .display-field_text {
-    width: 350px;
+    min-width: 350px;
     flex-grow: 1;
     background-color: #FFFFFF;
     border: var(--dark-blue) solid 1px;

@@ -74,7 +74,10 @@
 }
 #homework_container__txt > p {
     overflow-y: paged-y;
+    white-space: pre-wrap;
 }
+
+
 
 #edit_btn {
     margin-top: 10px;

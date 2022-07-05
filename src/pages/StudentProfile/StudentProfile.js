@@ -13,6 +13,9 @@ import Avatar from "../../components/Avatar/Avatar";
 import Button from "../../components/StylingElements/Button/Button";
 import BigDisplayField from "../../components/StylingElements/BigDisplayField/BigDisplayField";
 import NotRegistered from "../../components/NotRegistered/NotRegistered";
+import InputField from "../../components/FormElements/InputField/InputField";
+import {useForm} from "react-hook-form";
+import InputTextarea from "../../components/FormElements/InputTextarea/InputTextarea";
 
 const StudentProfile = () => {
 
@@ -20,10 +23,13 @@ const StudentProfile = () => {
 
     const { id } = useParams();
 
+    const { register, handleSubmit, formState: {errors} } = useForm({mode: "onBlur"});
+
     const [student, setStudent] = useState(null);
     const [loading, toggleLoading] = useState(true);
     const [error, toggleError] = useState(false);
-    const [edit, toggleEdit] = useState(false);
+    const [editDetails, toggleEditDetails] = useState(false);
+    const [editRequest, toggleEditRequest] = useState(false);
 
     const axiosConfig = { headers: {
             'Content-Type' : 'application/json',
@@ -46,69 +52,211 @@ const StudentProfile = () => {
         fetchStudent();
     }, [])
 
+    async function updateDetails(data) {
+        try {
+            await axios.patch(`http://localhost:8080/students/${user.id}`, {
+                name: data.name,
+                email: data.email,
+                age: data.age,
+                phoneNumber: data.phoneNumber,
+                residence: data.residence
+            }, axiosConfig)
+
+            console.log("Update is gelukt!")
+            toggleEditDetails(false);
+            location.reload();
+        } catch (e) {
+            console.log("update niet gelukt")
+        }
+    }
+
+    async function updateRequest(data) {
+        try {
+            await axios.patch(`http://localhost:8080/students/${user.id}`, {
+                request: data.request
+            }, axiosConfig)
+
+            console.log("Update is gelukt!")
+            toggleEditRequest(false);
+            location.reload();
+        } catch (e) {
+            console.error("Update is niet gelukt")
+        }
+    }
+
     return (
         <> {isAuth ?
             <> {student &&
-            <>
-                {user.authority === "ROLE_STUDENT" ? <Header text="Mijn profiel" /> : <Header text={`Profiel van ${student.name}`}/>}
-                <Background>
-                    <section>
-                        <h2>Gegevens</h2>
-                        {!edit ?
-                            <>
-                                <DisplayField label="Naam" text={student.name}/>
-                                <DisplayField label="Email" text={student.email}/>
-                                <DisplayField label="Leeftijd" text={student.age}/>
-                                <DisplayField label="Telefoonnummer" text={student.phoneNumber}/>
-                                <DisplayField label="Woonplaats" text={student.residence}/>
-                            </>
-                            :
-                            <>
-                                <p>hallo!</p>
-                            </>
-                        }
+                <>
+                    {user.authority === "ROLE_STUDENT" ? <Header text="Mijn profiel" /> : <Header text={`Profiel van ${student.name}`}/>}
+                    <Background specificBackground={styles.details}>
 
-                    </section>
+                            <h2>Gegevens</h2>
+                            {!editDetails ?
+                                <span>
+                                    <section>
+                                        <DisplayField label="Naam" text={student.name}/>
+                                        <DisplayField label="Email" text={student.email}/>
+                                        <DisplayField label="Leeftijd" text={student.age}/>
+                                        <DisplayField label="Telefoonnummer" text={student.phoneNumber}/>
+                                        <DisplayField label="Woonplaats" text={student.residence}/>
+                                    </section>
+                                    <section className={styles.avatar}>
+                                        <div>
+                                            <h2>Profielfoto</h2>
+                                            <Avatar photo={robbert} big="yes"/>
+                                        </div>
+                                        <Button text="Gegevens wijzigen" color="blue" small="yes" onClick={() => toggleEditDetails(!editDetails)}
+                                                addStyle={styles.edit_btn}/>
+                                    </section>
+                                </span>
+                                :
+                                <form onSubmit={handleSubmit(updateDetails)}>
+                                    <section>
+                                            <InputField
+                                                label="Naam"
+                                                type="text"
+                                                inputName="name"
+                                                prefilled={student.name}
+                                                register={register}
+                                                validationRules={{
+                                                    minLength: {
+                                                        value: 2,
+                                                        message: "Je naam moet uit minimaal 2 letters bestaan"
+                                                    }
+                                                }}
+                                                errors={errors}
+                                            />
+                                            <InputField
+                                                label="Email"
+                                                type="email"
+                                                inputName="email"
+                                                prefilled={student.email}
+                                                register={register}
+                                                validationRules={{
+                                                    minLength: {
+                                                        value: 6,
+                                                        message: "Emailadres is te kort. Gebruik een \"@\""
+                                                    }
+                                                }}
+                                                errors={errors}
+                                            />
 
-                    <section className={styles.avatar}>
-                        <h2>Profielfoto</h2>
-                        <Avatar photo={robbert} big="yes"/>
-                    </section>
-                </Background>
+                                            <InputField
+                                                label="Leeftijd"
+                                                type="number"
+                                                inputName="age"
+                                                prefilled={student.age}
+                                                register={register}
+                                                validationRules={{
+                                                    min: {
+                                                        value: 16,
+                                                        message: "Je moet minimaal 16 jaar oud zijn om je in te schrijven"
+                                                    }
+                                                }}
+                                                errors={errors}
+                                            />
 
-                <Background specificBackground={styles.about}>
-                    <h2>Verzoek</h2>
-                    <span className={styles.about_container}>
-                        <section>
-                            <DisplayField label="Instrument" text={student.instrument}/>
-                            <DisplayField label="Voorkeur voor lesvorm" text={student.preferenceForLessonType}/>
+                                            <InputField
+                                                label="Telefoonnummer"
+                                                type="number"
+                                                inputName="phoneNumber"
+                                                prefilled={student.phoneNumber}
+                                                register={register}
+                                                validationRules={{
+                                                    minLength: {value: 10, message: "Vul een geldig telefoonnummer in"},
+                                                    maxLength: {value: 13, message: "Vul een geldig telefoonnummer in"}
+                                                }}
+                                                errors={errors}
+                                            />
 
-                            <div className={styles.request}>
-                                <h4>Wat wil ik leren?</h4>
-                                <BigDisplayField text={student.request}/>
-                            </div>
-                        </section>
+                                            <InputField
+                                                label="Woonplaats"
+                                                type="text"
+                                                inputName="residence"
+                                                register={register}
+                                                prefilled={student.residence}
+                                                errors={errors}
+                                            />
+                                        </section>
 
-                        {user.authority === "ROLE_STUDENT" &&
-                        <section className={styles.navigation}>
-                            <div>
-                                <Button link={`/matchpage/teacher=${student.lesson[0].id.teacherId}&student=${user.id}`} text="Huiswerk" color="orange"
-                                        addStyle={styles.navigation_btn}/>
-                                <Button link="/availableteachers" text="Zoek naar docenten" color="blue" small="yes"
-                                        addStyle={styles.navigation_btn}/>
-                                <Button link="/activeapplications" text="Openstaande aanvragen" color="blue" small="yes"
-                                        addStyle={styles.navigation_btn}/>
-                            </div>
-                            <Button text="Gegevens wijzigen" color="blue" small="yes" onClick={() => toggleEdit(true)}
-                                    addStyle={styles.navigation_btn}/>
-                        </section>
-                        }
-                    </span>
-                </Background>
+                                    <section className={styles.avatar}>
+                                        <div>
+                                            <h2>Profielfoto</h2>
+                                            <Avatar photo={robbert} big="yes"/>
+                                        </div>
+                                        <span>
+                                            <Button text="Annuleren" color="orange" small="yes" onClick={() => toggleEditDetails(!editDetails)}
+                                                    addStyle={styles.edit_btn}/>
+                                            <Button type="submit" text="Bevestigen" color="green" small="yes"
+                                                    addStyle={styles.edit_btn}/>
+                                        </span>
+                                    </section>
+                                </form>
+                            }
+                    </Background>
 
-                {loading && <Background><p>De gegevens worden geladen</p></Background>}
-                {error && <Background><p>Whoops, er ging iets mis met het ophalen van de data</p></Background>}
-            </>
+                    <Background specificBackground={styles.about}>
+                        <h2>Verzoek</h2>
+
+                        <form className={styles.about_container} onSubmit={handleSubmit(updateRequest)}>
+                            <section>
+                                <DisplayField label="Instrument" text={student.instrument}/>
+                                <DisplayField label="Voorkeur voor lesvorm" text={student.preferenceForLessonType}/>
+
+                                <div className={styles.request}>
+                                    <h4>Wat wil ik leren?</h4>
+                                    {!editRequest ?
+                                        <BigDisplayField text={student.request}/>
+                                        :
+                                        <InputTextarea
+                                            inputName="request"
+                                            placeholder={student.request}
+                                            register={register}
+                                            validationRules={{
+                                                minLength: {
+                                                    value: 20,
+                                                    message: "Vul wat meer tekst in. Zo is het duidelijker voor de docent wat je wil leren"
+                                                },
+                                                maxLength: {
+                                                    value: 4000,
+                                                    message: "Ik denk dat je wel duidelijk genoeg ben geweest. Probeer het in iets minder woorden"
+                                                }
+                                            }}
+                                            errors={errors}
+                                            />
+                                    }
+                                </div>
+                            </section>
+
+                            {user.authority === "ROLE_STUDENT" &&
+                            <section className={styles.navigation}>
+                                <div>
+                                    <Button link={`/matchpage/teacher=${student.lesson[0].id.teacherId}&student=${user.id}`} text="Huiswerk" color="orange"
+                                            addStyle={styles.navigation_btn}/>
+                                    <Button link="/availableteachers" text="Zoek naar docenten" color="blue" small="yes"
+                                            addStyle={styles.navigation_btn}/>
+                                    <Button link="/activeapplications" text="Openstaande aanvragen" color="blue" small="yes"
+                                            addStyle={styles.navigation_btn}/>
+                                </div>
+                                {!editRequest ?
+                                <Button text="Verzoek wijzigen" color="blue" small="yes" onClick={() => toggleEditRequest(!editRequest)}
+                                        addStyle={styles.edit_btn}/>
+                                    :
+                                    <span>
+                                        <Button text="Annuleren" color="orange" small="yes" onClick={() => toggleEditRequest(!editRequest)}
+                                                 addStyle={styles.edit_btn}/>
+                                        <Button type="submit" text="Bevestigen" color="green" small="yes"
+                                                addStyle={styles.edit_btn}/>
+                                    </span>}
+                            </section>
+                            }
+                        </form>
+                    </Background>
+
+                    {loading && <Background><p>De gegevens worden geladen</p></Background>}
+                    {error && <Background><p>Whoops, er ging iets mis met het ophalen van de data</p></Background>}
+                </>
             }
             </>
             :
