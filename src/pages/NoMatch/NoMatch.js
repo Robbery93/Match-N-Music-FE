@@ -4,7 +4,7 @@ import Background from "../../components/StylingElements/Background/Background";
 import Button from "../../components/StylingElements/Button/Button";
 import {useHistory} from "react-router-dom";
 
-const NotFound = () => {
+const NoMatch = () => {
 
     const history = useHistory();
 
@@ -18,4 +18,4 @@ const NotFound = () => {
     );
 };
 
-export default NotFound;
+export default NoMatch;

@@ -19,7 +19,11 @@ const NavBar = () => {
             </NavLink>
             {isAuth === true &&
                 <>
-                <Button color="blue" text={`Profiel: ${user.username}`} small="yes" link={`/studentprofile/${user.id}`} addStyle={styles.profile_btn}/>
+                <Button link={user.authority === "ROLE_STUDENT" ? `/studentprofile/${user.id}` : `/teacherprofile/${user.id}`}
+                        color="blue"
+                        text={`Profiel: ${user.username}`}
+                        small="yes"
+                        addStyle={styles.profile_btn}/>
                 <Button color="orange"
                         text="Uitloggen"
                         small="yes"

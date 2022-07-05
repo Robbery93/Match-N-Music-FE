@@ -1,21 +1,20 @@
 import React, {useContext, useState} from 'react';
 import styles from './RegisterStudent.module.css';
-import InputField from "../../components/FormElements/InputField/InputField";
-import skeleton from "../../assets/skeleton.jpg";
-import Button from "../../components/StylingElements/Button/Button";
+import InputField from "../../../components/FormElements/InputField/InputField";
+import skeleton from "../../../assets/skeleton.jpg";
+import Button from "../../../components/StylingElements/Button/Button";
 import {useForm} from "react-hook-form";
-import Label from "../../components/FormElements/Label/Label";
-import Background from "../../components/StylingElements/Background/Background";
-import InputTextarea from "../../components/FormElements/InputTextarea/InputTextarea";
-import InstrumentSelector from "../../components/FormElements/InstrumentSelector/InstrumentSelector";
-import Form from "../../components/FormElements/Form/Form";
-import Avatar from "../../components/Avatar/Avatar";
-import {AuthContext} from "../../context/AuthContext";
-import NotRegistered from "../../components/NotRegistered/NotRegistered";
+import Label from "../../../components/FormElements/Label/Label";
+import Background from "../../../components/StylingElements/Background/Background";
+import InputTextarea from "../../../components/FormElements/InputTextarea/InputTextarea";
+import InstrumentSelector from "../../../components/FormElements/InstrumentSelector/InstrumentSelector";
+import Avatar from "../../../components/Avatar/Avatar";
+import {AuthContext} from "../../../context/AuthContext";
+import NotRegistered from "../../../components/NotRegistered/NotRegistered";
 import {useHistory} from "react-router-dom";
-import PreferenceSelector from "../../components/FormElements/PreferenceSelector/PreferenceSelector";
+import PreferenceSelector from "../../../components/FormElements/PreferenceSelector/PreferenceSelector";
 import axios from "axios";
-import Header from "../../components/StylingElements/Header/Header";
+import Header from "../../../components/StylingElements/Header/Header";
 
 const RegisterStudent = () => {
 
@@ -78,7 +77,7 @@ const RegisterStudent = () => {
                 <> {user.authority === "ROLE_STUDENT" ?
                         <>
                             <Header text="Registratie pagina" />
-                            <Form onSubmit={handleSubmit(onFormSubmit)}>
+                            <form onSubmit={handleSubmit(onFormSubmit)}>
                                 <Background>
                                     <section>
                                         <h2>Gegevens</h2>
@@ -226,7 +225,7 @@ const RegisterStudent = () => {
                                     </span>
 
                                 </Background>
-                            </Form>
+                            </form>
 
                             {registerSucces && <Background><h2>Je gegevens zijn opgeslagen!</h2></Background>}
                             {error && <Background><h2>Er ging ergens iets mis...</h2></Background>}

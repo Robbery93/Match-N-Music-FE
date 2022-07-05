@@ -1,18 +1,17 @@
 import React, {useContext, useState} from 'react';
-import InputField from "../../components/FormElements/InputField/InputField";
-import skeleton from "../../assets/skeleton.jpg";
+import InputField from "../../../components/FormElements/InputField/InputField";
+import skeleton from "../../../assets/skeleton.jpg";
 import styles from "./RegisterTeacher.module.css"
-import Button from "../../components/StylingElements/Button/Button";
+import Button from "../../../components/StylingElements/Button/Button";
 import {useForm} from "react-hook-form";
-import Background from "../../components/StylingElements/Background/Background";
-import Form from "../../components/FormElements/Form/Form";
-import Avatar from "../../components/Avatar/Avatar";
-import Label from "../../components/FormElements/Label/Label";
-import InputTextarea from "../../components/FormElements/InputTextarea/InputTextarea";
-import InstrumentSelector from "../../components/FormElements/InstrumentSelector/InstrumentSelector";
-import {AuthContext} from "../../context/AuthContext";
-import NotRegistered from "../../components/NotRegistered/NotRegistered";
-import PreferenceSelector from "../../components/FormElements/PreferenceSelector/PreferenceSelector";
+import Background from "../../../components/StylingElements/Background/Background";
+import Avatar from "../../../components/Avatar/Avatar";
+import Label from "../../../components/FormElements/Label/Label";
+import InputTextarea from "../../../components/FormElements/InputTextarea/InputTextarea";
+import InstrumentSelector from "../../../components/FormElements/InstrumentSelector/InstrumentSelector";
+import {AuthContext} from "../../../context/AuthContext";
+import NotRegistered from "../../../components/NotRegistered/NotRegistered";
+import PreferenceSelector from "../../../components/FormElements/PreferenceSelector/PreferenceSelector";
 import axios from "axios";
 import {useHistory} from "react-router-dom";
 
@@ -84,7 +83,7 @@ const RegisterTeacher = () => {
             {user ?
                 <>
                     {user.authority === "ROLE_TEACHER" ?
-                        <Form onSubmit={handleSubmit(onFormSubmit)}>
+                        <form onSubmit={handleSubmit(onFormSubmit)}>
 
                             <Background>
                                 <section className="inputs">
@@ -252,7 +251,7 @@ const RegisterTeacher = () => {
                                     </section>
                                 </span>
                         </Background>
-                        </Form>
+                        </form>
                         :
                         <Background>
                             <h3>Je hebt niet de juiste rechten om deze pagina te bekijken.</h3>

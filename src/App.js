@@ -6,10 +6,10 @@ import NavBar from "./components/NavBar/NavBar";
 import AvailableTeachers from "./pages/StudentProfile/AvailableTeachers/AvailableTeachers";
 import StudentApplications from "./pages/TeacherProfile/StudentApplications/StudentApplications";
 import MatchPage from "./pages/MatchPage/MatchPage";
-import RegisterStudent from "./pages/RegisterStudent/RegisterStudent";
-import RegisterTeacher from "./pages/RegisterTeacher/RegisterTeacher";
-import RegisterUser from "./pages/RegisterUser/RegisterUser";
-import NotFound from "./pages/NotFound/NotFound";
+import RegisterStudent from "./pages/RegisterPages/RegisterStudent/RegisterStudent";
+import RegisterTeacher from "./pages/RegisterPages/RegisterTeacher/RegisterTeacher";
+import RegisterUser from "./pages/RegisterPages/RegisterUser/RegisterUser";
+import NoMatch from "./pages/NoMatch/NoMatch";
 import PageWrapper from "./components/StylingElements/PageWrapper/PageWrapper";
 import StudentProfile from "./pages/StudentProfile/StudentProfile";
 import ActiveApplicationsForStudent
@@ -58,7 +58,7 @@ function App() {
                         <MatchPage />
                     </Route>
                     <Route path="*">
-                        <NotFound />
+                        <NoMatch />
                     </Route>
                 </Switch>
             </PageWrapper>

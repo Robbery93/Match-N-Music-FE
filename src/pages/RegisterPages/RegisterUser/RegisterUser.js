@@ -1,16 +1,15 @@
 import React, {useContext, useState} from "react";
 import axios from "axios";
 import styles from "./RegisterUser.module.css"
-import InputField from "../../components/FormElements/InputField/InputField";
+import InputField from "../../../components/FormElements/InputField/InputField";
 import {useForm} from "react-hook-form";
-import Form from "../../components/FormElements/Form/Form";
-import Background from "../../components/StylingElements/Background/Background";
-import Label from "../../components/FormElements/Label/Label";
-import Header from "../../components/StylingElements/Header/Header";
-import Button from "../../components/StylingElements/Button/Button";
+import Background from "../../../components/StylingElements/Background/Background";
+import Label from "../../../components/FormElements/Label/Label";
+import Header from "../../../components/StylingElements/Header/Header";
+import Button from "../../../components/StylingElements/Button/Button";
 import {useHistory} from "react-router-dom";
-import ErrorText from "../../components/ErrorMessage/ErrorText";
-import {AuthContext} from "../../context/AuthContext";
+import ErrorText from "../../../components/ErrorText/ErrorText";
+import {AuthContext} from "../../../context/AuthContext";
 
 const RegisterUser = () => {
 
@@ -109,7 +108,7 @@ const RegisterUser = () => {
             </Background>
 
             {registerStudent &&
-            <Form onSubmit={handleSubmit(createStudent)}>
+            <form onSubmit={handleSubmit(createStudent)}>
                 <Background specificBackground={styles.user}>
                     <section>
                         <h2 id={styles.choice_header}>Registreer je als <u>leerling</u></h2>
@@ -155,11 +154,11 @@ const RegisterUser = () => {
 
                     <Button color="orange" type="submit" text="Registreren" />
                 </Background>
-            </Form>
+            </form>
             }
 
             {registerTeacher &&
-            <Form onSubmit={handleSubmit(createTeacher)}>
+            <form onSubmit={handleSubmit(createTeacher)}>
                 <Background specificBackground={styles.user}>
                     <section>
                         <h2 id={styles.choice_header}>Registreer je als <u>docent</u></h2>
@@ -205,7 +204,7 @@ const RegisterUser = () => {
 
                     <Button color="orange" type="submit" text="Registreren" />
                 </Background>
-            </Form>
+            </form>
             }
 
             {registrationSuccessful &&

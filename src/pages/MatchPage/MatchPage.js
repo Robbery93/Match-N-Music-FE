@@ -12,7 +12,6 @@ import axios from "axios";
 import {useParams} from "react-router-dom";
 import { ErrorMessage } from "@hookform/error-message";
 import {useForm} from "react-hook-form";
-import Form from "../../components/FormElements/Form/Form";
 
 const MatchPage = () => {
 
@@ -92,7 +91,7 @@ const MatchPage = () => {
                             <div className={styles.homework_container}>
                                 <h3>Huiswerk van {student.name}</h3>
                                 {edit ?
-                                    <Form className={styles.homework_form} onSubmit={handleSubmit(onFormSubmit)}>
+                                    <form className={styles.homework_form} onSubmit={handleSubmit(onFormSubmit)}>
                                         <textarea
                                             className={styles.homework_input}
                                             placeholder={student.lesson[0].homework}
@@ -126,7 +125,7 @@ const MatchPage = () => {
                                                 text="Bevestigen"
                                             />
                                         </span>
-                                    </Form>
+                                    </form>
                                     :
                                     <>
                                         <Background color="white" specificBackground={styles.homework_container__txt}>
