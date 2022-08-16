@@ -19,11 +19,36 @@
 
 .avatar div {
     margin-right: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .avatar h2 {
     margin: 0;
     text-align: center;
+}
+
+.file_label {
+    min-width: 100px;
+    max-width: 200px;
+    padding: .5rem 1rem;
+    border-radius: 5px;
+    border: 2px solid;
+    font-size: 1rem;
+    transition: background-color 0.1s, color 0.1s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: var(--blue);
+    border-color: var(--dark-blue);
+    color: #000
+}
+
+.file_label:hover {
+    background-color: var(--dark-blue);
+    color: #FFF;
 }
 
 #edit_btn {

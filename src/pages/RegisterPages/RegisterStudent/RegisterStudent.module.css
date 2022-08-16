@@ -11,6 +11,32 @@
     margin: 0 0 7px 0;
 }
 
+.file_label {
+    min-width: 100px;
+    max-width: 200px;
+    padding: .5rem 1rem;
+    border-radius: 5px;
+    border: 2px solid;
+    font-size: 1rem;
+    transition: background-color 0.1s, color 0.1s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: var(--blue);
+    border-color: var(--dark-blue);
+    color: #000
+}
+
+.file_label:hover {
+    background-color: var(--dark-blue);
+    color: #FFF;
+}
+
+input[type="file"] {
+    display: none;
+}
+
 /*   Request   */
 
 #request {

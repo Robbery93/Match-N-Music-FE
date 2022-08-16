@@ -32,6 +32,7 @@ const StudentApplication = ({ id, isActive }) => {
             instrument={student.instrument}
             preference={student.preferenceForLessonType}
             request={student.request}
+            photo={student.photo}
             studentId={student.id}
             isActive={isActive}
         />

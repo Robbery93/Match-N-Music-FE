@@ -1,7 +1,6 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import styles from './RegisterStudent.module.css';
 import InputField from "../../../components/FormElements/InputField/InputField";
-import skeleton from "../../../assets/skeleton.jpg";
 import Button from "../../../components/StylingElements/Button/Button";
 import {useForm} from "react-hook-form";
 import Label from "../../../components/FormElements/Label/Label";
@@ -24,6 +23,9 @@ const RegisterStudent = () => {
 
     const { register, handleSubmit, formState: {errors} } = useForm({ mode: "onChange" });
 
+    const [file, setFile] = useState({});
+    const [fileName, setFileName] = useState("");
+
     const [registerSucces, toggleRegisterSucces] = useState(false);
     const [error, toggleError] = useState(false)
 
@@ -32,17 +34,24 @@ const RegisterStudent = () => {
             'Authorization' : `Bearer ${localStorage.getItem("token")}`
         }};
 
+    const storeFile = event => {
+        setFile(event.target.files[0]);
+        setFileName(event.target.files[0].name);
+    }
+
+
     async function onFormSubmit(data) {
         try {
             await axios.post("http://localhost:8080/students", {
                 name: data.name,
                 email: data.email,
                 age: data.age,
-                phoneNumber : data.phoneNumber,
+                phoneNumber: data.phoneNumber,
                 residence: data.residence,
-                instrument : data.instrument,
-                request : data.request,
-                preferenceForLessonType: data.preferenceForLessonType
+                instrument: data.instrument,
+                request: data.request,
+                preferenceForLessonType: data.preferenceForLessonType,
+                photo: fileName
             }, axiosConfig);
         } catch (e) {
             console.error(e);
@@ -53,13 +62,15 @@ const RegisterStudent = () => {
             await axios.patch(`http://localhost:8080/students/linkuser/${user.username}?email=${data.email}`,
                 axiosConfig);
         } catch (e) {
-            console.log(e);
+            console.error(e);
             toggleError(true);
         }
 
         try {
-            const foundStudent = await axios.get(`http://localhost:8080/student/email=${data.email}`, axiosConfig);
-            toggleError(false);
+            const foundStudent = await axios.get(`http://localhost:8080/students/email=${data.email}`, axiosConfig);
+            const studentId = foundStudent.data.id;
+
+            await handleUpload(studentId);
             toggleRegisterSucces(true);
             setTimeout(() => history.push(`/studentprofile/${foundStudent.data.id}`), 2000);
         } catch (e) {
@@ -68,16 +79,36 @@ const RegisterStudent = () => {
         }
 
        registerUser(localStorage.getItem("token"));
-
-        // setTimeout(() => history.push(`/studentprofile/${user.id}`), 3000);
     }
+
+    async function handleUpload(id) {
+        let formdata = new FormData();
+        formdata.append('file', file);
+
+        try {
+            await axios.post(`http://localhost:8080/students/${id}/upload`,
+                formdata,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        'Authorization': `Bearer ${localStorage.getItem("token")}`
+                    }}
+            )
+        } catch (e) {
+            console.error(`${e.message}`)
+        }
+    }
+
+    useEffect(() => {
+        console.log(file)
+    } ,[file])
 
     return (
         <> {user ?
                 <> {user.authority === "ROLE_STUDENT" ?
                         <>
                             <Header text="Registratie pagina" />
-                            <form onSubmit={handleSubmit(onFormSubmit)}>
+                            <form onSubmit={handleSubmit(onFormSubmit)} encType="multipart/form-data">
                                 <Background>
                                     <section>
                                         <h2>Gegevens</h2>
@@ -159,14 +190,22 @@ const RegisterStudent = () => {
                                     <aside className={styles.avatar}>
                                         <span className={styles.upload_text}>
                                             <Label text="Foto uploaden"/>
-                                            <Button
-                                                color="blue"
-                                                text="Kies een bestand"
-                                                small="yes"
-                                            />
+                                            <label className={styles.file_label}>
+                                            <input
+                                                type="file"
+                                                accept="image/jpeg, image/png"
+                                                onChange={(e) => storeFile(e)}/>
+                                                Kies een foto
+                                            </label>
+                                            {file.name && <>
+                                                <p>Het gekozen bestand:</p>
+                                                <p>{file.name}</p>
+                                            </>}
                                         </span>
 
-                                        <Avatar photo={skeleton} alt="Afbeelding" big="yes"/>
+                                        <Avatar photo="" alt="Afbeelding" big="yes"/>
+
+
                                     </aside>
 
                                 </Background>

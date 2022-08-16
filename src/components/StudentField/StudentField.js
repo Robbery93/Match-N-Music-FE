@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import styles from "./StudentField.module.css"
 import Avatar from "../Avatar/Avatar";
 import Details from "../Details/Details";
-import floortje from "../../assets/Floortje.jpg"
+// import floortje from "../../assets/Floortje.jpg"
 import Button from "../StylingElements/Button/Button";
 import Preference from "../Preference/Preference";
 import Background from "../StylingElements/Background/Background";
@@ -10,7 +10,7 @@ import BigDisplayField from "../StylingElements/BigDisplayField/BigDisplayField"
 import axios from "axios";
 import {AuthContext} from "../../context/AuthContext";
 
-const StudentField = ({ name, age, residence, instrument, preference, request, isActive, studentId }) => {
+const StudentField = ({ name, age, residence, instrument, preference, request, photo, isActive, studentId }) => {
 
     const { user } = useContext(AuthContext);
 
@@ -42,7 +42,7 @@ const StudentField = ({ name, age, residence, instrument, preference, request, i
         <>
             <Background specificBackground={styles.student_field}>
             <Avatar
-                photo={floortje}
+                photo={`http://localhost:8080/files/download/${photo}`}
                 alt="foto van leerling" />
 
                 <section className={styles.info}>
