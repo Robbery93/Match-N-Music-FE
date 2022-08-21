@@ -4,7 +4,6 @@ import {useParams} from "react-router-dom";
 import axios from "axios";
 
 import styles from "./TeacherProfile.module.css";
-import robbert from "../../assets/Robbert.jpg";
 
 import Header from "../../components/StylingElements/Header/Header";
 import Background from "../../components/StylingElements/Background/Background";
@@ -20,9 +19,7 @@ import InputTextarea from "../../components/FormElements/InputTextarea/InputText
 const TeacherProfile = () => {
 
     const { isAuth, user } = useContext(AuthContext);
-
     const { id } = useParams();
-
     const { register, handleSubmit, formState: {errors} } = useForm({mode: "onBlur"});
 
     const axiosConfig = { headers: {
@@ -30,11 +27,19 @@ const TeacherProfile = () => {
             'Authorization' : `Bearer ${localStorage.getItem("token")}`
         }};
 
-    const [teacher, setTeacher] = useState({});
+    const [teacher, setTeacher] = useState(null);
+    const [file, setFile] = useState({});
+    const [fileName, setFileName] = useState("");
+
     const [loading, toggleLoading] = useState(true);
     const [error, toggleError] = useState(false);
     const [editDetails, toggleEditDetails] = useState(false);
     const [editDescriptionAndExperience, toggleEditDescriptionAndExperience] = useState(false);
+
+    const storeFile = event => {
+        setFile(event.target.files[0]);
+        setFileName(event.target.files[0].name);
+    }
 
     useEffect(() => {
         async function fetchTeacher() {
@@ -60,13 +65,19 @@ const TeacherProfile = () => {
                 age: data.age,
                 phoneNumber: data.phoneNumber,
                 residence: data.residence
-            }, axiosConfig)
+            }, axiosConfig);
 
-            console.log("Update is gelukt!")
+            if(file) {
+                await updateAvatar();
+                await axios.patch(`http://localhost:8080/students/${user.id}`, {
+                    photo: fileName
+                }, axiosConfig)
+            }
+
             toggleEditDetails(false);
             location.reload();
         } catch (e) {
-            console.log("update niet gelukt")
+            console.log("Update niet gelukt")
         }
     }
 
@@ -82,6 +93,24 @@ const TeacherProfile = () => {
             location.reload();
         } catch (e) {
             console.error("Update is niet gelukt")
+        }
+    }
+
+    async function updateAvatar() {
+        let formdata = new FormData();
+        formdata.append('file', file)
+
+        try {
+            await axios.post(`http://localhost:8080/teachers/${user.id}/upload`,
+                formdata,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        'Authorization': `Bearer ${localStorage.getItem("token")}`
+                    }}
+            )
+        } catch (e) {
+            console.error("Avatar update niet gelukt")
         }
     }
 
@@ -106,10 +135,15 @@ const TeacherProfile = () => {
                             <section className={styles.avatar}>
                                 <div>
                                     <h2>Profielfoto</h2>
-                                    <Avatar photo={robbert} big="yes"/>
+                                    <Avatar photo={teacher.photo ? `http://localhost:8080/files/download/${teacher.photo}` : ""} big="yes"/>
                                 </div>
-                                <Button text="Gegevens wijzigen" color="blue" small="yes" onClick={() => toggleEditDetails(!editDetails)}
-                                        addStyle={styles.edit_btn}/>
+                                <Button
+                                    text="Gegevens wijzigen"
+                                    color="blue"
+                                    small="yes"
+                                    onClick={() => toggleEditDetails(!editDetails)}
+                                    addStyle={styles.edit_btn}
+                                />
                             </section>
                             </span>
                         :
@@ -185,8 +219,28 @@ const TeacherProfile = () => {
                             <section className={styles.avatar}>
                                 <div>
                                     <h2>Profielfoto</h2>
-                                    <Avatar photo={robbert} big="yes"/>
+
+                                    <label className={styles.file_label}>
+                                        <input
+                                            type="file"
+                                            accept="image/jpeg, image/png"
+                                            onChange={(e) => storeFile(e)}
+                                        />
+                                        Kies een foto
+                                    </label>
+                                    {fileName && <>
+                                        <p>Het gekozen bestand:</p>
+                                        <p>{fileName}</p>
+                                    </>
+                                    }
+
+                                    <Avatar
+                                        photo={teacher.photo ? `http://localhost:8080/files/download/${teacher.photo}` : ""}
+                                        alt={`Profielfoto van ${teacher.name}`}
+                                        big="yes"
+                                    />
                                 </div>
+
                                 <span>
                                             <Button text="Annuleren" color="orange" small="yes" onClick={() => toggleEditDetails(!editDetails)}
                                                     addStyle={styles.edit_btn}/>
@@ -266,11 +320,21 @@ const TeacherProfile = () => {
                                         addStyle={styles.edit_btn}/>
                                 :
                                 <span>
-                                        <Button text="Annuleren" color="orange" small="yes" onClick={() => toggleEditDescriptionAndExperience(!editDescriptionAndExperience)}
-                                                addStyle={styles.edit_btn}/>
-                                        <Button type="submit" text="Bevestigen" color="green" small="yes"
-                                                addStyle={styles.edit_btn}/>
-                                    </span>}
+                                    <Button
+                                        text="Annuleren"
+                                        color="orange"
+                                        small="yes"
+                                        onClick={() => toggleEditDescriptionAndExperience(!editDescriptionAndExperience)}
+                                        addStyle={styles.edit_btn}
+                                    />
+                                    <Button
+                                        type="submit"
+                                        text="Bevestigen"
+                                        color="green"
+                                        small="yes"
+                                        addStyle={styles.edit_btn}
+                                    />
+                                </span>}
                         </section>
                         }
                     </form>

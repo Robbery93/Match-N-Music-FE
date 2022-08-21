@@ -3,13 +3,12 @@ import Avatar from "../Avatar/Avatar";
 import styles from "./TeacherField.module.css";
 import Preference from "../Preference/Preference";
 import Details from "../Details/Details";
-import robbert from "../../assets/Robbert.jpg";
 import Button from "../StylingElements/Button/Button";
 import Background from "../StylingElements/Background/Background";
 import axios from "axios";
 import BigDisplayField from "../StylingElements/BigDisplayField/BigDisplayField";
 
-const TeacherField = ({ name, age, residence, instrument, preference, description, isApplication, userId, teacherId }) => {
+const TeacherField = ({ name, age, residence, instrument, preference, description, isApplication, userId, teacherId,  photo }) => {
 
     async function applyForTeacher() {
         if(confirm("Weet je zeker dat je de les wil krijg van deze docent?")){
@@ -31,7 +30,7 @@ const TeacherField = ({ name, age, residence, instrument, preference, descriptio
     return (
         <Background specificBackground={styles.teacher_field}>
             <Avatar
-                photo={robbert}
+                photo={`http://localhost:8080/files/download/${photo}`}
                 alt="Foto van docent"/>
 
             <section className={styles.info}>

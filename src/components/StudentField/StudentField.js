@@ -2,7 +2,6 @@ import React, {useContext} from 'react';
 import styles from "./StudentField.module.css"
 import Avatar from "../Avatar/Avatar";
 import Details from "../Details/Details";
-// import floortje from "../../assets/Floortje.jpg"
 import Button from "../StylingElements/Button/Button";
 import Preference from "../Preference/Preference";
 import Background from "../StylingElements/Background/Background";
@@ -43,7 +42,7 @@ const StudentField = ({ name, age, residence, instrument, preference, request, p
             <Background specificBackground={styles.student_field}>
             <Avatar
                 photo={`http://localhost:8080/files/download/${photo}`}
-                alt="foto van leerling" />
+                alt="Foto van leerling" />
 
                 <section className={styles.info}>
                     <span className={styles.info_top}>

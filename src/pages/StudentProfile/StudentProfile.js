@@ -19,10 +19,13 @@ import InputTextarea from "../../components/FormElements/InputTextarea/InputText
 const StudentProfile = () => {
 
     const { isAuth, user } = useContext(AuthContext);
-
     const { id } = useParams();
-
     const { register, handleSubmit, formState: {errors} } = useForm({mode: "onBlur"});
+
+    const axiosConfig = { headers: {
+            'Content-Type' : 'application/json',
+            'Authorization' : `Bearer ${localStorage.getItem("token")}`
+        }};
 
     const [student, setStudent] = useState(null);
     const [file, setFile] = useState({});
@@ -33,10 +36,6 @@ const StudentProfile = () => {
     const [editDetails, toggleEditDetails] = useState(false);
     const [editRequest, toggleEditRequest] = useState(false);
 
-    const axiosConfig = { headers: {
-            'Content-Type' : 'application/json',
-            'Authorization' : `Bearer ${localStorage.getItem("token")}`
-        }};
 
     const storeFile = event => {
         setFile(event.target.files[0]);
@@ -67,10 +66,7 @@ const StudentProfile = () => {
                 age: data.age,
                 phoneNumber: data.phoneNumber,
                 residence: data.residence,
-            }, axiosConfig)
-
-            console.log("Update is gelukt!")
-            toggleEditDetails(false);
+            }, axiosConfig);
 
             if(file) {
                 await updateAvatar();
@@ -79,7 +75,9 @@ const StudentProfile = () => {
                 }, axiosConfig)
             }
 
+            console.log("Update is gelukt!")
 
+            toggleEditDetails(false);
             location.reload();
         } catch (e) {
             console.log("update niet gelukt")
@@ -225,26 +223,38 @@ const StudentProfile = () => {
                                                 <input
                                                     type="file"
                                                     accept="image/jpeg, image/png"
-                                                    onChange={(e) => storeFile(e)}/>
+                                                    onChange={(e) => storeFile(e)}
+                                                />
                                                 Kies een foto
                                             </label>
                                             {fileName && <>
                                             <p>Het gekozen bestand:</p>
                                             <p>{fileName}</p>
-                                            </>}
+                                            </>
+                                            }
 
                                             <Avatar
                                                 photo={student.photo ? `http://localhost:8080/files/download/${student.photo}` : ""}
-                                                alt={`Afbeelding van ${student.name}`}
+                                                alt={`Profielfoto van ${student.name}`}
                                                 big="yes"
                                             />
                                         </div>
 
                                         <span>
-                                            <Button text="Annuleren" color="orange" small="yes" onClick={() => toggleEditDetails(!editDetails)}
-                                                    addStyle={styles.edit_btn}/>
-                                            <Button type="submit" text="Bevestigen" color="green" small="yes"
-                                                    addStyle={styles.edit_btn}/>
+                                            <Button
+                                                text="Annuleren"
+                                                color="orange"
+                                                small="yes"
+                                                onClick={() => toggleEditDetails(!editDetails)}
+                                                addStyle={styles.edit_btn}
+                                            />
+                                            <Button
+                                                type="submit"
+                                                text="Bevestigen"
+                                                color="green"
+                                                small="yes"
+                                                addStyle={styles.edit_btn}
+                                            />
                                         </span>
                                     </section>
                                 </form>
@@ -287,13 +297,15 @@ const StudentProfile = () => {
                             {user.authority === "ROLE_STUDENT" &&
                             <section className={styles.navigation}>
                                 <div>
-                                    {student.lesson.length > 0 &&
+                                    {student.lesson.length > 0 ?
                                     <Button link={`/matchpage/teacher=${student.lesson[0].id.teacherId}&student=${user.id}`} text="Huiswerk" color="orange"
-                                            addStyle={styles.navigation_btn}/>}
-                                    <Button link="/availableteachers" text="Zoek naar docenten" color="blue" small="yes"
+                                            addStyle={styles.navigation_btn}/>
+                                        : <>
+                                    <Button link="/availableteachers" text="Zoek naar docenten" color="orange" small="yes"
                                             addStyle={styles.navigation_btn}/>
                                     <Button link="/activeapplications" text="Openstaande aanvragen" color="blue" small="yes"
                                             addStyle={styles.navigation_btn}/>
+                                        </>}
                                 </div>
                                 {!editRequest ?
                                 <Button text="Verzoek wijzigen" color="blue" small="yes" onClick={() => toggleEditRequest(!editRequest)}

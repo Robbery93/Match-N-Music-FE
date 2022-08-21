@@ -55,6 +55,7 @@ const AvailableTeachers = () => {
                                     isApplication={false}
                                     userId={user.id}
                                     teacherId={teacher.id}
+                                    photo={teacher.photo}
                                 />
                             })}
 

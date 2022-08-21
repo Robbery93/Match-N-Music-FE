@@ -16,6 +16,7 @@ const TeacherApplication = ({ id }) => {
             try {
                 const {data} = await axios.get(`http://localhost:8080/teachers/${id}`, axiosConfig);
                 setTeacher(data);
+                console.log(data)
             } catch (e) {
                 console.error(e);
             }
@@ -34,6 +35,7 @@ const TeacherApplication = ({ id }) => {
             description={teacher.description}
             isApplication={true}
             teacherId={teacher.id}
+            photo={teacher.photo}
         />
     );
 };

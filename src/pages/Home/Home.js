@@ -37,11 +37,9 @@ const Home = () => {
             const role = user.authority;
 
             if (role === "ROLE_STUDENT") {
-                console.log("Studentje");
                 window.location.replace(`/studentprofile/${user.id}`);
             }
             if (role === "ROLE_TEACHER") {
-                console.log("Docentje");
                 window.location.replace(`/teacherprofile/${user.id}`);
             }
         }
