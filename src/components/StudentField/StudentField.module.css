@@ -1,0 +1,22 @@
+.info {
+    flex-grow: 1;
+}
+
+.info_top {
+    flex-grow: 1;
+    display: flex;
+    justify-content: space-between;
+}
+
+#student_field {
+    column-gap: 20px;
+}
+
+.buttons {
+    margin-left: 10px;
+    height: 164px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-self: flex-end;
+}

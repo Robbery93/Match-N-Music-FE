@@ -1,0 +1,21 @@
+.display_field {
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+    column-gap: 5px;
+    margin-bottom: 5px;
+}
+
+.display-field_text {
+    min-width: 350px;
+    flex-grow: 1;
+    background-color: #FFFFFF;
+    border: var(--dark-blue) solid 1px;
+    border-radius: 5px;
+    padding: 7px 0 7px 20px;
+    box-shadow: rgba(0, 0, 0, 0.15) 4px 4px 3px;
+}
+
+.display-field_text p {
+    color: #000000;
+}

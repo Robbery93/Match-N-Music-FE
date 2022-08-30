@@ -1,38 +1,71 @@
-.App {
-  text-align: center;
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  font-family: Roboto, sans-serif;
+  font-size: 16px;
+
+  background-color: #fcf8f8;
+  background-image: url("assets/Background MnM.png");
+  background-size: 100%;
+  background-attachment: fixed;
+  background-position: center bottom;
+  background-repeat: no-repeat;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body::-webkit-scrollbar {
+  width: 16px;               /* width of the entire scrollbar */
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+body::-webkit-scrollbar-track {
+  background: var(--light-blue);        /* color of the tracking area */
 }
 
-.App-link {
-  color: #61dafb;
+body::-webkit-scrollbar-thumb {
+  background-color: var(--dark-blue);    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 3px solid var(--light-blue);  /* creates padding around scroll thumb */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+h2,
+h3,
+h4,
+p {
+  color: var(--dark-blue);
 }
+::placeholder {
+  font-size: 16px;
+}
+
+h2,
+h3 {
+  margin: 10px 0 10px 25px;
+}
+
+h2 {
+  /*text-decoration: underline;*/
+}
+
+h4 {
+  margin: 5px 0;
+  font-weight: normal;
+  text-decoration: underline;
+}
+
+:root {
+  --white: #FCF1EF;
+  --light-blue: #EEFCFC;
+  --blue: #97EBED;
+  --dark-blue: #018A8C;
+  --green: #1ECB02;
+  --dark-green: #128200;
+  --light-orange: #FFD1BE;
+  --orange: #FF8858;
+  --grey: #AEAEAE;
+  --error: #A60000;
+}
+

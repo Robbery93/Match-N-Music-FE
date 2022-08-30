@@ -1,0 +1,8 @@
+.preference_selector {
+    display: flex;
+    flex-direction: column;
+}
+
+.preference_selector label {
+    margin-bottom: 5px;
+}

@@ -1,0 +1,9 @@
+.info {
+    flex-grow: 1;
+}
+
+.info_top {
+    flex-grow: 1;
+    display: flex;
+    justify-content: space-between;
+}

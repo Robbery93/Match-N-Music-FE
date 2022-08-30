@@ -1,0 +1,32 @@
+.details {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin: 0 0 10px 0.25rem;
+}
+
+.details_header {
+    display: flex;
+    align-items: flex-end;
+}
+
+.details_header h2 {
+    text-decoration: none;
+    margin: 0 0 3px 0;
+}
+
+.details_header p {
+    display: inline;
+    color: var(--dark-blue);
+    font-size: 1rem;
+}
+
+.location {
+    display: flex;
+    flex-direction: row;
+}
+
+.location p {
+    margin-left: 0;
+}

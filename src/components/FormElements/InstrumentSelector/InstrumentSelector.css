@@ -1,0 +1,13 @@
+.selector {
+    border: var(--dark-blue) solid 1px;
+    border-radius: 3px;
+    padding: 5px;
+    margin-bottom: 10px;
+    width: 200px;
+    box-shadow: rgba(0, 0, 0, 0.15) 4px 4px 3px;
+}
+
+.selector:focus {
+    outline: none;
+    border: var(--dark-blue) solid 2px;
+}

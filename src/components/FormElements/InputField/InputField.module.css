@@ -1,0 +1,50 @@
+.inputfield {
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+    column-gap: 5px;
+}
+
+.inputfield > h4 {
+    margin: 5px 0;
+    font-weight: normal;
+}
+
+.inputfield_input {
+    border: var(--dark-blue) solid 1px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    width: 350px;
+    padding: 7px 0 7px 20px;
+    box-shadow: rgba(0, 0, 0, 0.15) 4px 4px 3px;
+}
+
+.inputfield_input:focus {
+    border: var(--dark-blue) solid 2px;
+    outline: none;
+}
+
+.inputfield_input::placeholder {
+    color: var(--grey);
+}
+
+/* To hide the up and down arrows of a input[type="number"] */
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.error {
+    font-size: 0.75rem;
+    color: var(--error);
+    margin-left: 10px;
+    padding: 0;
+}

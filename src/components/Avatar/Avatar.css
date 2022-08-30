@@ -1,0 +1,14 @@
+.avatar {
+    border: var(--dark-blue) solid 2px;
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    margin-top: 10px;
+    box-shadow: rgba(0, 0, 0, 0.15) 4px 4px 3px;
+    object-fit: cover;
+}
+
+.big_avatar {
+    width: 200px;
+    height: 200px;
+}

@@ -1,0 +1,15 @@
+#not_registered p {
+    font-size: 1.2rem;
+}
+
+a,
+a:link,
+a:visited {
+    font-weight: bold;
+    color: var(--dark-blue);
+    text-decoration: none;
+}
+a:hover {
+    color: var(--orange);
+    text-decoration: underline;
+}

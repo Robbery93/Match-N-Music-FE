@@ -1,0 +1,23 @@
+.teacher_header {
+    position: relative;
+    width: 820px;
+    height: 60px;
+    line-height: 60px;
+    border: var(--dark-blue) solid 3px;
+    border-radius: 5px;
+    background-color: var(--blue);
+    box-shadow: rgba(0, 0, 0, 0.15) 4px 4px 3px;
+    color: var(--dark-blue);
+    text-align: center;
+    margin: 0 0 15px 0;
+}
+
+.teacher_header h2 {
+    margin: 0;
+}
+
+#back_btn {
+    position: absolute;
+    top: calc(50% - 19px);
+    left: 10px;
+}
