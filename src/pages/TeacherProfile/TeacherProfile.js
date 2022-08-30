@@ -18,7 +18,7 @@ import InputTextarea from "../../components/FormElements/InputTextarea/InputText
 
 const TeacherProfile = () => {
 
-    const { isAuth, user } = useContext(AuthContext);
+    const { isAuth, user, logoutAfterDelete } = useContext(AuthContext);
     const { id } = useParams();
     const { register, handleSubmit, formState: {errors} } = useForm({mode: "onBlur"});
 
@@ -114,6 +114,18 @@ const TeacherProfile = () => {
         }
     }
 
+    async function deleteAccount() {
+        if(confirm("Weet je zeker dat je je account wil verwijderen? \nZo ja, dan word je teruggeleidt naar de homepagina")) {
+            try {
+                await axios.delete(`http://localhost:8080/users/${user.username}`, axiosConfig);
+                await axios.delete(`http://localhost:8080/teachers/${user.id}`);
+            } catch (error) {
+                console.error("Delete is niet gelukt.")
+            }
+            setTimeout(() => logoutAfterDelete(), 1000);
+        }
+    }
+
     return (
         <> {isAuth ?
             <> {teacher &&
@@ -137,13 +149,15 @@ const TeacherProfile = () => {
                                     <h2>Profielfoto</h2>
                                     <Avatar photo={teacher.photo ? `http://localhost:8080/files/download/${teacher.photo}` : ""} big="yes"/>
                                 </div>
-                                <Button
-                                    text="Gegevens wijzigen"
-                                    color="blue"
-                                    small="yes"
-                                    onClick={() => toggleEditDetails(!editDetails)}
-                                    addStyle={styles.edit_btn}
-                                />
+                                {user.authority === "ROLE_TEACHER" &&
+                                    <Button
+                                        text="Gegevens wijzigen"
+                                        color="blue"
+                                        small="yes"
+                                        onClick={() => toggleEditDetails(!editDetails)}
+                                        addStyle={styles.edit_btn}
+                                    />
+                                }
                             </section>
                             </span>
                         :
@@ -316,8 +330,21 @@ const TeacherProfile = () => {
                                         addStyle={styles.navigation_btn}/>
                             </div>
                             {!editDescriptionAndExperience ?
-                                <Button text="Verzoek wijzigen" color="blue" small="yes" onClick={() => toggleEditDescriptionAndExperience(!editDescriptionAndExperience)}
-                                        addStyle={styles.edit_btn}/>
+                                <span className={styles.edit_delete_btns}>
+                                    <Button 
+                                        text="Verzoek wijzigen" 
+                                        color="blue" 
+                                        small="yes" 
+                                        onClick={() => toggleEditDescriptionAndExperience(!editDescriptionAndExperience)}
+                                        addStyle={styles.edit_btn}
+                                    />
+                                    <Button
+                                        text="Account verwijderen"
+                                        color="blue"
+                                        small="yes"
+                                        onClick={deleteAccount}
+                                    />
+                                </span>        
                                 :
                                 <span>
                                     <Button

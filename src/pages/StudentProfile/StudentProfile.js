@@ -18,7 +18,7 @@ import InputTextarea from "../../components/FormElements/InputTextarea/InputText
 
 const StudentProfile = () => {
 
-    const { isAuth, user } = useContext(AuthContext);
+    const { isAuth, user, logoutAfterDelete } = useContext(AuthContext);
     const { id } = useParams();
     const { register, handleSubmit, formState: {errors} } = useForm({mode: "onBlur"});
 
@@ -116,6 +116,18 @@ const StudentProfile = () => {
         }
     }
 
+    async function deleteAccount() {
+        if(confirm("Weet je zeker dat je je account wil verwijderen? \nZo ja, dan word je teruggeleidt naar de homepagina")) {
+            try {
+                await axios.delete(`http://localhost:8080/users/${user.username}`, axiosConfig);
+                await axios.delete(`http://localhost:8080/students/${user.id}`);             
+            } catch (error) {
+                console.error("Delete is niet gelukt.")
+            } 
+            setTimeout(() => logoutAfterDelete(), 1000);
+        }
+    }
+
     return (
         <> {isAuth ?
             <> {student &&
@@ -141,8 +153,10 @@ const StudentProfile = () => {
                                                 big="yes"
                                             />
                                         </div>
+                                        {user.authority === "ROLE_STUDENT" &&
                                         <Button text="Gegevens wijzigen" color="blue" small="yes" onClick={() => toggleEditDetails(!editDetails)}
                                                 addStyle={styles.edit_btn}/>
+                                            }
                                     </section>
                                 </span>
                                 :
@@ -308,8 +322,21 @@ const StudentProfile = () => {
                                         </>}
                                 </div>
                                 {!editRequest ?
-                                <Button text="Verzoek wijzigen" color="blue" small="yes" onClick={() => toggleEditRequest(!editRequest)}
-                                        addStyle={styles.edit_btn}/>
+                                <span className={styles.edit_delete_btns}>
+                                    <Button 
+                                        text="Verzoek wijzigen" 
+                                        color="blue" 
+                                        small="yes" 
+                                        onClick={() => toggleEditRequest(!editRequest)}
+                                        addStyle={styles.edit_btn}
+                                    />
+                                    <Button
+                                        text="Account verwijderen"
+                                        color="blue"
+                                        small="yes"
+                                        onClick={deleteAccount}
+                                    />
+                                </span>
                                     :
                                     <span>
                                         <Button text="Annuleren" color="orange" small="yes" onClick={() => toggleEditRequest(!editRequest)}

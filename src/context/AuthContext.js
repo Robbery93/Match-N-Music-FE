@@ -130,12 +130,23 @@ const AuthContextProvider = ({ children }) => {
         }
     }
 
+    function logoutAfterDelete() {
+        localStorage.clear();
+        toggleIsAuth({
+            isAuth: false,
+            user: null,
+            status: 'done',
+        });
+        history.push("/");
+    }
+
     const data = {
         isAuth: isAuth.isAuth,
         user: isAuth.user,
         login,
         registerUser,
-        logout
+        logout,
+        logoutAfterDelete
     }
 
     return (

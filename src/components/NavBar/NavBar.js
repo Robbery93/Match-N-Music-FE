@@ -7,7 +7,7 @@ import {AuthContext} from "../../context/AuthContext";
 
 const NavBar = () => {
 
-    const { isAuth, user,  logout } = useContext(AuthContext);
+    const { isAuth, user, logout } = useContext(AuthContext);
 
     return (
         <header className={styles.navBar}>

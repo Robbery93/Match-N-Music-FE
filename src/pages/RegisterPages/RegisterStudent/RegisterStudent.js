@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import styles from './RegisterStudent.module.css';
 import InputField from "../../../components/FormElements/InputField/InputField";
 import Button from "../../../components/StylingElements/Button/Button";
@@ -98,10 +98,6 @@ const RegisterStudent = () => {
             console.error(`${e.message}`)
         }
     }
-
-    useEffect(() => {
-        console.log(file)
-    } ,[file])
 
     return (
         <> {user ?

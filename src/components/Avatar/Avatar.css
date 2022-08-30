@@ -5,6 +5,7 @@
     height: 150px;
     margin-top: 10px;
     box-shadow: rgba(0, 0, 0, 0.15) 4px 4px 3px;
+    object-fit: cover;
 }
 
 .big_avatar {
