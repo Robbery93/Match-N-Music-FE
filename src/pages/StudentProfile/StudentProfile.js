@@ -132,7 +132,10 @@ const StudentProfile = () => {
         <> {isAuth ?
             <> {student &&
                 <>
-                    {user.authority === "ROLE_STUDENT" ? <Header text="Mijn profiel" /> : <Header text={`Profiel van ${student.name}`}/>}
+                    {user.authority === "ROLE_STUDENT" && <>
+                        {user.id === student.id ? <Header text="Mijn profiel" /> : <Header text={`Profiel van ${student.name}`}/>}
+                    </>
+                    }
                     <Background specificBackground={styles.details}>
 
                             <h2>Gegevens</h2>
@@ -153,10 +156,15 @@ const StudentProfile = () => {
                                                 big="yes"
                                             />
                                         </div>
-                                        {user.authority === "ROLE_STUDENT" &&
-                                        <Button text="Gegevens wijzigen" color="blue" small="yes" onClick={() => toggleEditDetails(!editDetails)}
-                                                addStyle={styles.edit_btn}/>
-                                            }
+                                        {user.id === student.id &&
+                                            <Button 
+                                                text="Gegevens wijzigen" 
+                                                color="blue" 
+                                                small="yes" 
+                                                onClick={() => toggleEditDetails(!editDetails)}
+                                                addStyle={styles.edit_btn}
+                                            />
+                                        }
                                     </section>
                                 </span>
                                 :
@@ -308,19 +316,35 @@ const StudentProfile = () => {
                                 </div>
                             </section>
 
-                            {user.authority === "ROLE_STUDENT" &&
+                            {user.id === student.id &&
                             <section className={styles.navigation}>
                                 <div>
                                     {student.lesson.length > 0 ?
-                                    <Button link={`/matchpage/teacher=${student.lesson[0].id.teacherId}&student=${user.id}`} text="Huiswerk" color="orange"
-                                            addStyle={styles.navigation_btn}/>
-                                        : <>
-                                    <Button link="/availableteachers" text="Zoek naar docenten" color="orange" small="yes"
-                                            addStyle={styles.navigation_btn}/>
-                                    <Button link="/activeapplications" text="Openstaande aanvragen" color="blue" small="yes"
-                                            addStyle={styles.navigation_btn}/>
-                                        </>}
+                                        <Button 
+                                            link={`/matchpage/teacher=${student.lesson[0].id.teacherId}&student=${user.id}`} 
+                                            text="Huiswerk" 
+                                            color="orange"
+                                            addStyle={styles.navigation_btn}
+                                        />
+                                    : 
+                                    <>
+                                        <Button 
+                                            link="/availableteachers" text="Zoek naar docenten" 
+                                            color="orange" 
+                                            small="yes"
+                                            addStyle={styles.navigation_btn}
+                                        />
+                                        <Button 
+                                            link="/activeapplications"
+                                            text="Openstaande aanvragen" 
+                                            color="blue" 
+                                            small="yes"
+                                            addStyle={styles.navigation_btn}
+                                        />
+                                    </>
+                                    }
                                 </div>
+
                                 {!editRequest ?
                                 <span className={styles.edit_delete_btns}>
                                     <Button 

@@ -130,7 +130,10 @@ const TeacherProfile = () => {
         <> {isAuth ?
             <> {teacher &&
             <>
-                {user.authority === "ROLE_TEACHER" ? <Header text="Mijn profiel" /> : <Header text={`Profiel van ${teacher.name}`} />}
+                {user.authority === "ROLE_TEACHER" && <> 
+                    {user.id === teacher.id ? <Header text="Mijn profiel" /> : <Header text={`Profiel van ${teacher.name}`} />}
+                </>
+                }
                 <Background specificBackground={styles.details}>
                     <h2>Gegevens</h2>
 
@@ -149,7 +152,7 @@ const TeacherProfile = () => {
                                     <h2>Profielfoto</h2>
                                     <Avatar photo={teacher.photo ? `http://localhost:8080/files/download/${teacher.photo}` : ""} big="yes"/>
                                 </div>
-                                {user.authority === "ROLE_TEACHER" &&
+                                {user.id === teacher.id &&
                                     <Button
                                         text="Gegevens wijzigen"
                                         color="blue"
@@ -321,7 +324,7 @@ const TeacherProfile = () => {
                             </div>
                         </section>
 
-                        {user.authority === "ROLE_TEACHER" &&
+                        {user.id === teacher.id &&
                         <section className={styles.navigation}>
                             <div>
                                 <Button link="/activelessons" text="Mijn leerlingen" color="orange" small="yes"
